@@ -36,8 +36,6 @@ namespace WordDocumentBuilder
                 var resultPath = $"{candidate.Info.Фамилия} {candidate.Info.Имя} {candidate.Info.Отчество}.docx";
                 // Устанавливаем начения текста для закладок документа
                 SetValues(document, candidate);
-                //
-                document.SetMergeFieldText("Фамилия", "Это просто фамилия");
                 // Сохраняем и закрываем
                 document.Save(resultPath);
                 document.Close();
@@ -62,7 +60,8 @@ namespace WordDocumentBuilder
                     Фамилия_представителя = dt.Rows[i].Field<string>(6),
                     Имя_представителя = dt.Rows[i].Field<string>(7),
                     Отчество_представителя = dt.Rows[i].Field<string>(8),
-                    Дата_договора = dt.Rows[i].Field<string>(9)
+                    Дата_договора = dt.Rows[i].Field<string>(9),
+                    Доверенность_на_представителя = dt.Rows[i].Field<string>(10)
                 });
             }
             return candidates;
@@ -134,24 +133,24 @@ namespace WordDocumentBuilder
         }
 
         /// <summary>
-        /// Захардкоженное присваивание значений закладкам.
+        /// Захардкоженное присваивание значений местам в документе.
         /// </summary>
         private void SetValues(WordDocument doc, Candidate c)
         {
             var table = CreateTable(c.Talon);
-            doc.SetBookmarkText("Фамилия", $"{c.Info.Фамилия}");
-            doc.SetBookmarkText("Фамилия1", $"{c.Info.Фамилия}");
-            doc.SetBookmarkText("Имя", $"{c.Info.Имя}");
-            doc.SetBookmarkText("Имя1", $"{c.Info.Имя}");
-            doc.SetBookmarkText("Отчество", $"{c.Info.Отчество}");
-            doc.SetBookmarkText("Отчество1", $"{c.Info.Отчество}");
-            doc.SetBookmarkText("Номер_договора", $"{c.Info.Номер_договора}");
-            doc.SetBookmarkText("Номер_договора1", $"{c.Info.Номер_договора}");
-            doc.SetBookmarkText("Номер_договора2", $"{c.Info.Номер_договора}");
-            doc.SetBookmarkText("Дата_договора", $"{c.Info.Дата_договора}");
-            doc.SetBookmarkText("Постановление_ТИК", $"{c.Info.Постановление_ТИК}");
-            doc.SetBookmarkText("ФИО_представителя", $"{c.Info.Фамилия_представителя} " +
-                $"{c.Info.Имя_представителя} {c.Info.Отчество_представителя}");
+            //
+            doc.SetMergeFieldText("Фамилия", $"{c.Info.Фамилия}");
+            doc.SetMergeFieldText("Имя", $"{c.Info.Имя}");
+            doc.SetMergeFieldText("Отчество", $"{c.Info.Отчество}");
+            doc.SetMergeFieldText("Номер_договора", $"{c.Info.Номер_договора}");
+            doc.SetMergeFieldText("Дата_договора", $"{c.Info.Дата_договора}");
+            doc.SetMergeFieldText("Постановление_ТИК", $"{c.Info.Постановление_ТИК}");
+            doc.SetMergeFieldText("Фамилия_представителя_род_падеж", $"{c.Info.Фамилия_представителя}");
+            doc.SetMergeFieldText("Имя_представителя_род_падеж", $"{c.Info.Имя_представителя}");
+            doc.SetMergeFieldText("Отчество_представителя_род_падеж", $"{c.Info.Отчество_представителя}");
+            doc.SetMergeFieldText("ИО_Фамилия", $"{c.ИО_Фамилия}");
+            doc.SetMergeFieldText("ИО_Фамилия_предст", $"{c.ИО_Фамилия_представителя}");
+            doc.SetMergeFieldText("Доверенность_на_представителя", $"{c.Info.Доверенность_на_представителя}");
             doc.SetBookmarkText("Талон", $"{c.Talon.Id}");
             doc.SetBookmarkTable("Талон", table);
         }

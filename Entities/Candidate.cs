@@ -18,18 +18,22 @@ namespace WordDocumentBuilder.Entities
 
         public Talon Talon { get; }
 
-        public string И_О_Фамилия { get; }
+        public string ИО_Фамилия { get; }
 
-        public string И_О_Фамилия_представителя { get; }
+        public string ИО_Фамилия_представителя { get; }
 
         public Candidate(CandidateInfo info, Talon talon)
         {
             Info = info;
             Talon = talon;
-            И_О_Фамилия = $"{Info.Имя[0]}.{Info.Отчество[0]} {Info.Фамилия}";
+            ИО_Фамилия = $"{Info.Имя[0]}.{Info.Отчество[0]}. {Info.Фамилия}";
             if (Info.Имя_представителя != "" & Info.Отчество_представителя != "" & Info.Фамилия_представителя != "")
             {
-                И_О_Фамилия_представителя = $"{Info.Имя_представителя[0]}.{Info.Отчество_представителя[0]} {Info.Фамилия_представителя}";
+                ИО_Фамилия_представителя = $"{Info.Имя_представителя[0]}.{Info.Отчество_представителя[0]}. {Info.Фамилия_представителя}";
+            }
+            else
+            {
+                ИО_Фамилия_представителя = "";
             }
         }
     }
