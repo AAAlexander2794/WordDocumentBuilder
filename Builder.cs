@@ -12,7 +12,7 @@ using WordDocumentBuilder.Entities;
 
 namespace WordDocumentBuilder
 {
-    internal class Builder
+    public class Builder
     {
         const string _templatePath = "Шаблон Договора.dotx";
         const string _dataFilepath = "data.xlsm";
@@ -36,6 +36,8 @@ namespace WordDocumentBuilder
                 var resultPath = $"{candidate.Info.Фамилия} {candidate.Info.Имя} {candidate.Info.Отчество}.docx";
                 // Устанавливаем начения текста для закладок документа
                 SetValues(document, candidate);
+                //
+                document.SetMergeFieldText("Фамилия", "Это просто фамилия");
                 // Сохраняем и закрываем
                 document.Save(resultPath);
                 document.Close();

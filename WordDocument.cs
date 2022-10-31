@@ -108,5 +108,35 @@ namespace WordDocumentBuilder
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="mergeFieldName">Название поля для слияния.</param>
+        /// <param name="text"></param>
+        public void SetMergeFieldText(string mergeFieldName, string text)
+        {
+            //
+            string FieldDelimeter = " MERGEFIELD ";
+            string FieldDelimeterEnd = " \\* MERGEFORMAT ";
+
+            foreach (FieldCode field in Document.MainDocumentPart.RootElement.Descendants<FieldCode>())
+            {
+                var fieldNameStart = field.Text.LastIndexOf(FieldDelimeter, System.StringComparison.Ordinal);
+                var fieldName = field.Text.Substring(fieldNameStart + FieldDelimeter.Length).Replace(FieldDelimeterEnd, "").Trim();
+                //var fieldName = fieldName1;
+
+                if (fieldName == mergeFieldName)
+                {
+                    foreach (Run run in Document.MainDocumentPart.Document.Descendants<Run>())
+                    {
+                        foreach (Text txtFromRun in run.Descendants<Text>().Where(a => a.Text == $"«{fieldName}»"))
+                        {
+                            txtFromRun.Text = text;
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }
