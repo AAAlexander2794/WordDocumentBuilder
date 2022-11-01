@@ -27,10 +27,15 @@ namespace WordDocumentBuilder.Entities
         /// </summary>
         public string Отчество { get; set; } = "";
 
-        /// <summary>
-        /// Номер талона
-        /// </summary>
-        public string Номер_талона { get; set; } = "";
+        public string Талон_Маяк { get; set; } = "";
+
+        public string Талон_Радио_России { get; set; } = "";
+
+        public string Талон_Вести_ФМ { get; set; } = "";
+
+        public string Талон_Россия_1 { get; set; } = "";
+
+        public string Талон_Россия_24 { get; set; } = "";
 
         /// <summary>
         /// Номер договора

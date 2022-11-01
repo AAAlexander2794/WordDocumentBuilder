@@ -54,7 +54,7 @@ namespace WordDocumentBuilder
                     Фамилия = dt.Rows[i].Field<string>(0),
                     Имя = dt.Rows[i].Field<string>(1),
                     Отчество = dt.Rows[i].Field<string>(2),
-                    Номер_талона = dt.Rows[i].Field<string>(3),
+                    Номер_талона_1 = dt.Rows[i].Field<string>(3),
                     Номер_договора = dt.Rows[i].Field<string>(4),
                     Постановление_ТИК = dt.Rows[i].Field<string>(5),
                     Фамилия_представителя = dt.Rows[i].Field<string>(6),
@@ -67,7 +67,13 @@ namespace WordDocumentBuilder
             return candidates;
         }
 
-
+        /// <summary>
+        /// Читаем таблицу с строками талонов
+        /// </summary>
+        /// <remarks>
+        /// Там в кучу талоны разных медиаресурсов, то есть могут совпадать ID.
+        /// </remarks>
+        /// <returns></returns>
         List<TalonRecordInfo> ReadTalonRecords()
         {
             var dt = ExcelProcessor.ReadExcelSheet(_dataFilepath, sheetNumber: 1);
@@ -98,7 +104,15 @@ namespace WordDocumentBuilder
         List<Talon> BuildTalons(List<TalonRecord> talonRecords)
         {
             var talons = new List<Talon>();
-            //
+            // Берем по уникальным медиаресурсам
+            var mediaresources = new List<string>();
+            foreach (var record in talonRecords)
+            {
+                mediaresources.Add(record.MediaResource);
+            }
+            // Формируем список уникальных медиаресурсов
+            var uniqMediaResources = mediaresources.Distinct().ToList();
+
             var ids = new List<int>();
             foreach (var rec in talonRecords)
             {
@@ -109,7 +123,7 @@ namespace WordDocumentBuilder
             //
             foreach (var id in uniqIds)
             {
-                var talon = new Talon()
+                var talon = new Talon(id, talonRecords)
                 {
                     Id = id,
                     TalonRecords = talonRecords.Where(rec => rec.Id == id).ToList()
@@ -124,7 +138,7 @@ namespace WordDocumentBuilder
             var candidates = new List<Candidate>();
             foreach (var info in infos)
             {
-                var talon = talons.FirstOrDefault(t => t.Id.ToString() == info.Номер_талона);
+                var talon = talons.FirstOrDefault(t => t.Id.ToString() == info.Номер_талона_1);
                 if (talon == null) continue;
                 var candidate = new Candidate(info, talon);
                 candidates.Add(candidate);
@@ -137,7 +151,16 @@ namespace WordDocumentBuilder
         /// </summary>
         private void SetValues(WordDocument doc, Candidate c)
         {
-            var table = CreateTable(c.Talon);
+            int i = 1;
+            foreach (var talon in c.Talons)
+            {
+                var table = CreateTable(talon);
+                doc.SetBookmarkText($"Талон_{i}", "");
+                doc.SetBookmarkTable($"Талон_{i}", table);
+                if (i == 5) break;
+            }
+
+            
             //
             doc.SetMergeFieldText("Фамилия", $"{c.Info.Фамилия}");
             doc.SetMergeFieldText("Имя", $"{c.Info.Имя}");
@@ -151,8 +174,7 @@ namespace WordDocumentBuilder
             doc.SetMergeFieldText("ИО_Фамилия", $"{c.ИО_Фамилия}");
             doc.SetMergeFieldText("ИО_Фамилия_предст", $"{c.ИО_Фамилия_представителя}");
             doc.SetMergeFieldText("Доверенность_на_представителя", $"{c.Info.Доверенность_на_представителя}");
-            doc.SetBookmarkText("Талон", $"{c.Talon.Id}");
-            doc.SetBookmarkTable("Талон", table);
+            
         }
 
         /// <summary>

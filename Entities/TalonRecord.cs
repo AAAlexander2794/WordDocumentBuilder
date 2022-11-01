@@ -22,13 +22,16 @@ namespace WordDocumentBuilder.Entities
 
         public TimeSpan Duration { get; set; }
 
-        public TalonRecord(int id, string mediaResource, DateOnly date, TimeOnly time, TimeSpan duration)
+        public string Description { get; set; }
+
+        public TalonRecord(int id, string mediaResource, DateOnly date, TimeOnly time, TimeSpan duration, string description)
         {
             Id = id;
             MediaResource = mediaResource;
             Date = date;
             Time = time;
             Duration = duration;
+            Description = description;
         }
 
         public TalonRecord(TalonRecordInfo info)
@@ -39,6 +42,8 @@ namespace WordDocumentBuilder.Entities
             // Происходит замена точки на запятую (вот такая культура)
             Time = TimeOnly.FromDateTime(DateTime.FromOADate(double.Parse(info.Time.Replace('.', ','))));
             Duration = TimeOnly.FromDateTime(DateTime.FromOADate(double.Parse(info.Duration.Replace('.', ',')))).ToTimeSpan();
+            //
+            Description = info.Description;
         }
     }
 }

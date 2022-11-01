@@ -36,13 +36,16 @@ namespace WordDocumentBuilder.Entities
         /// </summary>
         public string Duration { get; set; }
 
-        public TalonRecordInfo(string id, string mediaResource, string date, string time, string duration)
+        public string Description { get;set; }
+
+        public TalonRecordInfo(string id, string mediaResource, string date, string time, string duration, string description = "")
         {
             Id = id;
             MediaResource = mediaResource;
             Date = date;
             Time = time;
             Duration = duration;
+            Description = description;
         }
 
         //public TalonRecord(object? id, object? mediaResource, object? date, object? time, object? duration)

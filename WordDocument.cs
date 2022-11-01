@@ -123,7 +123,6 @@ namespace WordDocumentBuilder
             {
                 var fieldNameStart = field.Text.LastIndexOf(FieldDelimeter, System.StringComparison.Ordinal);
                 var fieldName = field.Text.Substring(fieldNameStart + FieldDelimeter.Length).Replace(FieldDelimeterEnd, "").Trim();
-                //var fieldName = fieldName1;
 
                 if (fieldName == mergeFieldName)
                 {
