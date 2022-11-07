@@ -65,7 +65,9 @@ namespace WordDocumentBuilder
                     Имя_представителя = dt.Rows[i].Field<string>(11),
                     Отчество_представителя = dt.Rows[i].Field<string>(12),
                     Дата_договора = dt.Rows[i].Field<string>(13),
-                    Доверенность_на_представителя = dt.Rows[i].Field<string>(14)
+                    Доверенность_на_представителя = dt.Rows[i].Field<string>(14),
+                    ИНН = dt.Rows[i].Field<string>(15),
+                    Спец_изб_счет_номер = dt.Rows[i].Field<string>(16)
                 });
             }
             return candidates;
@@ -191,7 +193,8 @@ namespace WordDocumentBuilder
             doc.SetMergeFieldText("ИО_Фамилия", $"{c.ИО_Фамилия}");
             doc.SetMergeFieldText("ИО_Фамилия_предст", $"{c.ИО_Фамилия_представителя}");
             doc.SetMergeFieldText("Доверенность_на_представителя", $"{c.Info.Доверенность_на_представителя}");
-            
+            doc.SetMergeFieldText("ИНН", $"{c.Info.ИНН}");
+            doc.SetMergeFieldText("Спец_изб_счет", $"{c.Info.Спец_изб_счет_номер}");
         }
 
         /// <summary>
@@ -203,6 +206,43 @@ namespace WordDocumentBuilder
         {
             // 
             Table table = new Table();
+            //
+            TableProperties tblProp = new TableProperties();
+            TableBorders tblBorders = new TableBorders()
+            {
+                BottomBorder = new BottomBorder()
+                {
+                    Size = 4,
+                    Val = BorderValues.Single
+                },
+                TopBorder = new TopBorder()
+                {
+                    Size = 4,
+                    Val = BorderValues.Single
+                },
+                LeftBorder = new LeftBorder()
+                {
+                    Size = 4,
+                    Val = BorderValues.Single
+                },
+                RightBorder = new RightBorder()
+                {
+                    Size = 4,
+                    Val = BorderValues.Single
+                },
+                InsideHorizontalBorder = new InsideHorizontalBorder()
+                {
+                    Size = 4,
+                    Val = BorderValues.Single
+                },
+                InsideVerticalBorder = new InsideVerticalBorder()
+                {
+                    Size = 4,
+                    Val = BorderValues.Single
+                }
+            };
+            tblProp.Append(tblBorders);
+            table.Append(tblProp);
             //
             TableRow trHead = new TableRow();
             trHead.Append(
