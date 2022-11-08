@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,5 +38,12 @@ namespace WordDocumentBuilder.Entities
             }
             return text;
         }
+
+        //public DataTable GetTalonDataTable()
+        //{
+        //    DataTable dt = new DataTable();
+
+        //    return dt;
+        //}
     }
 }

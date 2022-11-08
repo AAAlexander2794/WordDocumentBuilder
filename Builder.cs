@@ -16,19 +16,18 @@ namespace WordDocumentBuilder
     {
         const string _templatePath = "Шаблон Договора.dotx";
         const string _dataFilepath = "data.xlsm";
+        
 
         public void Do()
         {
-            //
-            var talonRecordInfos = ReadTalonRecords();
-            //
-            var talonRecords = BuildTalonRecords(talonRecordInfos);
-            //
-            var talons = BuildTalons(talonRecords);
+            // Вариант 1
+           // var talons = TalonBuilder.BuildTalonsVariant1();
+            // Вариант 2
+            var talons2 = TalonBuilder.BuildTalonsVariant2();
             //
             var candidatesInfos = ReadCandidates();
             //
-            var candidates = BuildCandidates(candidatesInfos, talons);
+            var candidates = BuildCandidates(candidatesInfos, talons2);
             // 
             foreach (var candidate in candidates)
             {
@@ -40,6 +39,8 @@ namespace WordDocumentBuilder
                 document.Save(resultPath);
                 document.Close();
             }
+            // test
+            ExcelProcessor.InsertText("test.xlsx", "some text");
         }
 
         List<CandidateInfo> ReadCandidates()
@@ -73,73 +74,7 @@ namespace WordDocumentBuilder
             return candidates;
         }
 
-        /// <summary>
-        /// Читаем таблицу с строками талонов
-        /// </summary>
-        /// <remarks>
-        /// Там в кучу талоны разных медиаресурсов, то есть могут совпадать ID.
-        /// </remarks>
-        /// <returns></returns>
-        List<TalonRecordInfo> ReadTalonRecords()
-        {
-            var dt = ExcelProcessor.ReadExcelSheet(_dataFilepath, sheetNumber: 1);
-            var records = new List<TalonRecordInfo>();
-            // По строкам
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                records.Add(new TalonRecordInfo(
-                    dt.Rows[i].Field<string>(0),
-                    dt.Rows[i].Field<string>(1),
-                    dt.Rows[i].Field<string>(2),
-                    dt.Rows[i].Field<string>(3),
-                    dt.Rows[i].Field<string>(4)));
-            }
-            return records;
-        }
-
-        List<TalonRecord> BuildTalonRecords(List<TalonRecordInfo> infos)
-        {
-            var records = new List<TalonRecord>();
-            foreach (var inf in infos)
-            {
-                records.Add(new TalonRecord(inf));
-            }
-            return records;
-        }
-
-        List<Talon> BuildTalons(List<TalonRecord> talonRecords)
-        {
-            var talons = new List<Talon>();
-            // Берем по уникальным медиаресурсам
-            var mediaresources = new List<string>();
-            foreach (var record in talonRecords)
-            {
-                mediaresources.Add(record.MediaResource);
-            }
-            // Формируем список уникальных медиаресурсов
-            var uniqMediaResources = mediaresources.Distinct().ToList();
-            // Для каждого медиаресурса
-            foreach (var mediaResource in uniqMediaResources)
-            {
-                // Выбираем все строчки для текущего медиаресурса
-                var curMediaTalonRecords = talonRecords.Where(x => x.MediaResource == mediaResource).ToList();
-                // Получаем уникальные ID талонов для этих строчек (по сути количество талонов)
-                var ids = new List<int>();
-                foreach (var rec in curMediaTalonRecords)
-                {
-                    ids.Add(rec.Id);
-                }
-                var uniqIds = ids.Distinct().ToList();
-                //
-                foreach (var id in uniqIds)
-                {
-                    // Создаем талон с этими записями
-                    var talon = new Talon(id, mediaResource, talonRecords);
-                    talons.Add(talon);
-                }
-            }
-            return talons;
-        }
+        
 
         List<Candidate> BuildCandidates(List<CandidateInfo> infos, List<Talon> talons)
         {
@@ -204,6 +139,7 @@ namespace WordDocumentBuilder
         /// <returns></returns>
         Table CreateTable(Talon talon)
         {
+            if (talon == null) return null;
             // 
             Table table = new Table();
             //
@@ -291,6 +227,8 @@ namespace WordDocumentBuilder
             //
             return paragraph;
         }
+
+
 
     }
     

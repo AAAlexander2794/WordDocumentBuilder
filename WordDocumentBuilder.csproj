@@ -7,8 +7,8 @@
     <ProjectGuid>{84ABEDE7-FF8C-4EED-970C-932EDDCDAB69}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WordDocumentBuilder_.NET_4._8</RootNamespace>
-    <AssemblyName>WordDocumentBuilder_.NET_4.8</AssemblyName>
+    <RootNamespace>WordDocumentBuilder</RootNamespace>
+    <AssemblyName>WordDocumentBuilder</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -67,9 +67,12 @@
     <Compile Include="Entities\Talon.cs" />
     <Compile Include="Entities\TalonRecord.cs" />
     <Compile Include="Entities\TalonRecordInfo.cs" />
-    <Compile Include="ExcelProcessor.cs" />
+    <Compile Include="Common\ExcelProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WordDocument.cs" />
+    <Compile Include="TalonBuilder.cs" />
+    <Compile Include="TalonBuilder.Variant1.cs" />
+    <Compile Include="TalonBuilder.Variant2.cs" />
+    <Compile Include="Common\WordDocument.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

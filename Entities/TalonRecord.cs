@@ -34,16 +34,6 @@ namespace WordDocumentBuilder.Entities
             Description = description;
         }
 
-        public TalonRecord(TalonRecordInfo info)
-        {
-            Id = int.Parse(info.Id);
-            MediaResource = info.MediaResource;
-            Date = DateOnly.FromDateTime(DateTime.FromOADate(double.Parse(info.Date)));
-            // Происходит замена точки на запятую (вот такая культура)
-            Time = TimeOnly.FromDateTime(DateTime.FromOADate(double.Parse(info.Time.Replace('.', ','))));
-            Duration = TimeOnly.FromDateTime(DateTime.FromOADate(double.Parse(info.Duration.Replace('.', ',')))).ToTimeSpan();
-            //
-            Description = info.Description;
-        }
+        
     }
 }

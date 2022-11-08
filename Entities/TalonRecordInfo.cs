@@ -47,18 +47,5 @@ namespace WordDocumentBuilder.Entities
             Duration = duration;
             Description = description;
         }
-
-        //public TalonRecord(object? id, object? mediaResource, object? date, object? time, object? duration)
-        //{
-        //    Id = int.Parse(id.ToString());
-        //    MediaResource = (string)mediaResource;
-
-        //    Date = DateOnly.FromDateTime(DateTime.FromOADate(double.Parse(date.ToString())));
-        //    //var timeString = time.ToString();
-        //    //var timeDouble = double.Parse(timeString);
-        //    //var timeDateTime = DateTime.FromOADate(timeDouble);
-        //    Time = TimeOnly.FromDateTime(DateTime.Now);
-        //    Duration = TimeSpan.FromSeconds(10);
-        //}
     }
 }

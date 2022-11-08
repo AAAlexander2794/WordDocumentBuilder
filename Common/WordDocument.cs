@@ -94,6 +94,7 @@ namespace WordDocumentBuilder
         /// <param name="table"></param>
         public void SetBookmarkTable(string bookmarkName, Table table)
         {
+            if (table == null) return;
             var mainPart = Document.MainDocumentPart;
             var res = from bm in mainPart.Document.Body.Descendants<BookmarkStart>()
                       where bm.Name == bookmarkName
