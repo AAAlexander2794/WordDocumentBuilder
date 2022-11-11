@@ -18,16 +18,23 @@ namespace WordDocumentBuilder
         const string _dataFilepath = "data.xlsm";
         
 
-        public void Do()
+        public void Do(string talonVariant = "1")
         {
-            // Вариант 1
-           // var talons = TalonBuilder.BuildTalonsVariant1();
-            // Вариант 2
-            var talons2 = TalonBuilder.BuildTalonsVariant2();
+            var talons = new List<Talon>();
+            if (talonVariant == "1")
+            {
+                // Вариант 1
+                talons = TalonBuilder.BuildTalonsVariant1();
+            }
+            else
+            {
+                // Вариант 2
+                talons = TalonBuilder.BuildTalonsVariant2();
+            }
             //
             var candidatesInfos = ReadCandidates();
             //
-            var candidates = BuildCandidates(candidatesInfos, talons2);
+            var candidates = BuildCandidates(candidatesInfos, talons);
             // 
             foreach (var candidate in candidates)
             {
@@ -39,8 +46,8 @@ namespace WordDocumentBuilder
                 document.Save(resultPath);
                 document.Close();
             }
-            // test
-            ExcelProcessor.InsertText("test.xlsx", "some text");
+            //// test
+            //ExcelProcessor.InsertText("test.xlsx", "some text");
         }
 
         List<CandidateInfo> ReadCandidates()
