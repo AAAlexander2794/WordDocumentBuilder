@@ -49,13 +49,25 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\TalonData_var2")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Талоны.xlsx")]
         public string TalonDataVar2FolderPath {
             get {
                 return ((string)(this["TalonDataVar2FolderPath"]));
             }
             set {
                 this["TalonDataVar2FolderPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Шаблон Договора.dotx")]
+        public string TemplateFilePath {
+            get {
+                return ((string)(this["TemplateFilePath"]));
+            }
+            set {
+                this["TemplateFilePath"] = value;
             }
         }
     }

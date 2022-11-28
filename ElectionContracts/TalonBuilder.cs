@@ -9,8 +9,8 @@ namespace WordDocumentBuilder.ElectionContracts
 {
     internal partial class TalonBuilder
     {
-        const string _dataFilepath = "data.xlsm";
-        const string _talonsFilepath = "Талоны.xlsx";
+        string _dataFilepath = Settings.Default.DataFilePath;
+        string _talonsFilepath = Settings.Default.TalonDataVar2FolderPath;
 
         internal static List<Talon> BuildTalonsVariant1()
         {

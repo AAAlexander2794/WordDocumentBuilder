@@ -9,7 +9,10 @@
       <Value Profile="(Default)">.\data.xlsm</Value>
     </Setting>
     <Setting Name="TalonDataVar2FolderPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">.\TalonData_var2</Value>
+      <Value Profile="(Default)">.\Талоны.xlsx</Value>
+    </Setting>
+    <Setting Name="TemplateFilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\Шаблон Договора.dotx</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -8,16 +8,24 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <TabControl Margin="0,0,0,10">
+            
+            <TabItem Header="Обработка">
+                <Grid Background="#FFE5E5E5">
+                    <Button Content="Вариант 1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="101" Click="Button_Click"/>
+                    <DataGrid Name="DataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,35,10,0"/>
+                    <Button Content="Вариант 2" HorizontalAlignment="Left" Margin="126,10,0,0" VerticalAlignment="Top" Width="83" Click="Button_Click_1"/>
+                </Grid>
+            </TabItem>
             <TabItem Header="Настройки">
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="45"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-
-                    <Button Content="Загрузить настройки"  Width="156" Click="LoadSettings" Height="20" Margin="10,12,628,12"/>
-                    <Button Content="Сохранить настройки" HorizontalAlignment="Left" Margin="171,0,0,0" VerticalAlignment="Center" Width="156" Click="SaveSettings" Height="20"/>
-
+                    <StackPanel Orientation="Horizontal" Margin="5,5,5,5">
+                        <Button Content="Загрузить настройки"  Width="160" Click="LoadSettings" Height="25" Margin="10,0,10,0"/>
+                        <Button Content="Сохранить настройки" Width="160" Click="SaveSettings" Height="25" Margin="10,0,10,0"/>
+                    </StackPanel>
                     <Grid Grid.Row="1">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="25"/>
@@ -35,13 +43,6 @@
                         <TextBox Grid.Column="1" Grid.Row="1" x:Name="tbContractsFolderPath" TextWrapping="Wrap" Text="" Margin="2,2,2,2"  />
                     </Grid>
 
-                </Grid>
-            </TabItem>
-            <TabItem Header="Обработка">
-                <Grid Background="#FFE5E5E5">
-                    <Button Content="Обработать" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="101" Click="Button_Click"/>
-                    <DataGrid Name="DataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,35,10,0"/>
-                    <Button Content="Вариант 2" HorizontalAlignment="Left" Margin="126,10,0,0" VerticalAlignment="Top" Width="83" Click="Button_Click_1"/>
                 </Grid>
             </TabItem>
         </TabControl>

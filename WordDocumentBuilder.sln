@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordDocumentBuilder", "WordDocumentBuilder.csproj", "{84ABEDE7-FF8C-4EED-970C-932EDDCDAB69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WDB_GUI_NET_4_8", "..\WDB_GUI_NET_4_8\WDB_GUI_NET_4_8.csproj", "{B780071C-7F83-4E49-911A-C73C1B491A48}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WDB_GUI_NET_4_8", "WDB_GUI_NET_4_8\WDB_GUI_NET_4_8.csproj", "{B780071C-7F83-4E49-911A-C73C1B491A48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

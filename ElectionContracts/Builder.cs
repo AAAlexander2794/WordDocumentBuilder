@@ -14,8 +14,8 @@ namespace WordDocumentBuilder.ElectionContracts
 {
     public class Builder
     {
-        const string _templatePath = "Шаблон Договора.dotx";
-        const string _dataFilepath = "data.xlsm";
+        string _templatePath = Settings.Default.TemplateFilePath;
+        string _dataFilepath = Settings.Default.DataFilePath;
         
 
         public void Do(string talonVariant = "1")
@@ -46,8 +46,6 @@ namespace WordDocumentBuilder.ElectionContracts
                 document.Save(resultPath);
                 document.Close();
             }
-            //// test
-            //ExcelProcessor.InsertText("test.xlsx", "some text");
         }
 
         List<CandidateInfo> ReadCandidates()
