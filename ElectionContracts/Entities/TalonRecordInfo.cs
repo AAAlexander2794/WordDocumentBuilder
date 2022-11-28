@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WordDocumentBuilder.Entities
+namespace WordDocumentBuilder.ElectionContracts.Entities
 {
     /// <summary>
     /// Одна запись талона в первозданном текстовом виде (из Экселя).

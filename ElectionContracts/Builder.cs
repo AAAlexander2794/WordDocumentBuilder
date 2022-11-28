@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using WordDocumentBuilder.Entities;
+using WordDocumentBuilder.ElectionContracts.Entities;
 
-namespace WordDocumentBuilder
+namespace WordDocumentBuilder.ElectionContracts
 {
     public class Builder
     {
@@ -75,8 +75,9 @@ namespace WordDocumentBuilder
                     Дата_договора = dt.Rows[i].Field<string>(13),
                     Доверенность_на_представителя = dt.Rows[i].Field<string>(14),
                     ИНН = dt.Rows[i].Field<string>(15),
-                    Спец_изб_счет_номер = dt.Rows[i].Field<string>(16)
-                });
+                    Спец_изб_счет_номер = dt.Rows[i].Field<string>(16),
+                    Округ_дат_падеж = dt.Rows[i].Field<string>(17)
+                }) ;
             }
             return candidates;
         }
@@ -137,6 +138,7 @@ namespace WordDocumentBuilder
             doc.SetMergeFieldText("Доверенность_на_представителя", $"{c.Info.Доверенность_на_представителя}");
             doc.SetMergeFieldText("ИНН", $"{c.Info.ИНН}");
             doc.SetMergeFieldText("Спец_изб_счет", $"{c.Info.Спец_изб_счет_номер}");
+            doc.SetMergeFieldText("Округ_дат_падеж", $"{c.Info.Округ_дат_падеж}");
         }
 
         /// <summary>

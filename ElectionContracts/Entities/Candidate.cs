@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WordDocumentBuilder.Entities
+namespace WordDocumentBuilder.ElectionContracts.Entities
 {
     /// <summary>
     /// Полноценная строчка кандидата для записи в документ.
     /// </summary>
+    /// <remarks>
+    /// У каждого кандидата по 5 талонов.
+    /// </remarks>
     internal class Candidate
     {
         /// <summary>
@@ -33,7 +36,7 @@ namespace WordDocumentBuilder.Entities
         public Candidate(CandidateInfo info, List<Talon> talons)
         {
             Info = info;
-            ИО_Фамилия = $"{Info.Имя[0]}.{Info.Отчество[0]}. {Info.Фамилия}";
+            ИО_Фамилия = $"{Info?.Имя[0]}.{Info?.Отчество[0]}. {Info?.Фамилия}";
             if (Info.Имя_представителя != "" & Info.Отчество_представителя != "" & Info.Фамилия_представителя != "")
             {
                 ИО_Фамилия_представителя = $"{Info.Имя_представителя[0]}.{Info.Отчество_представителя[0]}. {Info.Фамилия_представителя}";

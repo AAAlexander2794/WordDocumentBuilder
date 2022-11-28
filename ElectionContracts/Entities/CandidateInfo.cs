@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WordDocumentBuilder.Entities
+namespace WordDocumentBuilder.ElectionContracts.Entities
 {
     /// <summary>
     /// Запись кандидата в текстовом виде (из Экселя).
@@ -26,6 +26,8 @@ namespace WordDocumentBuilder.Entities
         /// Отчество
         /// </summary>
         public string Отчество { get; set; } = "";
+
+        public string Округ_дат_падеж { get; set; } = "";
 
         public string Талон_Маяк { get; set; } = "";
 

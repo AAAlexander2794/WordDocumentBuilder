@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WordDocumentBuilder.Entities
+namespace WordDocumentBuilder.ElectionContracts.Entities
 {
     internal class Talon
     {
