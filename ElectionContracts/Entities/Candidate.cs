@@ -39,7 +39,9 @@ namespace WordDocumentBuilder.ElectionContracts.Entities
         public Candidate(CandidateInfo info, List<Talon> talons)
         {
             Info = info;
-            ИО_Фамилия = $"{Info?.Имя[0]}.{Info?.Отчество[0]}. {Info?.Фамилия}";
+            ИО_Фамилия = $"{Info?.Фамилия}";
+            if (Info?.Отчество.Length > 0) ИО_Фамилия = $"{Info?.Отчество[0]}. {ИО_Фамилия}";
+            if (Info?.Имя.Length > 0) ИО_Фамилия = $"{Info?.Имя[0]}.{ИО_Фамилия}";
             if (Info.Имя_представителя != "" & Info.Отчество_представителя != "" & Info.Фамилия_представителя != "")
             {
                 ИО_Фамилия_представителя = $"{Info.Имя_представителя[0]}.{Info.Отчество_представителя[0]}. {Info.Фамилия_представителя}";

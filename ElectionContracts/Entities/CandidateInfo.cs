@@ -44,7 +44,12 @@ namespace WordDocumentBuilder.ElectionContracts.Entities
         /// </summary>
         public string Номер_договора { get; set; } = "";
 
-        public string Дата_договора { get; set; } = "";
+        private string _contractDate = "\"__\" __________ 20__ ";
+        public string Дата_договора 
+        { 
+            get { return _contractDate; }
+            set { if (value != "") _contractDate = value; }
+        }
 
         /// <summary>
         /// Постановление ТИК. В формате "[дата] [номер]"

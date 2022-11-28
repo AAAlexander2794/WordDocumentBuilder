@@ -74,6 +74,7 @@ namespace WordDocumentBuilder
         /// <returns></returns>
         private static string GetCellValue(SpreadsheetDocument doc, Cell cell)
         {
+            if (cell.CellValue == null) return "";
             string value = cell.CellValue.InnerText;
             if (cell.DataType != null && cell.DataType.Value == CellValues.SharedString)
             {
