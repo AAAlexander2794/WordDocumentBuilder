@@ -30,6 +30,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="25"/>
                             <RowDefinition Height="25"/>
+                            <RowDefinition Height="25"/>
                             <RowDefinition Height="119*"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
@@ -37,10 +38,12 @@
                             <ColumnDefinition Width="330"/>
                             <ColumnDefinition Width="87*"/>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Grid.Row="0" >Путь к файлу с данным:</Label>
+                        <Label Grid.Column="0" Grid.Row="0" >Путь к файлу с данными:</Label>
                         <TextBox Grid.Column="1" Grid.Row="0" x:Name="tbDataFilePath" TextWrapping="Wrap" Text="" Margin="2,2,2,2" />
-                        <Label Grid.Column="0" Grid.Row="1">Путь к папке с договорами:</Label>
-                        <TextBox Grid.Column="1" Grid.Row="1" x:Name="tbContractsFolderPath" TextWrapping="Wrap" Text="" Margin="2,2,2,2"  />
+                        <Label Grid.Column="0" Grid.Row="1" >Путь к шаблону договора:</Label>
+                        <TextBox Grid.Column="1" Grid.Row="1" x:Name="tbTemplateFilePath" TextWrapping="Wrap" Text="" Margin="2,2,2,2" />
+                        <Label Grid.Column="0" Grid.Row="2">Путь к папке с договорами:</Label>
+                        <TextBox Grid.Column="1" Grid.Row="2" x:Name="tbContractsFolderPath" TextWrapping="Wrap" Text="" Margin="2,2,2,2"  />
                     </Grid>
 
                 </Grid>

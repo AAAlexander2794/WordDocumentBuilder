@@ -9,8 +9,8 @@ namespace WordDocumentBuilder.ElectionContracts
 {
     internal partial class TalonBuilder
     {
-        string _dataFilepath = Settings.Default.DataFilePath;
-        string _talonsFilepath = Settings.Default.TalonDataVar2FolderPath;
+        static string _dataFilepath = Settings.Default.DataFilePath;
+        static string _talonsFilepath = Settings.Default.TalonDataVar2FolderPath;
 
         internal static List<Talon> BuildTalonsVariant1()
         {
