@@ -49,6 +49,7 @@ namespace WDB_GUI_NET_4_8
             tbContractsFolderPath.Text = Settings.Default.ContractsFolderPath;
             tbDataFilePath.Text = Settings.Default.DataFilePath;
             tbTemplateFilePath.Text = Settings.Default.TemplateFilePath;
+            tbTalonsVar2Folder.Text = Settings.Default.TalonDataVar2FolderPath;
         }
 
         private void SaveSettings(object sender, RoutedEventArgs e)
@@ -56,6 +57,7 @@ namespace WDB_GUI_NET_4_8
             if (tbContractsFolderPath.Text != "") Settings.Default.ContractsFolderPath = tbContractsFolderPath.Text;
             if (tbDataFilePath.Text != "") Settings.Default.DataFilePath = tbDataFilePath.Text;
             if (tbTemplateFilePath.Text != "") Settings.Default.TemplateFilePath = tbTemplateFilePath.Text;
+            if (tbTalonsVar2Folder.Text != "") Settings.Default.TalonDataVar2FolderPath = tbTalonsVar2Folder.Text;
             Settings.Default.Save();
         }
     }

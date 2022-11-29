@@ -31,10 +31,11 @@
                             <RowDefinition Height="25"/>
                             <RowDefinition Height="25"/>
                             <RowDefinition Height="25"/>
+                            <RowDefinition Height="25"/>
                             <RowDefinition Height="119*"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="170"/>
+                            <ColumnDefinition Width="190"/>
                             <ColumnDefinition Width="330"/>
                             <ColumnDefinition Width="87*"/>
                         </Grid.ColumnDefinitions>
@@ -44,6 +45,8 @@
                         <TextBox Grid.Column="1" Grid.Row="1" x:Name="tbTemplateFilePath" TextWrapping="Wrap" Text="" Margin="2,2,2,2" />
                         <Label Grid.Column="0" Grid.Row="2">Путь к папке с договорами:</Label>
                         <TextBox Grid.Column="1" Grid.Row="2" x:Name="tbContractsFolderPath" TextWrapping="Wrap" Text="" Margin="2,2,2,2"  />
+                        <Label Grid.Column="0" Grid.Row="3">Путь к файлу с талонами вар.2:</Label>
+                        <TextBox Grid.Column="1" Grid.Row="3" x:Name="tbTalonsVar2Folder" TextWrapping="Wrap" Text="" Margin="2,2,2,2"  />
                     </Grid>
 
                 </Grid>
