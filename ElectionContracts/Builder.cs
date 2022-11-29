@@ -22,7 +22,7 @@ namespace WordDocumentBuilder.ElectionContracts
         string _contractsFolderPath = $"{Settings.Default.ContractsFolderPath}{DateTime.Now.ToString().Replace(":", "_")}\\";
         
 
-        public void Do(string talonVariant = "1")
+        public DataTable Do(string talonVariant = "1")
         {
             var talons = new List<Talon>();
             if (talonVariant == "1")
@@ -64,6 +64,9 @@ namespace WordDocumentBuilder.ElectionContracts
                 document.Save(resultPath + "_ТВ.docx");
                 document.Close();
             }
+            //
+            DataTable dt = ExcelProcessor.ReadExcelSheet(_dataFilepath, sheetNumber: 0);
+            return dt;
         }
 
         List<CandidateInfo> ReadCandidates()
