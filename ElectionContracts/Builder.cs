@@ -4,6 +4,7 @@ using DocumentFormat.OpenXml.Wordprocessing;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -15,28 +16,20 @@ namespace WordDocumentBuilder.ElectionContracts
 {
     public class Builder
     {
-        string _templatePath = Settings.Default.TemplateFilePath;
-        string _dataFilepath = Settings.Default.DataFilePath;
+        //string _templatePath = Settings.Default.TemplateFilePath;
+        //string _dataFilepath = Settings.Default.CandidatesFilePath;
         // С подпапкой времени
         //string _dateTimeForDirectory = DateTime.Now.ToString().Replace(":", "_");
-        string _contractsFolderPath = $"{Settings.Default.ContractsFolderPath}{DateTime.Now.ToString().Replace(":", "_")}\\";
+        //string _contractsFolderPath = $"{Settings.Default.ContractsFolderPath}{DateTime.Now.ToString().Replace(":", "_")}\\";
         
 
-        public DataTable Do(string talonVariant = "1")
+        public DataTable Do(string talonVariant = "default")
         {
-            var talons = new List<Talon>();
-            if (talonVariant == "1")
-            {
-                // Вариант 1
-                talons = TalonBuilder.BuildTalonsVariant1();
-            }
-            else
-            {
-                // Вариант 2
-                talons = TalonBuilder.BuildTalonsVariant2();
-            }
+            string _contractsFolderPath = $"{Settings.Default.ContractsFolderPath}{DateTime.Now.ToString().Replace(":", "_")}\\";
+
+            var talons = TalonBuilder.BuildTalons(talonVariant);
             //
-            var candidatesInfos = ReadCandidates();
+            var candidatesInfos = ReadCandidates(Settings.Default.CandidatesFilePath);
             //
             var candidates = BuildCandidates(candidatesInfos, talons);
             // Создает путь для документов, если вдруг каких-то папок нет
@@ -44,10 +37,15 @@ namespace WordDocumentBuilder.ElectionContracts
             //
             foreach (var candidate in candidates)
             {
+                Debug.WriteLine(candidate.Info.На_печать);
+                Debug.WriteLine($"{_contractsFolderPath}{candidate.Округ_для_создания_каталога}\\");
+                // Если не отмечено на печать, пропускаем
+                if (candidate.Info.На_печать == "") continue;
                 // Создает подпапку округа
                 Directory.CreateDirectory($"{_contractsFolderPath}{candidate.Округ_для_создания_каталога}\\");
-                //
-                var document = new WordDocument(_templatePath);
+
+                // Создаем договор РВ
+                var document = new WordDocument(Settings.Default.TemplateFilePath_РВ);
                 var resultPath = $"{_contractsFolderPath}{candidate.Округ_для_создания_каталога}\\" +
                     $"{candidate.Info.Фамилия} {candidate.Info.Имя} {candidate.Info.Отчество}";
                 // Устанавливаем начения текста для полей документа, кроме закладок
@@ -57,21 +55,22 @@ namespace WordDocumentBuilder.ElectionContracts
                 // Сохраняем и закрываем
                 document.Save(resultPath + "_радио.docx");
                 document.Close();
+
                 // Повторяем создание документа для договора ТВ
-                document = new WordDocument(_templatePath);
+                document = new WordDocument(Settings.Default.TemplateFilePath_ТВ);
                 SetMergeFields(document, candidate);
                 SetTables(document, candidate, "tele");
                 document.Save(resultPath + "_ТВ.docx");
                 document.Close();
             }
-            //
-            DataTable dt = ExcelProcessor.ReadExcelSheet(_dataFilepath, sheetNumber: 0);
+            // test
+            DataTable dt = ExcelProcessor.ReadExcelSheet(Settings.Default.CandidatesFilePath, sheetNumber: 0);
             return dt;
         }
 
-        List<CandidateInfo> ReadCandidates()
+        List<CandidateInfo> ReadCandidates(string dataFilePath)
         {
-            var dt = ExcelProcessor.ReadExcelSheet(_dataFilepath, sheetNumber: 0);
+            var dt = ExcelProcessor.ReadExcelSheet(dataFilePath, sheetNumber: 0);
             var candidates = new List<CandidateInfo>();
             // По строкам
             for (int i = 0; i < dt.Rows.Count; i++)
@@ -95,7 +94,8 @@ namespace WordDocumentBuilder.ElectionContracts
                     Доверенность_на_представителя = dt.Rows[i].Field<string>(14),
                     ИНН = dt.Rows[i].Field<string>(15),
                     Спец_изб_счет_номер = dt.Rows[i].Field<string>(16),
-                    Округ_дат_падеж = dt.Rows[i].Field<string>(17)
+                    Округ_дат_падеж = dt.Rows[i].Field<string>(17),
+                    На_печать = dt.Rows[i].Field<string>(18)
                 }) ;
             }
             return candidates;

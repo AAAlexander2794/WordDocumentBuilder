@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,30 +10,50 @@ namespace WordDocumentBuilder.ElectionContracts
 {
     internal partial class TalonBuilder
     {
-        static string _dataFilepath = Settings.Default.DataFilePath;
-        static string _talonsFilepath = Settings.Default.TalonDataVar2FolderPath;
+        
 
-        internal static List<Talon> BuildTalonsVariant1()
+        internal static List<Talon> BuildTalons(string variant = "default")
         {
-            var dt = ExcelProcessor.ReadExcelSheet(_dataFilepath, sheetNumber: 1);
-            var talonRecords = Variant1.BuildTalonRecords(dt);
-            var talons = BuildTalons(talonRecords);
+            DataTable dt;
+            List<TalonRecord> talonRecords;
+            List<Talon> talons = new List<Talon>();
+            switch (variant)
+            {
+                case "1":
+                    dt = ExcelProcessor.ReadExcelSheet(Settings.Default.TalonsFilePath_Маяк, sheetNumber: 1);
+                    talonRecords = Variant1.BuildTalonRecords(dt, "Маяк");
+                    talons = BuildTalons(talonRecords, talons);
+                    dt = ExcelProcessor.ReadExcelSheet(Settings.Default.TalonsFilePath_Вести_ФМ, sheetNumber: 1);
+                    talonRecords = Variant1.BuildTalonRecords(dt, "Вести ФМ");
+                    talons = BuildTalons(talonRecords, talons);
+                    dt = ExcelProcessor.ReadExcelSheet(Settings.Default.TalonsFilePath_Радио_России, sheetNumber: 1);
+                    talonRecords = Variant1.BuildTalonRecords(dt, "Радио России");
+                    talons = BuildTalons(talonRecords, talons);
+                    dt = ExcelProcessor.ReadExcelSheet(Settings.Default.TalonsFilePath_Россия_1, sheetNumber: 1);
+                    talonRecords = Variant1.BuildTalonRecords(dt, "Россия 1");
+                    talons = BuildTalons(talonRecords, talons);
+                    dt = ExcelProcessor.ReadExcelSheet(Settings.Default.TalonsFilePath_Россия_24, sheetNumber: 1);
+                    talonRecords = Variant1.BuildTalonRecords(dt, "Россия 24");
+                    talons = BuildTalons(talonRecords, talons);
+                    break;
+                case "test":
+                    dt = ExcelProcessor.ReadExcelSheet(Settings.Default.TalonsFilePath, sheetNumber: 2);
+                    talonRecords = Default.BuildTalonRecords(dt);
+                    talons = BuildTalons(talonRecords);
+                    break;
+                default:
+                    dt = ExcelProcessor.ReadExcelSheet(Settings.Default.TalonsFilePath, sheetNumber: 0);
+                    talonRecords = Default.BuildTalonRecords(dt);
+                    talons = BuildTalons(talonRecords);
+                    break;
+            }
             return talons;
         }
 
-        internal static List<Talon> BuildTalonsVariant2()
-        {
-            // todo: добавить обработку всех медиаресурсов
-            var dt = ExcelProcessor.ReadExcelSheet(_talonsFilepath, sheetNumber: 1);
-            List<TalonRecord> talonRecords = Variant2.BuildTalonRecords(dt, "Маяк");
-            //
-            var talons = BuildTalons(talonRecords);
-            return talons;
-        }
 
-        static List<Talon> BuildTalons(List<TalonRecord> talonRecords)
+        static List<Talon> BuildTalons(List<TalonRecord> talonRecords, List<Talon> talons = null)
         {
-            var talons = new List<Talon>();
+            if (talons == null) talons = new List<Talon>();
             // Берем по уникальным медиаресурсам
             var mediaresources = new List<string>();
             foreach (var record in talonRecords)

@@ -13,6 +13,11 @@ namespace WordDocumentBuilder.ElectionContracts.Entities
     internal class CandidateInfo
     {
         /// <summary>
+        /// Поле, где отмечается, создавать договор на этого кандидата или нет
+        /// </summary>
+        public string На_печать { get; set; } = "";
+
+        /// <summary>
         /// Фамилия
         /// </summary>
         public string Фамилия { get; set; } = "";

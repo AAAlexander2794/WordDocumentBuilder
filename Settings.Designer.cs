@@ -25,7 +25,7 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Contracts\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Договоры\\")]
         public string ContractsFolderPath {
             get {
                 return ((string)(this["ContractsFolderPath"]));
@@ -37,37 +37,109 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\data.xlsm")]
-        public string DataFilePath {
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Кандидаты.xlsx")]
+        public string CandidatesFilePath {
             get {
-                return ((string)(this["DataFilePath"]));
+                return ((string)(this["CandidatesFilePath"]));
             }
             set {
-                this["DataFilePath"] = value;
+                this["CandidatesFilePath"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Талоны.xlsx")]
-        public string TalonDataVar2FolderPath {
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Талоны.xlsm")]
+        public string TalonsFilePath {
             get {
-                return ((string)(this["TalonDataVar2FolderPath"]));
+                return ((string)(this["TalonsFilePath"]));
             }
             set {
-                this["TalonDataVar2FolderPath"] = value;
+                this["TalonsFilePath"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Шаблон Договора.dotx")]
-        public string TemplateFilePath {
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Талоны для формирования\\Талоны Маяк.xlsx")]
+        public string TalonsFilePath_Маяк {
             get {
-                return ((string)(this["TemplateFilePath"]));
+                return ((string)(this["TalonsFilePath_Маяк"]));
             }
             set {
-                this["TemplateFilePath"] = value;
+                this["TalonsFilePath_Маяк"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Талоны для формирования\\Талоны Радио России.xlsx")]
+        public string TalonsFilePath_Радио_России {
+            get {
+                return ((string)(this["TalonsFilePath_Радио_России"]));
+            }
+            set {
+                this["TalonsFilePath_Радио_России"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Талоны для формирования\\Талоны Вести ФМ.xlsx")]
+        public string TalonsFilePath_Вести_ФМ {
+            get {
+                return ((string)(this["TalonsFilePath_Вести_ФМ"]));
+            }
+            set {
+                this["TalonsFilePath_Вести_ФМ"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Талоны для формирования\\Талоны Россия 1.xlsx")]
+        public string TalonsFilePath_Россия_1 {
+            get {
+                return ((string)(this["TalonsFilePath_Россия_1"]));
+            }
+            set {
+                this["TalonsFilePath_Россия_1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Талоны для формирования\\Талоны Россия 24.xlsx")]
+        public string TalonsFilePath_Россия_24 {
+            get {
+                return ((string)(this["TalonsFilePath_Россия_24"]));
+            }
+            set {
+                this["TalonsFilePath_Россия_24"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Шаблон Договора ТВ.dotx")]
+        public string TemplateFilePath_ТВ {
+            get {
+                return ((string)(this["TemplateFilePath_ТВ"]));
+            }
+            set {
+                this["TemplateFilePath_ТВ"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Шаблон Договора РВ.dotx")]
+        public string TemplateFilePath_РВ {
+            get {
+                return ((string)(this["TemplateFilePath_РВ"]));
+            }
+            set {
+                this["TemplateFilePath_РВ"] = value;
             }
         }
     }

@@ -27,26 +27,36 @@
                         <Button Content="Сохранить настройки" Width="160" Click="SaveSettings" Height="25" Margin="10,0,10,0"/>
                     </StackPanel>
                     <Grid Grid.Row="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="25"/>
-                            <RowDefinition Height="25"/>
-                            <RowDefinition Height="25"/>
-                            <RowDefinition Height="25"/>
-                            <RowDefinition Height="119*"/>
-                        </Grid.RowDefinitions>
+                        
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="190"/>
+                            <ColumnDefinition Width="200"/>
                             <ColumnDefinition Width="330"/>
                             <ColumnDefinition Width="87*"/>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Grid.Row="0" >Путь к файлу с данными:</Label>
-                        <TextBox Grid.Column="1" Grid.Row="0" x:Name="tbDataFilePath" TextWrapping="Wrap" Text="" Margin="2,2,2,2" />
-                        <Label Grid.Column="0" Grid.Row="1" >Путь к шаблону договора:</Label>
-                        <TextBox Grid.Column="1" Grid.Row="1" x:Name="tbTemplateFilePath" TextWrapping="Wrap" Text="" Margin="2,2,2,2" />
-                        <Label Grid.Column="0" Grid.Row="2">Путь к папке с договорами:</Label>
-                        <TextBox Grid.Column="1" Grid.Row="2" x:Name="tbContractsFolderPath" TextWrapping="Wrap" Text="" Margin="2,2,2,2"  />
-                        <Label Grid.Column="0" Grid.Row="3">Путь к файлу с талонами вар.2:</Label>
-                        <TextBox Grid.Column="1" Grid.Row="3" x:Name="tbTalonsVar2Folder" TextWrapping="Wrap" Text="" Margin="2,2,2,2"  />
+                        <StackPanel Orientation="Vertical" Grid.Column="0">
+                            <Label  Margin="2,2,2,2" Height="26">Путь к файлу с кандидатами:</Label>
+                            <Label Margin="2,2,2,2" Height="26">Путь к шаблону договора РВ:</Label>
+                            <Label Margin="2,2,2,2" Height="26">Путь к шаблону договора ТВ:</Label>
+                            <Label Margin="2,2,2,2" Height="26">Путь к папке с договорами:</Label>
+                            <Label Margin="2,2,2,2" Height="26">Путь к файлу с талонами (default):</Label>
+                            <Label Margin="2,2,2,2" Height="26">Путь к талонам Маяк:</Label>
+                            <Label Margin="2,2,2,2" Height="26">Путь к талонам Вести ФМ:</Label>
+                            <Label Margin="2,2,2,2" Height="26">Путь к талонам Радио России:</Label>
+                            <Label Margin="2,2,2,2" Height="26">Путь к талонам Россия 1:</Label>
+                            <Label Margin="2,2,2,2" Height="26">Путь к талонам Россия 24:</Label>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Column="1">
+                            <TextBox x:Name="tbCandidatesFilePath" TextWrapping="Wrap" Text="" Margin="2,2,2,2" Height="26"/>
+                            <TextBox x:Name="tbTemplateFilePath_РВ" TextWrapping="Wrap" Text="" Margin="2,2,2,2" Height="26"/>
+                            <TextBox x:Name="tbTemplateFilePath_ТВ" TextWrapping="Wrap" Text="" Margin="2,2,2,2" Height="26"/>
+                            <TextBox x:Name="tbContractsFolderPath" TextWrapping="Wrap" Text="" Margin="2,2,2,2"  Height="26"/>
+                            <TextBox x:Name="tbTalonsDefaultFilePath" TextWrapping="Wrap" Text="" Margin="2,2,2,2" Height="26" />
+                            <TextBox x:Name="tbTalons_Маяк" TextWrapping="Wrap" Text="" Margin="2,2,2,2" Height="26" />
+                            <TextBox x:Name="tbTalons_Вести_ФМ" TextWrapping="Wrap" Text="" Margin="2,2,2,2" Height="26" />
+                            <TextBox x:Name="tbTalons_Радио_России" TextWrapping="Wrap" Text="" Margin="2,2,2,2" Height="26" />
+                            <TextBox x:Name="tbTalons_Россия_1" TextWrapping="Wrap" Text="" Margin="2,2,2,2" Height="26" />
+                            <TextBox x:Name="tbTalons_Россия24" TextWrapping="Wrap" Text="" Margin="2,2,2,2" Height="26" />
+                        </StackPanel>
                     </Grid>
 
                 </Grid>
