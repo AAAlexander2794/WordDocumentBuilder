@@ -75,7 +75,14 @@ namespace WordDocumentBuilder
 
         public void SetBookmarkText(string bookmarkName, string text)
         {
-            SetBookmarkText(BookmarkMap[bookmarkName], text);
+            try
+            {
+                SetBookmarkText(BookmarkMap[bookmarkName], text);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Закладка не найдена.\n" + ex.Message);
+            };
         }
 
         private static void SetBookmarkText(BookmarkStart bookmarkStart, string text)

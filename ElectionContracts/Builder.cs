@@ -51,7 +51,11 @@ namespace WordDocumentBuilder.ElectionContracts
                 // Устанавливаем начения текста для полей документа, кроме закладок
                 SetMergeFields(document, candidate);
                 //
-                SetTables(document, candidate, "radio");
+                try
+                {
+                    SetTables(document, candidate, "radio");
+                }
+                catch { }
                 // Сохраняем и закрываем
                 document.Save(resultPath + "_радио.docx");
                 document.Close();
@@ -59,7 +63,14 @@ namespace WordDocumentBuilder.ElectionContracts
                 // Повторяем создание документа для договора ТВ
                 document = new WordDocument(Settings.Default.TemplateFilePath_ТВ);
                 SetMergeFields(document, candidate);
-                SetTables(document, candidate, "tele");
+                try
+                {
+                    SetTables(document, candidate, "tele");
+                }
+                catch
+                {
+
+                }
                 document.Save(resultPath + "_ТВ.docx");
                 document.Close();
             }
