@@ -4,6 +4,8 @@ using DocumentFormat.OpenXml.Wordprocessing;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,45 +16,72 @@ namespace WordDocumentBuilder.ElectionContracts
 {
     public class Builder
     {
-        const string _templatePath = "Шаблон Договора.dotx";
-        const string _dataFilepath = "data.xlsm";
+        //string _templatePath = Settings.Default.TemplateFilePath;
+        //string _dataFilepath = Settings.Default.CandidatesFilePath;
+        // С подпапкой времени
+        //string _dateTimeForDirectory = DateTime.Now.ToString().Replace(":", "_");
+        //string _contractsFolderPath = $"{Settings.Default.ContractsFolderPath}{DateTime.Now.ToString().Replace(":", "_")}\\";
         
 
-        public void Do(string talonVariant = "1")
+        public DataTable Do(string talonVariant = "default")
         {
-            var talons = new List<Talon>();
-            if (talonVariant == "1")
-            {
-                // Вариант 1
-                talons = TalonBuilder.BuildTalonsVariant1();
-            }
-            else
-            {
-                // Вариант 2
-                talons = TalonBuilder.BuildTalonsVariant2();
-            }
+            string _contractsFolderPath = $"{Settings.Default.ContractsFolderPath}{DateTime.Now.ToString().Replace(":", "_")}\\";
+
+            var talons = TalonBuilder.BuildTalons(talonVariant);
             //
-            var candidatesInfos = ReadCandidates();
+            var candidatesInfos = ReadCandidates(Settings.Default.CandidatesFilePath);
             //
             var candidates = BuildCandidates(candidatesInfos, talons);
-            // 
+            // Создает путь для документов, если вдруг каких-то папок нет
+            Directory.CreateDirectory(_contractsFolderPath);
+            //
             foreach (var candidate in candidates)
             {
-                var document = new WordDocument(_templatePath);
-                var resultPath = $"{candidate.Info.Фамилия} {candidate.Info.Имя} {candidate.Info.Отчество}.docx";
-                // Устанавливаем начения текста для закладок документа
-                SetValues(document, candidate);
+                Debug.WriteLine(candidate.Info.На_печать);
+                Debug.WriteLine($"{_contractsFolderPath}{candidate.Округ_для_создания_каталога}\\");
+                // Если не отмечено на печать, пропускаем
+                if (candidate.Info.На_печать == "") continue;
+                // Создает подпапку округа
+                Directory.CreateDirectory($"{_contractsFolderPath}{candidate.Округ_для_создания_каталога}\\");
+
+                // Создаем договор РВ
+                var document = new WordDocument(Settings.Default.TemplateFilePath_РВ);
+                var resultPath = $"{_contractsFolderPath}{candidate.Округ_для_создания_каталога}\\" +
+                    $"{candidate.Info.Фамилия} {candidate.Info.Имя} {candidate.Info.Отчество}";
+                // Устанавливаем начения текста для полей документа, кроме закладок
+                SetMergeFields(document, candidate);
+                //
+                try
+                {
+                    SetTables(document, candidate, "radio");
+                }
+                catch { }
                 // Сохраняем и закрываем
-                document.Save(resultPath);
+                document.Save(resultPath + "_радио.docx");
+                document.Close();
+
+                // Повторяем создание документа для договора ТВ
+                document = new WordDocument(Settings.Default.TemplateFilePath_ТВ);
+                SetMergeFields(document, candidate);
+                try
+                {
+                    SetTables(document, candidate, "tele");
+                }
+                catch
+                {
+
+                }
+                document.Save(resultPath + "_ТВ.docx");
                 document.Close();
             }
-            //// test
-            //ExcelProcessor.InsertText("test.xlsx", "some text");
+            // test
+            DataTable dt = ExcelProcessor.ReadExcelSheet(Settings.Default.CandidatesFilePath, sheetNumber: 0);
+            return dt;
         }
 
-        List<CandidateInfo> ReadCandidates()
+        List<CandidateInfo> ReadCandidates(string dataFilePath)
         {
-            var dt = ExcelProcessor.ReadExcelSheet(_dataFilepath, sheetNumber: 0);
+            var dt = ExcelProcessor.ReadExcelSheet(dataFilePath, sheetNumber: 0);
             var candidates = new List<CandidateInfo>();
             // По строкам
             for (int i = 0; i < dt.Rows.Count; i++)
@@ -76,7 +105,8 @@ namespace WordDocumentBuilder.ElectionContracts
                     Доверенность_на_представителя = dt.Rows[i].Field<string>(14),
                     ИНН = dt.Rows[i].Field<string>(15),
                     Спец_изб_счет_номер = dt.Rows[i].Field<string>(16),
-                    Округ_дат_падеж = dt.Rows[i].Field<string>(17)
+                    Округ_дат_падеж = dt.Rows[i].Field<string>(17),
+                    На_печать = dt.Rows[i].Field<string>(18)
                 }) ;
             }
             return candidates;
@@ -100,30 +130,8 @@ namespace WordDocumentBuilder.ElectionContracts
         /// <summary>
         /// Захардкоженное присваивание значений местам в документе.
         /// </summary>
-        private void SetValues(WordDocument doc, Candidate c)
+        private void SetMergeFields(WordDocument doc, Candidate c)
         {
-            var table = CreateTable(c.Талон_Маяк);
-            doc.SetBookmarkText($"Талон_1", "");
-            doc.SetBookmarkTable($"Талон_1", table);
-            //
-            table = CreateTable(c.Талон_Радио_России);
-            doc.SetBookmarkText($"Талон_2", "");
-            doc.SetBookmarkTable($"Талон_2", table);
-            //
-            table = CreateTable(c.Талон_Вести_ФМ);
-            doc.SetBookmarkText($"Талон_3", "");
-            doc.SetBookmarkTable($"Талон_3", table);
-            //
-            table = CreateTable(c.Талон_Россия_1);
-            doc.SetBookmarkText($"Талон_4", "");
-            doc.SetBookmarkTable($"Талон_4", table);
-            //
-            table = CreateTable(c.Талон_Россия_24);
-            doc.SetBookmarkText($"Талон_5", "");
-            doc.SetBookmarkTable($"Талон_5", table);
-
-
-            //
             doc.SetMergeFieldText("Фамилия", $"{c.Info.Фамилия}");
             doc.SetMergeFieldText("Имя", $"{c.Info.Имя}");
             doc.SetMergeFieldText("Отчество", $"{c.Info.Отчество}");
@@ -139,6 +147,46 @@ namespace WordDocumentBuilder.ElectionContracts
             doc.SetMergeFieldText("ИНН", $"{c.Info.ИНН}");
             doc.SetMergeFieldText("Спец_изб_счет", $"{c.Info.Спец_изб_счет_номер}");
             doc.SetMergeFieldText("Округ_дат_падеж", $"{c.Info.Округ_дат_падеж}");
+        }
+
+        /// <summary>
+        /// Захардкоженное присваивание таблиц заладкам в документе
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <param name="c"></param>
+        /// <param name="mode"></param>
+        private void SetTables(WordDocument doc, Candidate c, string mode = "both")
+        {
+            Table table;
+            //
+            doc.SetBookmarkText($"Талон_1", "");
+            doc.SetBookmarkText($"Талон_2", "");
+            doc.SetBookmarkText($"Талон_3", "");
+            doc.SetBookmarkText($"Талон_4", "");
+            doc.SetBookmarkText($"Талон_5", "");
+            //
+            if (mode == "both" || mode == "radio")
+            {
+                //
+                table = CreateTable(c.Талон_Маяк);
+                doc.SetBookmarkTable($"Талон_1", table);
+                //
+                table = CreateTable(c.Талон_Радио_России);
+                doc.SetBookmarkTable($"Талон_2", table);
+                //
+                table = CreateTable(c.Талон_Вести_ФМ);
+                doc.SetBookmarkTable($"Талон_3", table);
+            }
+            //
+            if (mode == "both" || mode == "tele")
+            {
+                //
+                table = CreateTable(c.Талон_Россия_1);
+                doc.SetBookmarkTable($"Талон_4", table);
+                //
+                table = CreateTable(c.Талон_Россия_24);
+                doc.SetBookmarkTable($"Талон_5", table);
+            }
         }
 
         /// <summary>

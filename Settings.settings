@@ -1,0 +1,36 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="WordDocumentBuilder" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ContractsFolderPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\Договоры\</Value>
+    </Setting>
+    <Setting Name="CandidatesFilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\Кандидаты.xlsx</Value>
+    </Setting>
+    <Setting Name="TalonsFilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\Талоны.xlsm</Value>
+    </Setting>
+    <Setting Name="TalonsFilePath_Маяк" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\Талоны для формирования\Талоны Маяк.xlsx</Value>
+    </Setting>
+    <Setting Name="TalonsFilePath_Радио_России" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\Талоны для формирования\Талоны Радио России.xlsx</Value>
+    </Setting>
+    <Setting Name="TalonsFilePath_Вести_ФМ" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\Талоны для формирования\Талоны Вести ФМ.xlsx</Value>
+    </Setting>
+    <Setting Name="TalonsFilePath_Россия_1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\Талоны для формирования\Талоны Россия 1.xlsx</Value>
+    </Setting>
+    <Setting Name="TalonsFilePath_Россия_24" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\Талоны для формирования\Талоны Россия 24.xlsx</Value>
+    </Setting>
+    <Setting Name="TemplateFilePath_ТВ" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\Шаблон Договора ТВ.dotx</Value>
+    </Setting>
+    <Setting Name="TemplateFilePath_РВ" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\Шаблон Договора РВ.dotx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
