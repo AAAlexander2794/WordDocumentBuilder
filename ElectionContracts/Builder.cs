@@ -35,7 +35,7 @@ namespace WordDocumentBuilder.ElectionContracts
             // Создает путь для документов, если вдруг каких-то папок нет
             Directory.CreateDirectory(_contractsFolderPath);
             //
-            foreach (var candidate in candidates)
+            foreach (var candidate in candidates) 
             {
                 Debug.WriteLine(candidate.Info.На_печать);
                 Debug.WriteLine($"{_contractsFolderPath}{candidate.Округ_для_создания_каталога}\\");
