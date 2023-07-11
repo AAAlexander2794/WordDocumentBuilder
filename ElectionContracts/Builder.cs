@@ -48,7 +48,7 @@ namespace WordDocumentBuilder.ElectionContracts
                 var document = new WordDocument(Settings.Default.TemplateFilePath_РВ);
                 var resultPath = $"{_contractsFolderPath}{candidate.Округ_для_создания_каталога}\\" +
                     $"{candidate.Info.Фамилия} {candidate.Info.Имя} {candidate.Info.Отчество}";
-                // Устанавливаем начения текста для полей документа, кроме закладок
+                // Устанавливаем значения текста для полей документа, кроме закладок
                 SetMergeFields(document, candidate);
                 //
                 try
@@ -152,40 +152,59 @@ namespace WordDocumentBuilder.ElectionContracts
         /// <summary>
         /// Захардкоженное присваивание таблиц заладкам в документе
         /// </summary>
+        /// <remarks>Так как в двух местах будут таблицы размещаться, 
+        /// а закладка только на одно место, то сделаны дубликаты закладок 
+        /// (надо потом в MergeField переделать)</remarks>
         /// <param name="doc"></param>
         /// <param name="c"></param>
         /// <param name="mode"></param>
         private void SetTables(WordDocument doc, Candidate c, string mode = "both")
         {
             Table table;
+            Table table2;
             //
             doc.SetBookmarkText($"Талон_1", "");
             doc.SetBookmarkText($"Талон_2", "");
             doc.SetBookmarkText($"Талон_3", "");
             doc.SetBookmarkText($"Талон_4", "");
             doc.SetBookmarkText($"Талон_5", "");
+            doc.SetBookmarkText($"Талон_1_2", "");
+            doc.SetBookmarkText($"Талон_2_2", "");
+            doc.SetBookmarkText($"Талон_3_2", "");
+            doc.SetBookmarkText($"Талон_4_2", "");
+            doc.SetBookmarkText($"Талон_5_2", "");
             //
             if (mode == "both" || mode == "radio")
             {
                 //
                 table = CreateTable(c.Талон_Маяк);
+                table2 = CreateTable(c.Талон_Маяк);
                 doc.SetBookmarkTable($"Талон_1", table);
+                doc.SetBookmarkTable($"Талон_1_2", table2);
                 //
                 table = CreateTable(c.Талон_Радио_России);
+                table2 = CreateTable(c.Талон_Радио_России);
                 doc.SetBookmarkTable($"Талон_2", table);
+                doc.SetBookmarkTable($"Талон_2_2", table2);
                 //
                 table = CreateTable(c.Талон_Вести_ФМ);
+                table2 = CreateTable(c.Талон_Вести_ФМ);
                 doc.SetBookmarkTable($"Талон_3", table);
+                doc.SetBookmarkTable($"Талон_3_2", table2);
             }
             //
             if (mode == "both" || mode == "tele")
             {
                 //
                 table = CreateTable(c.Талон_Россия_1);
+                table2 = CreateTable(c.Талон_Россия_1);
                 doc.SetBookmarkTable($"Талон_4", table);
+                doc.SetBookmarkTable($"Талон_4_2", table2);
                 //
                 table = CreateTable(c.Талон_Россия_24);
+                table2 = CreateTable(c.Талон_Россия_24);
                 doc.SetBookmarkTable($"Талон_5", table);
+                doc.SetBookmarkTable($"Талон_5_2", table2);
             }
         }
 
