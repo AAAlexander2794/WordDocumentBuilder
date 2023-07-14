@@ -27,10 +27,10 @@
       <Value Profile="(Default)">.\Талоны для формирования\Талоны Россия 24.xlsx</Value>
     </Setting>
     <Setting Name="TemplateFilePath_ТВ" Type="System.String" Scope="User">
-      <Value Profile="(Default)">.\Шаблон Договора ТВ.dotx</Value>
+      <Value Profile="(Default)">.\КАНДИДАТЫ ЗС РО форма_БПЛ ТВ.dotx</Value>
     </Setting>
     <Setting Name="TemplateFilePath_РВ" Type="System.String" Scope="User">
-      <Value Profile="(Default)">.\Шаблон Договора РВ.dotx</Value>
+      <Value Profile="(Default)">.\КАНДИДАТЫ ЗС РО форма_БПЛ РВ.dotx</Value>
     </Setting>
   </Settings>
 </SettingsFile>

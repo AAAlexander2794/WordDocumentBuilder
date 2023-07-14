@@ -76,8 +76,5 @@ namespace WordDocumentBuilder.ElectionContracts.Entities
         /// </summary>
         public string Доверенность_на_представителя { get; set; } = "";
 
-
-
-
     }
 }

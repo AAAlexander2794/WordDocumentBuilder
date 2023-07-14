@@ -121,7 +121,7 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Шаблон Договора ТВ.dotx")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\КАНДИДАТЫ ЗС РО форма_БПЛ ТВ.dotx")]
         public string TemplateFilePath_ТВ {
             get {
                 return ((string)(this["TemplateFilePath_ТВ"]));
@@ -133,7 +133,7 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Шаблон Договора РВ.dotx")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\КАНДИДАТЫ ЗС РО форма_БПЛ РВ.dotx")]
         public string TemplateFilePath_РВ {
             get {
                 return ((string)(this["TemplateFilePath_РВ"]));

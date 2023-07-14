@@ -25,9 +25,13 @@ namespace WordDocumentBuilder.ElectionContracts
 
         public DataTable Do(string talonVariant = "default")
         {
+            // test
+            DataTable dt = ExcelProcessor.ReadExcelSheet(Settings.Default.CandidatesFilePath, sheetNumber: 0);
+            //
             string _contractsFolderPath = $"{Settings.Default.ContractsFolderPath}{DateTime.Now.ToString().Replace(":", "_")}\\";
-
+            
             var talons = TalonBuilder.BuildTalons(talonVariant);
+            
             //
             var candidatesInfos = ReadCandidates(Settings.Default.CandidatesFilePath);
             //
@@ -43,40 +47,59 @@ namespace WordDocumentBuilder.ElectionContracts
                 if (candidate.Info.На_печать == "") continue;
                 // Создает подпапку округа
                 Directory.CreateDirectory($"{_contractsFolderPath}{candidate.Округ_для_создания_каталога}\\");
-
                 // Создаем договор РВ
                 var document = new WordDocument(Settings.Default.TemplateFilePath_РВ);
-                var resultPath = $"{_contractsFolderPath}{candidate.Округ_для_создания_каталога}\\" +
-                    $"{candidate.Info.Фамилия} {candidate.Info.Имя} {candidate.Info.Отчество}";
-                // Устанавливаем значения текста для полей документа, кроме закладок
-                SetMergeFields(document, candidate);
-                //
                 try
                 {
-                    SetTables(document, candidate, "radio");
+                    
+                    var resultPath = $"{_contractsFolderPath}{candidate.Округ_для_создания_каталога}\\" +
+                        $"{candidate.Info.Фамилия} {candidate.Info.Имя} {candidate.Info.Отчество}";
+                    try
+                    {
+                        // Устанавливаем значения текста для полей документа, кроме закладок
+                        SetMergeFields(document, candidate);
+                    }
+                    catch { }
+                    //
+                    try
+                    {
+                        SetTables(document, candidate, "radio");
+                    }
+                    catch { }
+                    try
+                    {
+                        // Сохраняем и закрываем
+                        document.Save(resultPath + "_радио.docx");
+                        document.Close();
+
+                        // Повторяем создание документа для договора ТВ
+                        document = new WordDocument(Settings.Default.TemplateFilePath_ТВ);
+                    }
+                    catch { }
+                    try
+                    {
+                        SetMergeFields(document, candidate);
+                    }
+                    catch { }
+                    try
+                    {
+                        SetTables(document, candidate, "tele");
+                    }
+                    catch
+                    {
+
+                    }
+                    try
+                    {
+                        document.Save(resultPath + "_ТВ.docx");
+                        document.Close();
+                    }
+                    catch { }
                 }
                 catch { }
-                // Сохраняем и закрываем
-                document.Save(resultPath + "_радио.docx");
-                document.Close();
-
-                // Повторяем создание документа для договора ТВ
-                document = new WordDocument(Settings.Default.TemplateFilePath_ТВ);
-                SetMergeFields(document, candidate);
-                try
-                {
-                    SetTables(document, candidate, "tele");
-                }
-                catch
-                {
-
-                }
-                document.Save(resultPath + "_ТВ.docx");
-                document.Close();
             }
-            // test
-            DataTable dt = ExcelProcessor.ReadExcelSheet(Settings.Default.CandidatesFilePath, sheetNumber: 0);
-            return dt;
+                
+                return dt;
         }
 
         List<CandidateInfo> ReadCandidates(string dataFilePath)
