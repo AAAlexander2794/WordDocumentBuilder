@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WDB_GUI_NET_4_8"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="499" Width="800">
     <Grid>
         <TabControl Margin="0,0,0,10">
 
@@ -44,6 +44,9 @@
                             <Label Margin="2,2,2,2" Height="26">Путь к талонам Радио России:</Label>
                             <Label Margin="2,2,2,2" Height="26">Путь к талонам Россия 1:</Label>
                             <Label Margin="2,2,2,2" Height="26">Путь к талонам Россия 24:</Label>
+                            <Label Margin="2,2,2,2" Height="26">Путь к файлу с партиями:</Label>
+                            <Label Margin="2,2,2,2" Height="26">Путь к шаблону партий РВ:</Label>
+                            <Label Margin="2,2,2,2" Height="26">Путь к шаблону партий ТВ:</Label>
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Grid.Column="1">
                             <TextBox x:Name="tbCandidatesFilePath" TextWrapping="Wrap" Text="" Margin="2,2,2,2" Height="26"/>
@@ -56,6 +59,9 @@
                             <TextBox x:Name="tbTalons_Радио_России" TextWrapping="Wrap" Text="" Margin="2,2,2,2" Height="26" />
                             <TextBox x:Name="tbTalons_Россия_1" TextWrapping="Wrap" Text="" Margin="2,2,2,2" Height="26" />
                             <TextBox x:Name="tbTalons_Россия24" TextWrapping="Wrap" Text="" Margin="2,2,2,2" Height="26" />
+                            <TextBox x:Name="tbParties_FilePath" TextWrapping="Wrap" Text="" Margin="2,2,2,2" Height="26" />
+                            <TextBox x:Name="tbParties_TemplateFilePath_РВ" TextWrapping="Wrap" Text="" Margin="2,2,2,2" Height="26" />
+                            <TextBox x:Name="tbParties_TemplateFilePath_ТВ" TextWrapping="Wrap" Text="" Margin="2,2,2,2" Height="26" />
                         </StackPanel>
                     </Grid>
 

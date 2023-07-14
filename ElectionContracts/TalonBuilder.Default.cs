@@ -14,6 +14,9 @@ namespace WordDocumentBuilder.ElectionContracts
         /// <summary>
         /// Базовый вариант парсинга талонов. Все талоны вместе в одной таблице Эксель
         /// </summary>
+        /// <remarks>
+        /// 14.07.2023: Такие талоны никто не делает пока, так что пользуем Variant1.
+        /// </remarks>
         internal static class Default
         {
             internal static List<TalonRecord> BuildTalonRecords(DataTable dt)

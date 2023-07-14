@@ -32,5 +32,14 @@
     <Setting Name="TemplateFilePath_РВ" Type="System.String" Scope="User">
       <Value Profile="(Default)">.\КАНДИДАТЫ ЗС РО форма_БПЛ РВ.dotx</Value>
     </Setting>
+    <Setting Name="Parties_FilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\Партии.xlsx</Value>
+    </Setting>
+    <Setting Name="Parties_TemplateFilePath_ТВ" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\ПАРТИИ ЗС РО_БПЛ ТВ.dotx</Value>
+    </Setting>
+    <Setting Name="Parties_TemplateFilePath_РВ" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\ПАРТИИ ЗС РО_БПЛ РВ.dotx</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

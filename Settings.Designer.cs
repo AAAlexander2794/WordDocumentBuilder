@@ -142,5 +142,41 @@ namespace WordDocumentBuilder {
                 this["TemplateFilePath_РВ"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Партии.xlsx")]
+        public string Parties_FilePath {
+            get {
+                return ((string)(this["Parties_FilePath"]));
+            }
+            set {
+                this["Parties_FilePath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\ПАРТИИ ЗС РО_БПЛ ТВ.dotx")]
+        public string Parties_TemplateFilePath_ТВ {
+            get {
+                return ((string)(this["Parties_TemplateFilePath_ТВ"]));
+            }
+            set {
+                this["Parties_TemplateFilePath_ТВ"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\ПАРТИИ ЗС РО_БПЛ РВ.dotx")]
+        public string Parties_TemplateFilePath_РВ {
+            get {
+                return ((string)(this["Parties_TemplateFilePath_РВ"]));
+            }
+            set {
+                this["Parties_TemplateFilePath_РВ"] = value;
+            }
+        }
     }
 }

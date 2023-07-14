@@ -29,7 +29,7 @@ namespace WDB_GUI_NET_4_8
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             WordDocumentBuilder.ElectionContracts.Builder builder = new WordDocumentBuilder.ElectionContracts.Builder();
-            var dt = builder.Do();
+            var dt = builder.BuildContractsCandidates();
             // Тестово посмотреть
             DataGrid.ItemsSource = dt.DefaultView;
             MessageBox.Show("Готово.");
@@ -38,7 +38,7 @@ namespace WDB_GUI_NET_4_8
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             WordDocumentBuilder.ElectionContracts.Builder builder = new WordDocumentBuilder.ElectionContracts.Builder();
-            var dt = builder.Do("1");
+            var dt = builder.BuildContractsCandidates("1");
             // Тестово посмотреть
             DataGrid.ItemsSource = dt.DefaultView;
             MessageBox.Show("Готово.");
