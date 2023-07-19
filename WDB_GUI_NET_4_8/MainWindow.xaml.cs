@@ -35,10 +35,29 @@ namespace WDB_GUI_NET_4_8
             MessageBox.Show("Готово.");
         }
 
+        /// <summary>
+        /// Договоры кандидатов
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             WordDocumentBuilder.ElectionContracts.Builder builder = new WordDocumentBuilder.ElectionContracts.Builder();
             var dt = builder.BuildContractsCandidates("1");
+            // Тестово посмотреть
+            DataGrid.ItemsSource = dt.DefaultView;
+            MessageBox.Show("Готово.");
+        }
+
+        /// <summary>
+        /// Договоры партий
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            WordDocumentBuilder.ElectionContracts.Builder builder = new WordDocumentBuilder.ElectionContracts.Builder();
+            var dt = builder.BuildContractsParties("1");
             // Тестово посмотреть
             DataGrid.ItemsSource = dt.DefaultView;
             MessageBox.Show("Готово.");
@@ -51,6 +70,10 @@ namespace WDB_GUI_NET_4_8
             tbTalonsDefaultFilePath.Text = Settings.Default.TalonsFilePath;
             tbTemplateFilePath_РВ.Text = Settings.Default.TemplateFilePath_РВ;
             tbTemplateFilePath_ТВ.Text = Settings.Default.TemplateFilePath_ТВ;
+            //
+            tbParties_FilePath.Text = Settings.Default.Parties_FilePath;
+            tbParties_TemplateFilePath_РВ.Text = Settings.Default.Parties_TemplateFilePath_РВ;
+            tbParties_TemplateFilePath_ТВ.Text = Settings.Default.Parties_TemplateFilePath_ТВ;
             //
             tbTalons_Маяк.Text = Settings.Default.TalonsFilePath_Маяк;
             tbTalons_Вести_ФМ.Text = Settings.Default.TalonsFilePath_Вести_ФМ;
@@ -67,6 +90,10 @@ namespace WDB_GUI_NET_4_8
             if (tbTemplateFilePath_РВ.Text != "") Settings.Default.TemplateFilePath_РВ = tbTemplateFilePath_РВ.Text;
             if (tbTemplateFilePath_ТВ.Text != "") Settings.Default.TemplateFilePath_ТВ = tbTemplateFilePath_ТВ.Text;
             //
+            if (tbParties_FilePath.Text != "") Settings.Default.Parties_FilePath = tbParties_FilePath.Text;
+            if (tbParties_TemplateFilePath_РВ.Text != "") Settings.Default.Parties_TemplateFilePath_РВ = tbParties_TemplateFilePath_РВ.Text;
+            if (tbParties_TemplateFilePath_ТВ.Text != "") Settings.Default.Parties_TemplateFilePath_ТВ = tbParties_TemplateFilePath_ТВ.Text;
+            //
             if (tbTalons_Маяк.Text != "") Settings.Default.TalonsFilePath_Маяк = tbTalons_Маяк.Text;
             if (tbTalons_Вести_ФМ.Text != "") Settings.Default.TalonsFilePath_Вести_ФМ = tbTalons_Вести_ФМ.Text;
             if (tbTalons_Радио_России.Text != "") Settings.Default.TalonsFilePath_Радио_России = tbTalons_Радио_России.Text;
@@ -75,5 +102,7 @@ namespace WDB_GUI_NET_4_8
 
             Settings.Default.Save();
         }
+
+        
     }
 }

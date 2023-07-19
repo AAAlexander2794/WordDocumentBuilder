@@ -127,8 +127,12 @@ namespace WordDocumentBuilder.ElectionContracts
                 var resultPath = $"{_contractsFolderPath}" + $"{party.Info.Партия_Название}";
                 // Устанавливаем значения текста для полей документа, кроме закладок (талонов)
                 SetMergeFields(document, party);
-                // Устанавливаем таблицы талонов по закладкам
-                SetTables(document, party, "radio");
+                try
+                {
+                    // Устанавливаем таблицы талонов по закладкам
+                    SetTables(document, party, "radio");
+                }
+                catch { };
                 // Сохраняем и закрываем
                 document.Save(resultPath + "_радио.docx");
                 document.Close();
@@ -136,8 +140,12 @@ namespace WordDocumentBuilder.ElectionContracts
                 document = new WordDocument(Settings.Default.Parties_TemplateFilePath_ТВ);
                 //
                 SetMergeFields(document, party);
-                //
-                SetTables(document, party, "tele");
+                try
+                {
+                    //
+                    SetTables(document, party, "tele");
+                }
+                catch { };
                 //
                 document.Save(resultPath + "_ТВ.docx");
                 document.Close();
