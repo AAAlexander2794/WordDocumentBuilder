@@ -217,17 +217,19 @@ namespace WordDocumentBuilder.ElectionContracts
                     Представитель_Отчество = dt.Rows[i].Field<string>(12),
                     Представитель_Доверенность = dt.Rows[i].Field<string>(13),
                     //
-                    Нотариус_Фамилия = dt.Rows[i].Field<string>(14),
-                    Нотариус_Имя = dt.Rows[i].Field<string>(15),
-                    Нотариус_Отчество = dt.Rows[i].Field<string>(16),
-                    Нотариус_Реестр = dt.Rows[i].Field<string>(17),
+                    Нотариус_Город = dt.Rows[i].Field<string>(14),
+                    Нотариус_Фамилия = dt.Rows[i].Field<string>(15),
+                    Нотариус_Имя = dt.Rows[i].Field<string>(16),
+                    Нотариус_Отчество = dt.Rows[i].Field<string>(17),
+                    Нотариус_Реестр = dt.Rows[i].Field<string>(18),
                     //
-                    ОГРН = dt.Rows[i].Field<string>(18),
-                    ИНН = dt.Rows[i].Field<string>(19),
-                    КПП = dt.Rows[i].Field<string>(20),
-                    Спец_изб_счет_номер = dt.Rows[i].Field<string>(21),
+                    ОГРН = dt.Rows[i].Field<string>(19),
+                    ИНН = dt.Rows[i].Field<string>(20),
+                    КПП = dt.Rows[i].Field<string>(21),
+                    Спец_изб_счет_номер = dt.Rows[i].Field<string>(22),
+                    Место_нахождения = dt.Rows[i].Field<string>(23),
                     //
-                    На_печать = dt.Rows[i].Field<string>(22)
+                    На_печать = dt.Rows[i].Field<string>(24)
                 }) ;
             }
             return parties;
@@ -306,11 +308,13 @@ namespace WordDocumentBuilder.ElectionContracts
             doc.SetMergeFieldText("Нотариус_Имя", $"{p.Info.Нотариус_Имя}");
             doc.SetMergeFieldText("Нотариус_Отчество", $"{p.Info.Нотариус_Отчество}");
             doc.SetMergeFieldText("Нотариус_Реестр", $"{p.Info.Нотариус_Реестр}");
+            doc.SetMergeFieldText("Нотариус_Город", $"{p.Info.Нотариус_Город}");
             //
             doc.SetMergeFieldText("ИНН", $"{p.Info.ИНН}");
-            doc.SetMergeFieldText("ИНН", $"{p.Info.КПП}");
-            doc.SetMergeFieldText("ИНН", $"{p.Info.ОГРН}");
-            doc.SetMergeFieldText("Спец_изб_счет", $"{p.Info.Спец_изб_счет_номер}");  
+            doc.SetMergeFieldText("КПП", $"{p.Info.КПП}");
+            doc.SetMergeFieldText("ОГРН", $"{p.Info.ОГРН}");
+            doc.SetMergeFieldText("Счет", $"{p.Info.Спец_изб_счет_номер}");
+            doc.SetMergeFieldText("Место_нахождения", $"{p.Info.Место_нахождения}");
         }
 
         /// <summary>

@@ -58,6 +58,8 @@ namespace WordDocumentBuilder.ElectionContracts.Entities
 
         public string Нотариус_Отчество { get; set; } = "";
 
+        public string Нотариус_Город { get; set; } = "";
+
         /// <summary>
         /// Номер реестра
         /// </summary>
@@ -70,6 +72,8 @@ namespace WordDocumentBuilder.ElectionContracts.Entities
         public string КПП { get; set; } = "";
 
         public string Спец_изб_счет_номер { get; set; } = "";
+
+        public string Место_нахождения { get; set; } = "";
 
         public string Талон_Маяк { get; set; } = "";
 
