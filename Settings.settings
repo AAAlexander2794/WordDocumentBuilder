@@ -5,41 +5,59 @@
     <Setting Name="ContractsFolderPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">.\Договоры\</Value>
     </Setting>
-    <Setting Name="CandidatesFilePath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">.\Кандидаты.xlsx</Value>
+    <Setting Name="Candidates_FilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\Кандидаты\Кандидаты.xlsx</Value>
     </Setting>
-    <Setting Name="TalonsFilePath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">.\Талоны.xlsm</Value>
+    <Setting Name="Candidates_TemplateFilePath_ТВ" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\Кандидаты\КАНДИДАТЫ ЗС РО форма_БПЛ ТВ.dotx</Value>
     </Setting>
-    <Setting Name="TalonsFilePath_Маяк" Type="System.String" Scope="User">
-      <Value Profile="(Default)">.\Талоны для формирования\Талоны Маяк.xlsx</Value>
+    <Setting Name="Candidates_TemplateFilePath_РВ" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\Кандидаты\КАНДИДАТЫ ЗС РО форма_БПЛ РВ.dotx</Value>
     </Setting>
-    <Setting Name="TalonsFilePath_Радио_России" Type="System.String" Scope="User">
-      <Value Profile="(Default)">.\Талоны для формирования\Талоны Радио России.xlsx</Value>
+    <Setting Name="Candidates_TalonsFilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\Кандидаты\Талоны.xlsm</Value>
     </Setting>
-    <Setting Name="TalonsFilePath_Вести_ФМ" Type="System.String" Scope="User">
-      <Value Profile="(Default)">.\Талоны для формирования\Талоны Вести ФМ.xlsx</Value>
+    <Setting Name="Candidates_TalonsFilePath_Маяк" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\Кандидаты\Талоны для формирования\Талоны Маяк.xlsx</Value>
     </Setting>
-    <Setting Name="TalonsFilePath_Россия_1" Type="System.String" Scope="User">
-      <Value Profile="(Default)">.\Талоны для формирования\Талоны Россия 1.xlsx</Value>
+    <Setting Name="Candidates_TalonsFilePath_Радио_России" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\Кандидаты\Талоны для формирования\Талоны Радио России.xlsx</Value>
     </Setting>
-    <Setting Name="TalonsFilePath_Россия_24" Type="System.String" Scope="User">
-      <Value Profile="(Default)">.\Талоны для формирования\Талоны Россия 24.xlsx</Value>
+    <Setting Name="Candidates_TalonsFilePath_Вести_ФМ" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\Кандидаты\Талоны для формирования\Талоны Вести ФМ.xlsx</Value>
     </Setting>
-    <Setting Name="TemplateFilePath_ТВ" Type="System.String" Scope="User">
-      <Value Profile="(Default)">.\КАНДИДАТЫ ЗС РО форма_БПЛ ТВ.dotx</Value>
+    <Setting Name="Candidates_TalonsFilePath_Россия_1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\Кандидаты\Талоны для формирования\Талоны Россия 1.xlsx</Value>
     </Setting>
-    <Setting Name="TemplateFilePath_РВ" Type="System.String" Scope="User">
-      <Value Profile="(Default)">.\КАНДИДАТЫ ЗС РО форма_БПЛ РВ.dotx</Value>
+    <Setting Name="Candidates_TalonsFilePath_Россия_24" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\Кандидаты\Талоны для формирования\Талоны Россия 24.xlsx</Value>
     </Setting>
     <Setting Name="Parties_FilePath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">.\Партии.xlsx</Value>
+      <Value Profile="(Default)">.\Партии\Партии.xlsx</Value>
     </Setting>
     <Setting Name="Parties_TemplateFilePath_ТВ" Type="System.String" Scope="User">
-      <Value Profile="(Default)">.\ПАРТИИ ЗС РО_БПЛ ТВ.dotx</Value>
+      <Value Profile="(Default)">.\Партии\ПАРТИИ ЗС РО_БПЛ ТВ.dotx</Value>
     </Setting>
     <Setting Name="Parties_TemplateFilePath_РВ" Type="System.String" Scope="User">
-      <Value Profile="(Default)">.\ПАРТИИ ЗС РО_БПЛ РВ.dotx</Value>
+      <Value Profile="(Default)">.\Партии\ПАРТИИ ЗС РО_БПЛ РВ.dotx</Value>
+    </Setting>
+    <Setting Name="Parties_TalonsFilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\Партии\Талоны.xlsm</Value>
+    </Setting>
+    <Setting Name="Parties_TalonsFilePath_Маяк" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\Партии\Талоны для формирования\Талоны Маяк.xlsx</Value>
+    </Setting>
+    <Setting Name="Parties_TalonsFilePath_Радио_России" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\Партии\Талоны для формирования\Талоны Радио России.xlsx</Value>
+    </Setting>
+    <Setting Name="Parties_TalonsFilePath_Вести_ФМ" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\Партии\Талоны для формирования\Талоны Вести ФМ.xlsx</Value>
+    </Setting>
+    <Setting Name="Parties_TalonsFilePath_Россия_1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\Партии\Талоны для формирования\Талоны Россия 1.xlsx</Value>
+    </Setting>
+    <Setting Name="Parties_TalonsFilePath_Россия_24" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\Партии\Талоны для формирования\Талоны Россия 24.xlsx</Value>
     </Setting>
   </Settings>
 </SettingsFile>

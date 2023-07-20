@@ -37,115 +37,115 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Кандидаты.xlsx")]
-        public string CandidatesFilePath {
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Кандидаты\\Кандидаты.xlsx")]
+        public string Candidates_FilePath {
             get {
-                return ((string)(this["CandidatesFilePath"]));
+                return ((string)(this["Candidates_FilePath"]));
             }
             set {
-                this["CandidatesFilePath"] = value;
+                this["Candidates_FilePath"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Талоны.xlsm")]
-        public string TalonsFilePath {
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Кандидаты\\КАНДИДАТЫ ЗС РО форма_БПЛ ТВ.dotx")]
+        public string Candidates_TemplateFilePath_ТВ {
             get {
-                return ((string)(this["TalonsFilePath"]));
+                return ((string)(this["Candidates_TemplateFilePath_ТВ"]));
             }
             set {
-                this["TalonsFilePath"] = value;
+                this["Candidates_TemplateFilePath_ТВ"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Талоны для формирования\\Талоны Маяк.xlsx")]
-        public string TalonsFilePath_Маяк {
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Кандидаты\\КАНДИДАТЫ ЗС РО форма_БПЛ РВ.dotx")]
+        public string Candidates_TemplateFilePath_РВ {
             get {
-                return ((string)(this["TalonsFilePath_Маяк"]));
+                return ((string)(this["Candidates_TemplateFilePath_РВ"]));
             }
             set {
-                this["TalonsFilePath_Маяк"] = value;
+                this["Candidates_TemplateFilePath_РВ"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Талоны для формирования\\Талоны Радио России.xlsx")]
-        public string TalonsFilePath_Радио_России {
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Кандидаты\\Талоны.xlsm")]
+        public string Candidates_TalonsFilePath {
             get {
-                return ((string)(this["TalonsFilePath_Радио_России"]));
+                return ((string)(this["Candidates_TalonsFilePath"]));
             }
             set {
-                this["TalonsFilePath_Радио_России"] = value;
+                this["Candidates_TalonsFilePath"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Талоны для формирования\\Талоны Вести ФМ.xlsx")]
-        public string TalonsFilePath_Вести_ФМ {
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Кандидаты\\Талоны для формирования\\Талоны Маяк.xlsx")]
+        public string Candidates_TalonsFilePath_Маяк {
             get {
-                return ((string)(this["TalonsFilePath_Вести_ФМ"]));
+                return ((string)(this["Candidates_TalonsFilePath_Маяк"]));
             }
             set {
-                this["TalonsFilePath_Вести_ФМ"] = value;
+                this["Candidates_TalonsFilePath_Маяк"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Талоны для формирования\\Талоны Россия 1.xlsx")]
-        public string TalonsFilePath_Россия_1 {
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Кандидаты\\Талоны для формирования\\Талоны Радио России.xlsx")]
+        public string Candidates_TalonsFilePath_Радио_России {
             get {
-                return ((string)(this["TalonsFilePath_Россия_1"]));
+                return ((string)(this["Candidates_TalonsFilePath_Радио_России"]));
             }
             set {
-                this["TalonsFilePath_Россия_1"] = value;
+                this["Candidates_TalonsFilePath_Радио_России"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Талоны для формирования\\Талоны Россия 24.xlsx")]
-        public string TalonsFilePath_Россия_24 {
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Кандидаты\\Талоны для формирования\\Талоны Вести ФМ.xlsx")]
+        public string Candidates_TalonsFilePath_Вести_ФМ {
             get {
-                return ((string)(this["TalonsFilePath_Россия_24"]));
+                return ((string)(this["Candidates_TalonsFilePath_Вести_ФМ"]));
             }
             set {
-                this["TalonsFilePath_Россия_24"] = value;
+                this["Candidates_TalonsFilePath_Вести_ФМ"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\КАНДИДАТЫ ЗС РО форма_БПЛ ТВ.dotx")]
-        public string TemplateFilePath_ТВ {
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Кандидаты\\Талоны для формирования\\Талоны Россия 1.xlsx")]
+        public string Candidates_TalonsFilePath_Россия_1 {
             get {
-                return ((string)(this["TemplateFilePath_ТВ"]));
+                return ((string)(this["Candidates_TalonsFilePath_Россия_1"]));
             }
             set {
-                this["TemplateFilePath_ТВ"] = value;
+                this["Candidates_TalonsFilePath_Россия_1"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\КАНДИДАТЫ ЗС РО форма_БПЛ РВ.dotx")]
-        public string TemplateFilePath_РВ {
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Кандидаты\\Талоны для формирования\\Талоны Россия 24.xlsx")]
+        public string Candidates_TalonsFilePath_Россия_24 {
             get {
-                return ((string)(this["TemplateFilePath_РВ"]));
+                return ((string)(this["Candidates_TalonsFilePath_Россия_24"]));
             }
             set {
-                this["TemplateFilePath_РВ"] = value;
+                this["Candidates_TalonsFilePath_Россия_24"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Партии.xlsx")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Партии\\Партии.xlsx")]
         public string Parties_FilePath {
             get {
                 return ((string)(this["Parties_FilePath"]));
@@ -157,7 +157,7 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\ПАРТИИ ЗС РО_БПЛ ТВ.dotx")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Партии\\ПАРТИИ ЗС РО_БПЛ ТВ.dotx")]
         public string Parties_TemplateFilePath_ТВ {
             get {
                 return ((string)(this["Parties_TemplateFilePath_ТВ"]));
@@ -169,13 +169,85 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\ПАРТИИ ЗС РО_БПЛ РВ.dotx")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Партии\\ПАРТИИ ЗС РО_БПЛ РВ.dotx")]
         public string Parties_TemplateFilePath_РВ {
             get {
                 return ((string)(this["Parties_TemplateFilePath_РВ"]));
             }
             set {
                 this["Parties_TemplateFilePath_РВ"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Партии\\Талоны.xlsm")]
+        public string Parties_TalonsFilePath {
+            get {
+                return ((string)(this["Parties_TalonsFilePath"]));
+            }
+            set {
+                this["Parties_TalonsFilePath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Партии\\Талоны для формирования\\Талоны Маяк.xlsx")]
+        public string Parties_TalonsFilePath_Маяк {
+            get {
+                return ((string)(this["Parties_TalonsFilePath_Маяк"]));
+            }
+            set {
+                this["Parties_TalonsFilePath_Маяк"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Партии\\Талоны для формирования\\Талоны Радио России.xlsx")]
+        public string Parties_TalonsFilePath_Радио_России {
+            get {
+                return ((string)(this["Parties_TalonsFilePath_Радио_России"]));
+            }
+            set {
+                this["Parties_TalonsFilePath_Радио_России"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Партии\\Талоны для формирования\\Талоны Вести ФМ.xlsx")]
+        public string Parties_TalonsFilePath_Вести_ФМ {
+            get {
+                return ((string)(this["Parties_TalonsFilePath_Вести_ФМ"]));
+            }
+            set {
+                this["Parties_TalonsFilePath_Вести_ФМ"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Партии\\Талоны для формирования\\Талоны Россия 1.xlsx")]
+        public string Parties_TalonsFilePath_Россия_1 {
+            get {
+                return ((string)(this["Parties_TalonsFilePath_Россия_1"]));
+            }
+            set {
+                this["Parties_TalonsFilePath_Россия_1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Партии\\Талоны для формирования\\Талоны Россия 24.xlsx")]
+        public string Parties_TalonsFilePath_Россия_24 {
+            get {
+                return ((string)(this["Parties_TalonsFilePath_Россия_24"]));
+            }
+            set {
+                this["Parties_TalonsFilePath_Россия_24"] = value;
             }
         }
     }
