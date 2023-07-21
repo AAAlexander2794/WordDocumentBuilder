@@ -60,6 +60,13 @@ namespace WordDocumentBuilder.ElectionContracts
             return dt;
         }
 
+        /// <summary>
+        /// Формирует файл протокола партии
+        /// </summary>
+        /// <param name="party"></param>
+        /// <param name="templatePath"></param>
+        /// <param name="resultPath"></param>
+        /// <param name="mediaresource"></param>
         private void CreateProtocol(Party party, string templatePath, string resultPath, string mediaresource)
         {
             //

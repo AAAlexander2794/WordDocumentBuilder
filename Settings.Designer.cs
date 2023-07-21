@@ -25,7 +25,7 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Договоры\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Документы\\Договоры\\")]
         public string ContractsFolderPath {
             get {
                 return ((string)(this["ContractsFolderPath"]));
@@ -37,7 +37,7 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Кандидаты\\Кандидаты.xlsx")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Настройки\\Кандидаты\\Кандидаты.xlsx")]
         public string Candidates_FilePath {
             get {
                 return ((string)(this["Candidates_FilePath"]));
@@ -49,7 +49,7 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Кандидаты\\КАНДИДАТЫ ЗС РО форма_БПЛ ТВ.dotx")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Настройки\\Кандидаты\\КАНДИДАТЫ ЗС РО форма_БПЛ ТВ.dotx")]
         public string Candidates_TemplateFilePath_ТВ {
             get {
                 return ((string)(this["Candidates_TemplateFilePath_ТВ"]));
@@ -61,7 +61,7 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Кандидаты\\КАНДИДАТЫ ЗС РО форма_БПЛ РВ.dotx")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Настройки\\Кандидаты\\КАНДИДАТЫ ЗС РО форма_БПЛ РВ.dotx")]
         public string Candidates_TemplateFilePath_РВ {
             get {
                 return ((string)(this["Candidates_TemplateFilePath_РВ"]));
@@ -73,7 +73,7 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Кандидаты\\Талоны.xlsm")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Настройки\\Кандидаты\\Талоны.xlsm")]
         public string Candidates_TalonsFilePath {
             get {
                 return ((string)(this["Candidates_TalonsFilePath"]));
@@ -85,7 +85,7 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Кандидаты\\Талоны для формирования\\Талоны Маяк.xlsx")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Настройки\\Кандидаты\\Талоны для формирования\\Талоны Маяк.xlsx")]
         public string Candidates_TalonsFilePath_Маяк {
             get {
                 return ((string)(this["Candidates_TalonsFilePath_Маяк"]));
@@ -97,7 +97,7 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Кандидаты\\Талоны для формирования\\Талоны Радио России.xlsx")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Настройки\\Кандидаты\\Талоны для формирования\\Талоны Радио России.xlsx")]
         public string Candidates_TalonsFilePath_Радио_России {
             get {
                 return ((string)(this["Candidates_TalonsFilePath_Радио_России"]));
@@ -109,7 +109,7 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Кандидаты\\Талоны для формирования\\Талоны Вести ФМ.xlsx")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Настройки\\Кандидаты\\Талоны для формирования\\Талоны Вести ФМ.xlsx")]
         public string Candidates_TalonsFilePath_Вести_ФМ {
             get {
                 return ((string)(this["Candidates_TalonsFilePath_Вести_ФМ"]));
@@ -121,7 +121,7 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Кандидаты\\Талоны для формирования\\Талоны Россия 1.xlsx")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Настройки\\Кандидаты\\Талоны для формирования\\Талоны Россия 1.xlsx")]
         public string Candidates_TalonsFilePath_Россия_1 {
             get {
                 return ((string)(this["Candidates_TalonsFilePath_Россия_1"]));
@@ -133,7 +133,7 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Кандидаты\\Талоны для формирования\\Талоны Россия 24.xlsx")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Настройки\\Кандидаты\\Талоны для формирования\\Талоны Россия 24.xlsx")]
         public string Candidates_TalonsFilePath_Россия_24 {
             get {
                 return ((string)(this["Candidates_TalonsFilePath_Россия_24"]));
@@ -145,7 +145,7 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Партии\\Партии.xlsx")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Настройки\\Партии\\Партии.xlsx")]
         public string Parties_FilePath {
             get {
                 return ((string)(this["Parties_FilePath"]));
@@ -157,7 +157,7 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Партии\\ПАРТИИ ЗС РО_БПЛ ТВ.dotx")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Настройки\\Партии\\ПАРТИИ ЗС РО_БПЛ ТВ.dotx")]
         public string Parties_TemplateFilePath_ТВ {
             get {
                 return ((string)(this["Parties_TemplateFilePath_ТВ"]));
@@ -169,7 +169,7 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Партии\\ПАРТИИ ЗС РО_БПЛ РВ.dotx")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Настройки\\Партии\\ПАРТИИ ЗС РО_БПЛ РВ.dotx")]
         public string Parties_TemplateFilePath_РВ {
             get {
                 return ((string)(this["Parties_TemplateFilePath_РВ"]));
@@ -181,7 +181,7 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Партии\\Талоны.xlsm")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Настройки\\Партии\\Талоны.xlsm")]
         public string Parties_TalonsFilePath {
             get {
                 return ((string)(this["Parties_TalonsFilePath"]));
@@ -193,7 +193,7 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Партии\\Талоны для формирования\\Талоны Маяк.xlsx")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Настройки\\Партии\\Талоны для формирования\\Талоны Маяк.xlsx")]
         public string Parties_TalonsFilePath_Маяк {
             get {
                 return ((string)(this["Parties_TalonsFilePath_Маяк"]));
@@ -205,7 +205,7 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Партии\\Талоны для формирования\\Талоны Радио России.xlsx")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Настройки\\Партии\\Талоны для формирования\\Талоны Радио России.xlsx")]
         public string Parties_TalonsFilePath_Радио_России {
             get {
                 return ((string)(this["Parties_TalonsFilePath_Радио_России"]));
@@ -217,7 +217,7 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Партии\\Талоны для формирования\\Талоны Вести ФМ.xlsx")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Настройки\\Партии\\Талоны для формирования\\Талоны Вести ФМ.xlsx")]
         public string Parties_TalonsFilePath_Вести_ФМ {
             get {
                 return ((string)(this["Parties_TalonsFilePath_Вести_ФМ"]));
@@ -229,7 +229,7 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Партии\\Талоны для формирования\\Талоны Россия 1.xlsx")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Настройки\\Партии\\Талоны для формирования\\Талоны Россия 1.xlsx")]
         public string Parties_TalonsFilePath_Россия_1 {
             get {
                 return ((string)(this["Parties_TalonsFilePath_Россия_1"]));
@@ -241,7 +241,7 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Партии\\Талоны для формирования\\Талоны Россия 24.xlsx")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Настройки\\Партии\\Талоны для формирования\\Талоны Россия 24.xlsx")]
         public string Parties_TalonsFilePath_Россия_24 {
             get {
                 return ((string)(this["Parties_TalonsFilePath_Россия_24"]));
@@ -253,7 +253,7 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Протоколы\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Документы\\Протоколы\\")]
         public string Protocols_FolderPath {
             get {
                 return ((string)(this["Protocols_FolderPath"]));
@@ -265,7 +265,7 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Кандидаты\\2018 Приложение 2 к 43-31.dotx")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Настройки\\Кандидаты\\2018 Приложение 2 к 43-31.dotx")]
         public string Protocols_TemplateFilePath_Candidates {
             get {
                 return ((string)(this["Protocols_TemplateFilePath_Candidates"]));
@@ -277,13 +277,25 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Партии\\2018 Приложение 1 к 43-31.dotx")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Настройки\\Партии\\2018 Приложение 1 к 43-31.dotx")]
         public string Protocols_TemplateFilePath_Parties {
             get {
                 return ((string)(this["Protocols_TemplateFilePath_Parties"]));
             }
             set {
                 this["Protocols_TemplateFilePath_Parties"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Настройки\\Протоколы.xlsx")]
+        public string Protocols_FilePath {
+            get {
+                return ((string)(this["Protocols_FilePath"]));
+            }
+            set {
+                this["Protocols_FilePath"] = value;
             }
         }
     }
