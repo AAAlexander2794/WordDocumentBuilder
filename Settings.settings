@@ -59,5 +59,14 @@
     <Setting Name="Parties_TalonsFilePath_Россия_24" Type="System.String" Scope="User">
       <Value Profile="(Default)">.\Партии\Талоны для формирования\Талоны Россия 24.xlsx</Value>
     </Setting>
+    <Setting Name="Protocols_FolderPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\Протоколы\</Value>
+    </Setting>
+    <Setting Name="Protocols_TemplateFilePath_Candidates" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\Кандидаты\2018 Приложение 2 к 43-31.dotx</Value>
+    </Setting>
+    <Setting Name="Protocols_TemplateFilePath_Parties" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\Партии\2018 Приложение 1 к 43-31.dotx</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

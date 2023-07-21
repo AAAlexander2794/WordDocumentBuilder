@@ -15,6 +15,8 @@
                     <DataGrid Name="DataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,61,10,0"/>
                     <Button Content="Сформировать договоры&#xD;&#xA;кандидатов" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click_1" Height="46" HorizontalContentAlignment="Center"/>
                     <Button Content="Сформировать договоры&#xD;&#xA;партий" HorizontalAlignment="Left" Margin="165,10,0,0" VerticalAlignment="Top" Width="150" Height="46" Click="Button_Click_2"/>
+                    <Button Content="Сформировать протоколы&#xD;&#xA;партий" HorizontalAlignment="Left" Margin="528,10,0,0" VerticalAlignment="Top" Width="150" Height="46" Click="Button_Click_3"/>
+                    <Button Content="Сформировать протоколы&#xA;кандидатов" HorizontalAlignment="Left" Margin="373,10,0,0" VerticalAlignment="Top" Width="150" Height="46"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Настройки кандидатов">
@@ -30,8 +32,7 @@
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="200"/>
-                            <ColumnDefinition Width="330"/>
-                            <ColumnDefinition Width="87*"/>
+                            <ColumnDefinition Width="330*"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Orientation="Vertical" Grid.Column="0">
                             <Label Margin="2,2,2,2" Height="26">Путь к папке с договорами:</Label>
@@ -75,8 +76,8 @@
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="200"/>
-                            <ColumnDefinition Width="330"/>
-                            <ColumnDefinition Width="87*"/>
+                            <ColumnDefinition Width="330*"/>
+
                         </Grid.ColumnDefinitions>
                         <StackPanel Orientation="Vertical" Grid.Column="0">
                             <Label  Margin="2,2,2,2" Height="26">Путь к списку партий:</Label>
@@ -99,6 +100,35 @@
                             <TextBox x:Name="tbParties_Talons_Радио_России" TextWrapping="Wrap" Text="" Margin="2,2,2,2" Height="26" />
                             <TextBox x:Name="tbParties_Talons_Россия_1" TextWrapping="Wrap" Text="" Margin="2,2,2,2" Height="26" />
                             <TextBox x:Name="tbParties_Talons_Россия24" TextWrapping="Wrap" Text="" Margin="2,2,2,2" Height="26" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Настройки протоколов">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" Margin="5,5,5,5">
+                        <Button Content="Загрузить настройки"  Width="160" Click="LoadSettings" Height="25" Margin="10,0,10,0"/>
+                        <Button Content="Сохранить настройки" Width="160" Click="SaveSettings" Height="25" Margin="10,0,10,0"/>
+                    </StackPanel>
+                    <Grid Grid.Row="1">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="240"/>
+                            <ColumnDefinition Width="330*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Vertical" Grid.Column="0">
+                            <Label Margin="2,2,2,2" Height="26">Путь к папке протоколов:</Label>
+                            <Label Margin="2,2,2,2" Height="26">Путь к шаблону протокола кандидатов:</Label>
+                            <Label Margin="2,2,2,2" Height="26">Путь к шаблону протокола партий:</Label>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Column="1">
+                            <TextBox x:Name="tbProtocols_FolderPath" TextWrapping="Wrap" Text="" Margin="2,2,2,2" Height="26" />
+                            <TextBox x:Name="tbProtocols_TemplateFilePath_Candidates" TextWrapping="Wrap" Text="" Margin="2,2,2,2" Height="26" />
+                            <TextBox x:Name="tbProtocols_TemplateFilePath_Parties" TextWrapping="Wrap" Text="" Margin="2,2,2,2" Height="26" />
                         </StackPanel>
                     </Grid>
                 </Grid>

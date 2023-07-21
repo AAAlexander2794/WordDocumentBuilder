@@ -250,5 +250,41 @@ namespace WordDocumentBuilder {
                 this["Parties_TalonsFilePath_Россия_24"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Протоколы\\")]
+        public string Protocols_FolderPath {
+            get {
+                return ((string)(this["Protocols_FolderPath"]));
+            }
+            set {
+                this["Protocols_FolderPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Кандидаты\\2018 Приложение 2 к 43-31.dotx")]
+        public string Protocols_TemplateFilePath_Candidates {
+            get {
+                return ((string)(this["Protocols_TemplateFilePath_Candidates"]));
+            }
+            set {
+                this["Protocols_TemplateFilePath_Candidates"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Партии\\2018 Приложение 1 к 43-31.dotx")]
+        public string Protocols_TemplateFilePath_Parties {
+            get {
+                return ((string)(this["Protocols_TemplateFilePath_Parties"]));
+            }
+            set {
+                this["Protocols_TemplateFilePath_Parties"] = value;
+            }
+        }
     }
 }

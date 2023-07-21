@@ -25,13 +25,8 @@ namespace WordDocumentBuilder.ElectionContracts
             DataTable dt = ExcelProcessor.ReadExcelSheet(Settings.Default.Candidates_FilePath, sheetNumber: 0);
             //
             string _contractsFolderPath = $"{Settings.Default.ContractsFolderPath}{DateTime.Now.ToString().Replace(":", "_")}\\";
-            
-            var talons = TalonBuilder.BuildTalonsCandidates(talonVariant);
-            
-            //
-            var candidatesInfos = ReadCandidates(Settings.Default.Candidates_FilePath);
-            //
-            var candidates = BuildCandidates(candidatesInfos, talons);
+            // Получаем список кандидатов
+            var candidates = BuildCandidates(talonVariant);
             // Создает путь для документов, если вдруг каких-то папок нет
             Directory.CreateDirectory(_contractsFolderPath);
             //
@@ -141,6 +136,18 @@ namespace WordDocumentBuilder.ElectionContracts
                 var candidate = new Candidate(info, talons);
                 candidates.Add(candidate);
             }
+            return candidates;
+        }
+
+        List<Candidate> BuildCandidates(string talonVariant = "default")
+        {
+            //
+            var talons = TalonBuilder.BuildTalonsCandidates(talonVariant);
+            //
+            var candidatesInfos = ReadCandidates(Settings.Default.Candidates_FilePath);
+            //
+            var candidates = BuildCandidates(candidatesInfos, talons);
+            //
             return candidates;
         }
 

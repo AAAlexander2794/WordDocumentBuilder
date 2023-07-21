@@ -63,6 +63,20 @@ namespace WDB_GUI_NET_4_8
             MessageBox.Show("Готово.");
         }
 
+        /// <summary>
+        /// Протоколы партий
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            WordDocumentBuilder.ElectionContracts.Builder builder = new WordDocumentBuilder.ElectionContracts.Builder();
+            var dt = builder.BuildProtocolsParties("1");
+            // Тестово посмотреть
+            DataGrid.ItemsSource = dt.DefaultView;
+            MessageBox.Show("Готово.");
+        }
+
         private void LoadSettings(object sender, RoutedEventArgs e)
         {
             //
@@ -89,6 +103,10 @@ namespace WDB_GUI_NET_4_8
             tbParties_Talons_Радио_России.Text = Settings.Default.Parties_TalonsFilePath_Радио_России;
             tbParties_Talons_Россия_1.Text = Settings.Default.Parties_TalonsFilePath_Россия_1;
             tbParties_Talons_Россия24.Text = Settings.Default.Parties_TalonsFilePath_Россия_24;
+            // Протоколы
+            tbProtocols_FolderPath.Text = Settings.Default.Protocols_FolderPath;
+            tbProtocols_TemplateFilePath_Candidates.Text = Settings.Default.Protocols_TemplateFilePath_Candidates;
+            tbProtocols_TemplateFilePath_Parties.Text = Settings.Default.Protocols_TemplateFilePath_Parties;
         }
 
         private void SaveSettings(object sender, RoutedEventArgs e)
@@ -117,6 +135,10 @@ namespace WDB_GUI_NET_4_8
             if (tbParties_Talons_Радио_России.Text != "") Settings.Default.Parties_TalonsFilePath_Радио_России = tbParties_Talons_Радио_России.Text;
             if (tbParties_Talons_Россия_1.Text != "") Settings.Default.Parties_TalonsFilePath_Россия_1 = tbParties_Talons_Россия_1.Text;
             if (tbParties_Talons_Россия24.Text != "") Settings.Default.Parties_TalonsFilePath_Россия_24 = tbParties_Talons_Россия24.Text;
+            // Протоколы
+            if (tbProtocols_FolderPath.Text != "") Settings.Default.Protocols_FolderPath = tbProtocols_FolderPath.Text;
+            if (tbProtocols_TemplateFilePath_Candidates.Text != "") Settings.Default.Protocols_TemplateFilePath_Candidates = tbProtocols_TemplateFilePath_Candidates.Text;
+            if (tbProtocols_TemplateFilePath_Parties.Text != "") Settings.Default.Protocols_TemplateFilePath_Parties = tbProtocols_TemplateFilePath_Parties.Text;
             //
             Settings.Default.Save();
         }

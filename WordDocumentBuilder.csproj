@@ -64,6 +64,7 @@
     <Compile Include="ElectionContracts\BuilderCandidates.cs" />
     <Compile Include="ElectionContracts\BuilderCommon.cs" />
     <Compile Include="ElectionContracts\BuilderParties.cs" />
+    <Compile Include="ElectionContracts\BuilderProtocols.cs" />
     <Compile Include="ElectionContracts\Entities\Candidate.cs" />
     <Compile Include="ElectionContracts\Entities\CandidateInfo.cs" />
     <Compile Include="ElectionContracts\Entities\Party.cs" />

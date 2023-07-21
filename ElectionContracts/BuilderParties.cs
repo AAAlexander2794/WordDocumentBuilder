@@ -24,15 +24,11 @@ namespace WordDocumentBuilder.ElectionContracts
             // test
             DataTable dt = ExcelProcessor.ReadExcelSheet(Settings.Default.Parties_FilePath, sheetNumber: 0);
             // Берем путь к каталогу договоров
-            string _contractsFolderPath = $"{Settings.Default.ContractsFolderPath}{DateTime.Now.ToString().Replace(":", "_")}\\";
-            // Формируем талоны
-            var talons = TalonBuilder.BuildTalonsParties(talonVariant);
-            // Читаем партии
-            var partiesInfos = ReadParties(Settings.Default.Parties_FilePath);
-            // Создаем сущности партий
-            var parties = BuildParties(partiesInfos, talons);
+            string _folderPath = $"{Settings.Default.ContractsFolderPath}{DateTime.Now.ToString().Replace(":", "_")}\\";
+            // Получаем список партий
+            var parties = BuildParties(talonVariant);
             // Создает путь для документов, если вдруг каких-то папок нет
-            Directory.CreateDirectory(_contractsFolderPath);
+            Directory.CreateDirectory(_folderPath);
             // Для каждой партии
             foreach (var party in parties)
             {
@@ -41,7 +37,7 @@ namespace WordDocumentBuilder.ElectionContracts
                 // Создаем договор РВ
                 var document = new WordDocument(Settings.Default.Parties_TemplateFilePath_РВ);
                 // Формируем има файла договора
-                var resultPath = $"{_contractsFolderPath}" + $"{party.Info.Партия_Название}";
+                var resultPath = $"{_folderPath}" + $"{party.Info.Партия_Название}";
                 // Устанавливаем значения текста для полей документа, кроме закладок (талонов)
                 SetMergeFields(document, party);
                 try
@@ -125,6 +121,18 @@ namespace WordDocumentBuilder.ElectionContracts
                 var party = new Party(info, talons);
                 parties.Add(party);
             }
+            return parties;
+        }
+
+        List<Party> BuildParties(string talonVariant = "default")
+        {
+            // Формируем талоны
+            var talons = TalonBuilder.BuildTalonsParties(talonVariant);
+            // Читаем партии
+            var partiesInfos = ReadParties(Settings.Default.Parties_FilePath);
+            // Создаем сущности партий
+            var parties = BuildParties(partiesInfos, talons);
+            //
             return parties;
         }
 
