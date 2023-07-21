@@ -121,6 +121,32 @@ namespace WordDocumentBuilder.ElectionContracts
             return paragraph;
         }
 
+        /// <summary>
+        /// Создает новый абзац текста
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        Paragraph CreateParagraph(List<string> lines)
+        {
+            var paragraph = new Paragraph();
+            var run = new Run();
+            foreach (var line in lines)
+            {
+                run.AppendChild(new Text(line));
+                run.AppendChild(new Break());
+            }
+            //
+            RunProperties runProperties = new RunProperties();
+            FontSize size = new FontSize();
+            size.Val = StringValue.FromString("18");
+            runProperties.Append(size);
+            //
+            run.Append(runProperties);
+            paragraph.Append(run);
+            //
+            return paragraph;
+        }
+
     }
     
 }

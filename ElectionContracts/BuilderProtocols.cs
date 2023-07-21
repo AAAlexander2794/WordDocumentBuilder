@@ -93,12 +93,15 @@ namespace WordDocumentBuilder.ElectionContracts
             var document = new WordDocument(templatePath);
             // Заполняем поля слияния
             document.SetMergeFieldText("Медиаресурс", $"{fieldMedia}");
-            document.SetMergeFieldText("Название", $"{party.Info.Партия_Отделение} {party.Info.Партия_Название}");
+            //
+            var partyName = $"{party.Info.Партия_Отделение} {party.Info.Партия_Название}";
+            // Фамилия И.О. человека, который подписывает протокол
+            var personName = $"{party.Info.Представитель_Фамилия} {party.Info.Представитель_Имя[0]}. {party.Info.Представитель_Отчество[0]}.";
             //
             try
             {
                 document.SetBookmarkText($"Талон", "");
-                var table = CreateTableParty(party.Талон_Маяк);
+                var table = CreateTableParty(party.Талон_Маяк, partyName, personName);
                 document.SetBookmarkTable($"Талон", table);
             }
             catch { }
@@ -112,7 +115,7 @@ namespace WordDocumentBuilder.ElectionContracts
         /// </summary>
         /// <param name="talon"></param>
         /// <returns></returns>
-        Table CreateTableParty(Talon talon)
+        Table CreateTableParty(Talon talon, string lastRow2CellText ="", string lastRow5CellText = "")
         {
             if (talon == null) return null;
             // 
@@ -198,23 +201,33 @@ namespace WordDocumentBuilder.ElectionContracts
             TableCell tc6 = new TableCell(CreateParagraph($"6"));
             tr.Append(tc1, tc2, tc3, tc4, tc5, tc6);
             table.Append(tr);
-            // Заполняем таблицу строками с данными
+            // Формируем текст ячейки с талоном
+            List<string> lines = new List<string>();
             foreach (var row in talon.TalonRecords)
             {
-                //
-                tr = new TableRow();
-                //
-                tc1 = new TableCell(CreateParagraph($""));
-                tc2 = new TableCell(CreateParagraph($""));
-                tc3 = new TableCell(CreateParagraph($""));
-                tc4 = new TableCell(CreateParagraph($"{row.Date} {row.Time} {row.Duration} {row.Description}"));
-                tc5 = new TableCell(CreateParagraph($""));
-                tc6 = new TableCell(CreateParagraph($""));
-                //
-                tr.Append(tc1, tc2, tc3, tc4, tc5, tc6);
-                //
-                table.Append(tr);
+                lines.Add($"{row.Date} {row.Time} {row.Duration} {row.Description}");
             }
+            // Строка с данными
+            tr = new TableRow();
+            tc1 = new TableCell(CreateParagraph($""));
+            tc2 = new TableCell(CreateParagraph($"{lastRow2CellText}"));
+            tc3 = new TableCell(CreateParagraph($""));
+            tc4 = new TableCell(CreateParagraph(lines));
+            tc5 = new TableCell(CreateParagraph($"{lastRow5CellText}"));
+            tc6 = new TableCell(CreateParagraph($""));
+            tr.Append(tc1, tc2, tc3, tc4, tc5, tc6);
+            table.Append(tr);
+            // Строка "Итого"
+            tr = new TableRow();
+            tc1 = new TableCell(CreateParagraph($"Итого"));
+            tc2 = new TableCell(CreateParagraph($""));
+            tc3 = new TableCell(CreateParagraph($""));
+            tc4 = new TableCell(CreateParagraph($""));
+            tc5 = new TableCell(CreateParagraph($""));
+            tc6 = new TableCell(CreateParagraph($""));
+            tr.Append(tc1, tc2, tc3, tc4, tc5, tc6);
+            table.Append(tr);
+            // Возвращаем
             return table;
         }
     }
