@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.ExtendedProperties;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using System;
@@ -80,6 +81,8 @@ namespace WordDocumentBuilder.ElectionContracts
             //
             foreach(var candidate in candidates)
             {
+                //
+                if (candidate.Info.Фамилия.Trim() == "") continue;
                 //
                 bool exist = false;
                 // Проход по уже существующим протоколам
@@ -288,9 +291,7 @@ namespace WordDocumentBuilder.ElectionContracts
             tr.Append(tc1, tc2, tc3, tc4, tc5, tc6);
             table.Append(tr);
             // Добавляем округ одной строкой
-            tr = new TableRow();
-            tc1 = new TableCell(CreateParagraph($"{protocol.Округ}"));
-            tr.Append(tc1);
+            tr = CreateRowMergedCells(protocol.Округ, 6);
             table.Append(tr);
             // По каждому кандидату из протокола
             for (int i = 0; i < protocol.Candidates.Count; i++)
@@ -341,7 +342,7 @@ namespace WordDocumentBuilder.ElectionContracts
                     break;
             }
             //
-            if (talon == null) return null;
+            if (talon == null || candidate.Info.Фамилия == "") return null;
             // Формируем текст ячейки с талоном
             List<string> lines = new List<string>();
             foreach (var row in talon.TalonRecords)
@@ -355,6 +356,44 @@ namespace WordDocumentBuilder.ElectionContracts
             var tc3 = new TableCell(CreateParagraph($""));
             var tc4 = new TableCell(CreateParagraph(lines));
             var tc5 = new TableCell(CreateParagraph($"{row5Text}"));
+            var tc6 = new TableCell(CreateParagraph($""));
+            tr.Append(tc1, tc2, tc3, tc4, tc5, tc6);
+            //
+            return tr;
+        }
+
+        private TableRow CreateRowMergedCells(string text, int cellsNumber)
+        {
+            var tr = new TableRow();
+            ////
+            //TableCellProperties cellOneProperties = new TableCellProperties();
+            //cellOneProperties.Append(new HorizontalMerge()
+            //{
+            //    Val = MergedCellValues.Restart
+            //});
+            ////
+            //TableCellProperties cellTwoProperties = new TableCellProperties();
+            //cellTwoProperties.Append(new HorizontalMerge()
+            //{
+            //    Val = MergedCellValues.Continue
+            //});
+            ////
+            //var tc = new TableCell(CreateParagraph($"{text}"));
+            //tc.Append(cellOneProperties);
+            //tr.Append(tc);
+            ////
+            //for (int i = 0; i < cellsNumber; i++)
+            //{
+            //    var tcNext = new TableCell();
+            //    tcNext.Append(cellTwoProperties);
+            //    tr.Append(tcNext);
+            //};
+            // 
+            var tc1 = new TableCell(CreateParagraph($"{text}"));
+            var tc2 = new TableCell(CreateParagraph($""));
+            var tc3 = new TableCell(CreateParagraph($""));
+            var tc4 = new TableCell(CreateParagraph($""));
+            var tc5 = new TableCell(CreateParagraph($""));
             var tc6 = new TableCell(CreateParagraph($""));
             tr.Append(tc1, tc2, tc3, tc4, tc5, tc6);
             //
