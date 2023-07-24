@@ -77,6 +77,15 @@ namespace WDB_GUI_NET_4_8
             MessageBox.Show("Готово.");
         }
 
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            WordDocumentBuilder.ElectionContracts.Builder builder = new WordDocumentBuilder.ElectionContracts.Builder();
+            var dt = builder.BuildProtocolsCandidates("1");
+            // Тестово посмотреть
+            DataGrid.ItemsSource = dt.DefaultView;
+            MessageBox.Show("Готово.");
+        }
+
         private void LoadSettings(object sender, RoutedEventArgs e)
         {
             //

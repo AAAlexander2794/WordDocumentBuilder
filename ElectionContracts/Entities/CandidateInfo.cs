@@ -34,6 +34,8 @@ namespace WordDocumentBuilder.ElectionContracts.Entities
 
         public string Округ_дат_падеж { get; set; } = "";
 
+        public string Округ_им_падеж { get; set; } = "";
+
         public string Талон_Маяк { get; set; } = "";
 
         public string Талон_Радио_России { get; set; } = "";

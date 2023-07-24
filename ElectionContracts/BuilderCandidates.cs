@@ -120,7 +120,8 @@ namespace WordDocumentBuilder.ElectionContracts
                     ИНН = dt.Rows[i].Field<string>(15),
                     Спец_изб_счет_номер = dt.Rows[i].Field<string>(16),
                     Округ_дат_падеж = dt.Rows[i].Field<string>(17),
-                    На_печать = dt.Rows[i].Field<string>(18)
+                    На_печать = dt.Rows[i].Field<string>(18),
+                    Округ_им_падеж = dt.Rows[i].Field<string>(19)
                 }) ;
             }
             return candidates;

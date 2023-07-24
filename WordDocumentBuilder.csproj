@@ -70,7 +70,8 @@
     <Compile Include="ElectionContracts\Entities\CandidateInfo.cs" />
     <Compile Include="ElectionContracts\Entities\Party.cs" />
     <Compile Include="ElectionContracts\Entities\PartyInfo.cs" />
-    <Compile Include="ElectionContracts\Entities\ProtocolInfo.cs" />
+    <Compile Include="ElectionContracts\Entities\ProtocolCandidates.cs" />
+    <Compile Include="ElectionContracts\Entities\ProtocolsInfo.cs" />
     <Compile Include="ElectionContracts\Entities\Talon.cs" />
     <Compile Include="ElectionContracts\Entities\TalonRecord.cs" />
     <Compile Include="ElectionContracts\Entities\TalonRecordInfo.cs" />

@@ -11,12 +11,11 @@
 
             <TabItem Header="Обработка">
                 <Grid Background="#FFE5E5E5">
-                    <Button Content="Тестовые талоны" HorizontalAlignment="Left" Margin="683,10,0,0" VerticalAlignment="Top" Width="101" Click="Button_Click"/>
                     <DataGrid Name="DataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,61,10,0"/>
                     <Button Content="Сформировать договоры&#xD;&#xA;кандидатов" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click_1" Height="46" HorizontalContentAlignment="Center"/>
                     <Button Content="Сформировать договоры&#xD;&#xA;партий" HorizontalAlignment="Left" Margin="165,10,0,0" VerticalAlignment="Top" Width="150" Height="46" Click="Button_Click_2"/>
                     <Button Content="Сформировать протоколы&#xD;&#xA;партий" HorizontalAlignment="Left" Margin="528,10,0,0" VerticalAlignment="Top" Width="150" Height="46" Click="Button_Click_3"/>
-                    <Button Content="Сформировать протоколы&#xA;кандидатов" HorizontalAlignment="Left" Margin="373,10,0,0" VerticalAlignment="Top" Width="150" Height="46"/>
+                    <Button Content="Сформировать протоколы&#xA;кандидатов" HorizontalAlignment="Left" Margin="373,10,0,0" VerticalAlignment="Top" Width="150" Height="46" Click="Button_Click_4"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Настройки кандидатов">
