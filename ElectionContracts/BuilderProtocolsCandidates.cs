@@ -179,7 +179,7 @@ namespace WordDocumentBuilder.ElectionContracts
             // Новый протокол
             var document = new WordDocument(templatePath);
             // Заполняем поля слияния
-            document.SetMergeFieldText("Медиаресурс", $"{fieldMedia}");
+            document.SetMergeFieldText("Наименование_СМИ", $"{fieldMedia}");
             document.SetMergeFieldText("ИО_Фамилия_предст_СМИ", $"{settings.ИО_Фамилия_предст_СМИ}");
             document.SetMergeFieldText("Дата", $"{settings.Дата}");
             document.SetMergeFieldText("ИО_Фамилия_члена_изб_ком", $"{settings.ИО_Фамилия_члена_изб_ком}");
@@ -292,7 +292,7 @@ namespace WordDocumentBuilder.ElectionContracts
             table.Append(tr);
             // Добавляем округ одной строкой
             tr = CreateRowMergedCells(protocol.Округ, 6);
-            table.Append(tr);
+            table.Append(tr);            
             // По каждому кандидату из протокола
             for (int i = 0; i < protocol.Candidates.Count; i++)
             {
@@ -362,40 +362,41 @@ namespace WordDocumentBuilder.ElectionContracts
             return tr;
         }
 
+        /// <summary>
+        /// Объединяет указанное количество ячеек в строке вместе, также вставляет туда текст. (в теории, пока нет)
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="cellsNumber"></param>
+        /// <returns></returns>
         private TableRow CreateRowMergedCells(string text, int cellsNumber)
         {
             var tr = new TableRow();
-            ////
-            //TableCellProperties cellOneProperties = new TableCellProperties();
-            //cellOneProperties.Append(new HorizontalMerge()
-            //{
-            //    Val = MergedCellValues.Restart
-            //});
-            ////
-            //TableCellProperties cellTwoProperties = new TableCellProperties();
-            //cellTwoProperties.Append(new HorizontalMerge()
-            //{
-            //    Val = MergedCellValues.Continue
-            //});
-            ////
-            //var tc = new TableCell(CreateParagraph($"{text}"));
-            //tc.Append(cellOneProperties);
-            //tr.Append(tc);
-            ////
-            //for (int i = 0; i < cellsNumber; i++)
-            //{
-            //    var tcNext = new TableCell();
-            //    tcNext.Append(cellTwoProperties);
-            //    tr.Append(tcNext);
-            //};
-            // 
-            var tc1 = new TableCell(CreateParagraph($"{text}"));
-            var tc2 = new TableCell(CreateParagraph($""));
-            var tc3 = new TableCell(CreateParagraph($""));
-            var tc4 = new TableCell(CreateParagraph($""));
-            var tc5 = new TableCell(CreateParagraph($""));
-            var tc6 = new TableCell(CreateParagraph($""));
-            tr.Append(tc1, tc2, tc3, tc4, tc5, tc6);
+            // Создаем свойства ячейки для начала объединения
+            TableCellProperties propStart = new TableCellProperties();
+            propStart.Append(new HorizontalMerge()
+            {
+                Val = MergedCellValues.Restart,
+            });
+            // Делаем ячейку с текстом и добавляем ей свойство начала объединения
+            var tc = new TableCell(CreateParagraph($"{text}", "alignmentCenter"));
+            tc.Append(propStart);
+            tr.Append(tc);
+            // Цикл по количеству ячеек, которые надо объединить
+            for (int i = 1; i < cellsNumber; i++)
+            {
+                // Создаем свойства ячейки для продолжения объединения
+                var prop = new TableCellProperties();
+                prop.Append(new HorizontalMerge()
+                {
+                    Val = MergedCellValues.Continue
+                });
+                // Создаем новую ячейку
+                var tcNext = new TableCell(CreateParagraph($""));
+                // Прикрепляем к новой ячейке свойства продолжения объединения
+                tcNext.Append(prop);
+                // Добавляем ячейку к строке
+                tr.Append(tcNext);
+            };
             //
             return tr;
         }

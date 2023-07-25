@@ -102,8 +102,9 @@ namespace WordDocumentBuilder.ElectionContracts
         /// Создает новый абзац текста
         /// </summary>
         /// <param name="text"></param>
+        /// <param name="style">Для выбора различных дополнений текста типа выравнивания по центру</param>
         /// <returns></returns>
-        Paragraph CreateParagraph(string text)
+        Paragraph CreateParagraph(string text, string style = "default")
         {
             var paragraph = new Paragraph();
             var run = new Run();
@@ -116,6 +117,18 @@ namespace WordDocumentBuilder.ElectionContracts
             //
             run.Append(runProperties);
             run.Append(runText);
+            //
+            if (style == "alignmentCenter")
+            {
+                Justification justification = new Justification()
+                {
+                    Val = JustificationValues.Center
+                };
+                var prProp = new ParagraphProperties();
+                prProp.Append(justification);
+                paragraph.Append(prProp);
+            }
+            //
             paragraph.Append(run);
             //
             return paragraph;
