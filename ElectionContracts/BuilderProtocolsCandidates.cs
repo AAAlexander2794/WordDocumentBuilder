@@ -351,6 +351,10 @@ namespace WordDocumentBuilder.ElectionContracts
             }
             // Строка с данными
             tr = new TableRow();
+            // Чтобы не разделялась при переходе на другую страницу
+            var rowProp = new TableRowProperties(new CantSplit());
+            tr.Append(rowProp);
+            // 
             var tc1 = new TableCell(CreateParagraph($"{i + 1}"));
             var tc2 = new TableCell(CreateParagraph($"{candidate.Info.Фамилия} {candidate.Info.Имя} {candidate.Info.Отчество}"));
             var tc3 = new TableCell(CreateParagraph($""));

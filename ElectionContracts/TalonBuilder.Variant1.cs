@@ -95,7 +95,8 @@ namespace WordDocumentBuilder.ElectionContracts
                         mediaResource,
                         columns[0],
                         columns[1],
-                        columns[2]));
+                        columns[2],
+                        columns[3]));
                     }
                     catch { continue; }
                 }
