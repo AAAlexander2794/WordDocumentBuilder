@@ -7,6 +7,7 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -34,12 +35,19 @@ namespace WordDocumentBuilder.ElectionContracts
         public DataTable BuildProtocolsParties(string talonVariant = "default")
         {
             var _folderPath = $"{Settings.Default.Protocols_FolderPath}{DateTime.Now.ToString().Replace(":", "_")}\\";
-            var _templatePath = Settings.Default.Protocols_TemplateFilePath_Parties; 
+            var _templatePath = Settings.Default.Protocols_TemplateFilePath_Parties;
+            var _protocolsFilePath = Settings.Default.Protocols_FilePath;
             // test
             DataTable dt = ExcelProcessor.ReadExcelSheet(Settings.Default.Parties_FilePath, sheetNumber: 0);
+            // Настройки текущей жеребьевки
+            ProtocolsInfo settings;
+            try
+            {
+                settings = ReadProtocols(_protocolsFilePath);
+            }
+            catch { throw new Exception("Не читает настройки протоколов."); }
             // Получаем список партий
             var parties = BuildParties(talonVariant);
-            
             // По каждой партии
             foreach (var party in parties)
             {
@@ -50,11 +58,11 @@ namespace WordDocumentBuilder.ElectionContracts
                 // Создает путь для документов, если вдруг каких-то папок нет
                 Directory.CreateDirectory(resultPath);
                 // По каждому СМИ
-                CreateProtocol(party, _templatePath, resultPath, "Маяк");
-                CreateProtocol(party, _templatePath, resultPath, "Вести ФМ");
-                CreateProtocol(party, _templatePath, resultPath, "Радио России");
-                CreateProtocol(party, _templatePath, resultPath, "Россия 1");
-                CreateProtocol(party, _templatePath, resultPath, "Россия 24");
+                CreateProtocol(party, settings, _templatePath, resultPath, "Маяк");
+                CreateProtocol(party, settings, _templatePath, resultPath, "Вести ФМ");
+                CreateProtocol(party, settings, _templatePath, resultPath, "Радио России");
+                CreateProtocol(party, settings, _templatePath, resultPath, "Россия 1");
+                CreateProtocol(party, settings, _templatePath, resultPath, "Россия 24");
             }
             //
             return dt;
@@ -67,7 +75,7 @@ namespace WordDocumentBuilder.ElectionContracts
         /// <param name="templatePath"></param>
         /// <param name="resultPath"></param>
         /// <param name="mediaresource"></param>
-        private void CreateProtocol(Party party, string templatePath, string resultPath, string mediaresource)
+        private void CreateProtocol(Party party, ProtocolsInfo settings, string templatePath, string resultPath, string mediaresource)
         {
             //
             string fieldMedia = "";
@@ -99,7 +107,10 @@ namespace WordDocumentBuilder.ElectionContracts
             // Новый протокол
             var document = new WordDocument(templatePath);
             // Заполняем поля слияния
-            document.SetMergeFieldText("Медиаресурс", $"{fieldMedia}");
+            document.SetMergeFieldText("Наименование_СМИ", $"{fieldMedia}");
+            document.SetMergeFieldText("ИО_Фамилия_предст_СМИ", $"{settings.ИО_Фамилия_предст_СМИ}");
+            document.SetMergeFieldText("Дата", $"{settings.Дата}");
+            document.SetMergeFieldText("ИО_Фамилия_члена_изб_ком", $"{settings.ИО_Фамилия_члена_изб_ком}");
             //
             var partyName = $"{party.Info.Партия_Отделение} {party.Info.Партия_Название}";
             // Фамилия И.О. человека, который подписывает протокол
@@ -216,6 +227,10 @@ namespace WordDocumentBuilder.ElectionContracts
             }
             // Строка с данными
             tr = new TableRow();
+            // Чтобы не разделялась при переходе на другую страницу
+            var rowProp = new TableRowProperties(new CantSplit());
+            tr.Append(rowProp);
+            //
             tc1 = new TableCell(CreateParagraph($""));
             tc2 = new TableCell(CreateParagraph($"{lastRow2CellText}"));
             tc3 = new TableCell(CreateParagraph($""));

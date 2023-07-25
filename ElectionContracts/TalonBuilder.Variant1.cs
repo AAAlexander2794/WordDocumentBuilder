@@ -86,6 +86,9 @@ namespace WordDocumentBuilder.ElectionContracts
                 char[] delimeterColumn = { ' ' };
                 foreach (string row in rows)
                 {
+                    //
+                    if (row.Length == 0) continue;
+                    //
                     string[] columns = row.Split(delimeterColumn);
                     //
                     try
