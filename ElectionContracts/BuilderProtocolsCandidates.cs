@@ -40,27 +40,54 @@ namespace WordDocumentBuilder.ElectionContracts
             var _templatePath = Settings.Default.Protocols_TemplateFilePath_Candidates;
             var _protocolsFilePath = Settings.Default.Protocols_FilePath;
             // test
-            DataTable dt = ExcelProcessor.ReadExcelSheet(Settings.Default.Candidates_FilePath, sheetNumber: 0);
-            // Получаем список Кандидатов
-            var candidates = BuildCandidates(talonVariant);
-            // Настройки текущей жеребьевки
-            var settings = ReadProtocols(_protocolsFilePath);
-            // Создаем список протоколов
-            var protocols = CreateProtocolsCandidates(candidates, settings);
-            // По каждому протоколу
-            foreach (var protocol in protocols)
+            DataTable dt;
+            try
             {
-                // Формируем путь к документу
-                var resultPath = $"{_folderPath}" + $"{protocol.Округ}\\";
-                // Создает путь для документов, если вдруг каких-то папок нет
-                Directory.CreateDirectory(resultPath);
-                // По каждому СМИ
-                CreateProtocol(protocol, settings, _templatePath, resultPath, "Маяк");
-                CreateProtocol(protocol, settings, _templatePath, resultPath, "Вести ФМ");
-                CreateProtocol(protocol, settings, _templatePath, resultPath, "Радио России");
-                CreateProtocol(protocol, settings, _templatePath, resultPath, "Россия 1");
-                CreateProtocol(protocol, settings, _templatePath, resultPath, "Россия 24");
+                 dt = ExcelProcessor.ReadExcelSheet(Settings.Default.Candidates_FilePath, sheetNumber: 0);
             }
+            catch
+            {
+                throw new Exception("Не читает таблицу.");
+            }
+            // Получаем список Кандидатов
+            List<Candidate> candidates;
+            try
+            {
+                candidates = BuildCandidates(talonVariant);
+            }
+            catch { throw new Exception("Ошибка с талонами."); }
+            // Настройки текущей жеребьевки
+            ProtocolsInfo settings;
+            try
+            {
+                settings = ReadProtocols(_protocolsFilePath);
+            }
+            catch { throw new Exception("Не читает настройки протоколов."); }
+            // Создаем список протоколов
+            List<ProtocolCandidates> protocols;
+            try
+            {
+                protocols = CreateProtocolsCandidates(candidates, settings);
+            }
+            catch { throw new Exception("Ошибка со списком протоколов."); }
+            // По каждому протоколу
+            try
+            {
+                foreach (var protocol in protocols)
+                {
+                    // Формируем путь к документу
+                    var resultPath = $"{_folderPath}" + $"{protocol.Округ}\\";
+                    // Создает путь для документов, если вдруг каких-то папок нет
+                    Directory.CreateDirectory(resultPath);
+                    // По каждому СМИ
+                    CreateProtocol(protocol, settings, _templatePath, resultPath, "Маяк");
+                    CreateProtocol(protocol, settings, _templatePath, resultPath, "Вести ФМ");
+                    CreateProtocol(protocol, settings, _templatePath, resultPath, "Радио России");
+                    CreateProtocol(protocol, settings, _templatePath, resultPath, "Россия 1");
+                    CreateProtocol(protocol, settings, _templatePath, resultPath, "Россия 24");
+                }
+            }
+            catch { throw new Exception("Ошибка с записью протоколов."); }
             //
             return dt;
         }

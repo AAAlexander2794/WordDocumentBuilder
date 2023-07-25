@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -80,10 +81,18 @@ namespace WDB_GUI_NET_4_8
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
             WordDocumentBuilder.ElectionContracts.Builder builder = new WordDocumentBuilder.ElectionContracts.Builder();
-            var dt = builder.BuildProtocolsCandidates("1");
-            // Тестово посмотреть
-            DataGrid.ItemsSource = dt.DefaultView;
-            MessageBox.Show("Готово.");
+            DataTable dt = new DataTable();
+            try
+            {
+                dt = builder.BuildProtocolsCandidates("1");
+                // Тестово посмотреть
+                DataGrid.ItemsSource = dt.DefaultView;
+                MessageBox.Show("Готово.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void LoadSettings(object sender, RoutedEventArgs e)
@@ -116,6 +125,7 @@ namespace WDB_GUI_NET_4_8
             tbProtocols_FolderPath.Text = Settings.Default.Protocols_FolderPath;
             tbProtocols_TemplateFilePath_Candidates.Text = Settings.Default.Protocols_TemplateFilePath_Candidates;
             tbProtocols_TemplateFilePath_Parties.Text = Settings.Default.Protocols_TemplateFilePath_Parties;
+            tbProtocols_FilePath.Text = Settings.Default.Protocols_FilePath;
         }
 
         private void SaveSettings(object sender, RoutedEventArgs e)
@@ -148,6 +158,7 @@ namespace WDB_GUI_NET_4_8
             if (tbProtocols_FolderPath.Text != "") Settings.Default.Protocols_FolderPath = tbProtocols_FolderPath.Text;
             if (tbProtocols_TemplateFilePath_Candidates.Text != "") Settings.Default.Protocols_TemplateFilePath_Candidates = tbProtocols_TemplateFilePath_Candidates.Text;
             if (tbProtocols_TemplateFilePath_Parties.Text != "") Settings.Default.Protocols_TemplateFilePath_Parties = tbProtocols_TemplateFilePath_Parties.Text;
+            if (tbProtocols_FilePath.Text != "") Settings.Default.Protocols_FilePath = tbProtocols_FilePath.Text;
             //
             Settings.Default.Save();
         }

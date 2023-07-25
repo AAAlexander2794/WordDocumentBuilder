@@ -123,11 +123,13 @@
                             <Label Margin="2,2,2,2" Height="26">Путь к папке протоколов:</Label>
                             <Label Margin="2,2,2,2" Height="26">Путь к шаблону протокола кандидатов:</Label>
                             <Label Margin="2,2,2,2" Height="26">Путь к шаблону протокола партий:</Label>
+                            <Label Margin="2,2,2,2" Height="26">Путь к настройкам протоколов:</Label>
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Grid.Column="1">
                             <TextBox x:Name="tbProtocols_FolderPath" TextWrapping="Wrap" Text="" Margin="2,2,2,2" Height="26" />
                             <TextBox x:Name="tbProtocols_TemplateFilePath_Candidates" TextWrapping="Wrap" Text="" Margin="2,2,2,2" Height="26" />
                             <TextBox x:Name="tbProtocols_TemplateFilePath_Parties" TextWrapping="Wrap" Text="" Margin="2,2,2,2" Height="26" />
+                            <TextBox x:Name="tbProtocols_FilePath" TextWrapping="Wrap" Text="" Margin="2,2,2,2" Height="26" />
                         </StackPanel>
                     </Grid>
                 </Grid>
