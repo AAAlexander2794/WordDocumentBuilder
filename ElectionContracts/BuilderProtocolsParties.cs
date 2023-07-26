@@ -78,29 +78,49 @@ namespace WordDocumentBuilder.ElectionContracts
         private void CreateProtocol(Party party, ProtocolsInfo settings, string templatePath, string resultPath, string mediaresource)
         {
             //
+            var partyName = $"{party.Info.Партия_Отделение} {party.Info.Партия_Название}";
+            // Фамилия И.О. человека, который подписывает талон в протоколе
+            string personName = "";
+            if (party.Info.Явка_представителя == "1")
+            {
+                personName = $"{party.Info.Представитель_Фамилия} {party.Info.Представитель_Имя[0]}. {party.Info.Представитель_Отчество[0]}.";
+            }
+            else
+            {
+                personName = $"{settings.Фамилия_ИО_члена_изб_ком}";
+            }
+            //
             string fieldMedia = "";
             string fileName = "_";
+            //
+            Table table = null;
+            //
             switch (mediaresource)
             {
                 case "Маяк":
                     fieldMedia = "Радиостанция \"Маяк\"";
                     fileName = "Маяк.docx";
+                    table = CreateTableParty(party.Талон_Маяк, partyName, personName);
                     break;
                 case "Вести ФМ":
                     fieldMedia = "Радиостанция \"Вести ФМ\"";
                     fileName = "Вести ФМ.docx";
+                    table = CreateTableParty(party.Талон_Вести_ФМ, partyName, personName);
                     break;
                 case "Радио России":
                     fieldMedia = "Радиостанция \"Радио России\"";
                     fileName = "Радио России.docx";
+                    table = CreateTableParty(party.Талон_Радио_России, partyName, personName);
                     break;
                 case "Россия 1":
                     fieldMedia = "Телеканал \"Россия\" (\"Россия-1\")";
                     fileName = "Россия 1.docx";
+                    table = CreateTableParty(party.Талон_Россия_1, partyName, personName);
                     break;
                 case "Россия 24":
                     fieldMedia = "Телеканал \"Россия\" (\"Россия-24\")";
                     fileName = "Россия 24.docx";
+                    table = CreateTableParty(party.Талон_Россия_24, partyName, personName);
                     break;
 
             }
@@ -112,14 +132,9 @@ namespace WordDocumentBuilder.ElectionContracts
             document.SetMergeFieldText("Дата", $"{settings.Дата}");
             document.SetMergeFieldText("ИО_Фамилия_члена_изб_ком", $"{settings.ИО_Фамилия_члена_изб_ком}");
             //
-            var partyName = $"{party.Info.Партия_Отделение} {party.Info.Партия_Название}";
-            // Фамилия И.О. человека, который подписывает протокол
-            var personName = $"{party.Info.Представитель_Фамилия} {party.Info.Представитель_Имя[0]}. {party.Info.Представитель_Отчество[0]}.";
-            //
             try
             {
                 document.SetBookmarkText($"Талон", "");
-                var table = CreateTableParty(party.Талон_Маяк, partyName, personName);
                 document.SetBookmarkTable($"Талон", table);
             }
             catch { }

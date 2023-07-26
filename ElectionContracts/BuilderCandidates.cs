@@ -110,18 +110,20 @@ namespace WordDocumentBuilder.ElectionContracts
                     Талон_Радио_России = dt.Rows[i].Field<string>(5),
                     Талон_Россия_1 = dt.Rows[i].Field<string>(6),
                     Талон_Россия_24 = dt.Rows[i].Field<string>(7),
-                    Номер_договора = dt.Rows[i].Field<string>(8),
-                    Постановление_ТИК = dt.Rows[i].Field<string>(9),
-                    Фамилия_представителя = dt.Rows[i].Field<string>(10),
-                    Имя_представителя = dt.Rows[i].Field<string>(11),
-                    Отчество_представителя = dt.Rows[i].Field<string>(12),
-                    Дата_договора = dt.Rows[i].Field<string>(13),
-                    Доверенность_на_представителя = dt.Rows[i].Field<string>(14),
-                    ИНН = dt.Rows[i].Field<string>(15),
-                    Спец_изб_счет_номер = dt.Rows[i].Field<string>(16),
-                    Округ_дат_падеж = dt.Rows[i].Field<string>(17),
-                    На_печать = dt.Rows[i].Field<string>(18),
-                    Округ_им_падеж = dt.Rows[i].Field<string>(19)
+                    Явка_кандидата = dt.Rows[i].Field<string>(8),
+                    Явка_представителя = dt.Rows[i].Field<string>(9),
+                    Номер_договора = dt.Rows[i].Field<string>(10),
+                    Постановление_ТИК = dt.Rows[i].Field<string>(11),
+                    Фамилия_представителя = dt.Rows[i].Field<string>(12),
+                    Имя_представителя = dt.Rows[i].Field<string>(13),
+                    Отчество_представителя = dt.Rows[i].Field<string>(14),
+                    Дата_договора = dt.Rows[i].Field<string>(15),
+                    Доверенность_на_представителя = dt.Rows[i].Field<string>(16),
+                    ИНН = dt.Rows[i].Field<string>(17),
+                    Спец_изб_счет_номер = dt.Rows[i].Field<string>(18),
+                    Округ_дат_падеж = dt.Rows[i].Field<string>(19),
+                    На_печать = dt.Rows[i].Field<string>(20),
+                    Округ_им_падеж = dt.Rows[i].Field<string>(21)
                 }) ;
             }
             return candidates;

@@ -84,30 +84,31 @@ namespace WordDocumentBuilder.ElectionContracts
                     Талон_Радио_России = dt.Rows[i].Field<string>(4),
                     Талон_Россия_1 = dt.Rows[i].Field<string>(5),
                     Талон_Россия_24 = dt.Rows[i].Field<string>(6),
+                    Явка_представителя = dt.Rows[i].Field<string>(7),
                     //
-                    Номер_договора = dt.Rows[i].Field<string>(7),
-                    Дата_договора = dt.Rows[i].Field<string>(8),
+                    Номер_договора = dt.Rows[i].Field<string>(8),
+                    Дата_договора = dt.Rows[i].Field<string>(9),
                     //
-                    Постановление = dt.Rows[i].Field<string>(9),
+                    Постановление = dt.Rows[i].Field<string>(10),
                     //
-                    Представитель_Фамилия = dt.Rows[i].Field<string>(10),
-                    Представитель_Имя = dt.Rows[i].Field<string>(11),
-                    Представитель_Отчество = dt.Rows[i].Field<string>(12),
-                    Представитель_Доверенность = dt.Rows[i].Field<string>(13),
+                    Представитель_Фамилия = dt.Rows[i].Field<string>(11),
+                    Представитель_Имя = dt.Rows[i].Field<string>(12),
+                    Представитель_Отчество = dt.Rows[i].Field<string>(13),
+                    Представитель_Доверенность = dt.Rows[i].Field<string>(14),
                     //
-                    Нотариус_Город = dt.Rows[i].Field<string>(14),
-                    Нотариус_Фамилия = dt.Rows[i].Field<string>(15),
-                    Нотариус_Имя = dt.Rows[i].Field<string>(16),
-                    Нотариус_Отчество = dt.Rows[i].Field<string>(17),
-                    Нотариус_Реестр = dt.Rows[i].Field<string>(18),
+                    Нотариус_Город = dt.Rows[i].Field<string>(15),
+                    Нотариус_Фамилия = dt.Rows[i].Field<string>(16),
+                    Нотариус_Имя = dt.Rows[i].Field<string>(17),
+                    Нотариус_Отчество = dt.Rows[i].Field<string>(18),
+                    Нотариус_Реестр = dt.Rows[i].Field<string>(19),
                     //
-                    ОГРН = dt.Rows[i].Field<string>(19),
-                    ИНН = dt.Rows[i].Field<string>(20),
-                    КПП = dt.Rows[i].Field<string>(21),
-                    Спец_изб_счет_номер = dt.Rows[i].Field<string>(22),
-                    Место_нахождения = dt.Rows[i].Field<string>(23),
+                    ОГРН = dt.Rows[i].Field<string>(20),
+                    ИНН = dt.Rows[i].Field<string>(21),
+                    КПП = dt.Rows[i].Field<string>(22),
+                    Спец_изб_счет_номер = dt.Rows[i].Field<string>(23),
+                    Место_нахождения = dt.Rows[i].Field<string>(24),
                     //
-                    На_печать = dt.Rows[i].Field<string>(24)
+                    На_печать = dt.Rows[i].Field<string>(25)
                 });
             }
             return parties;

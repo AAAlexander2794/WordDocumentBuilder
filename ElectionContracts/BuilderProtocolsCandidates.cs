@@ -323,8 +323,24 @@ namespace WordDocumentBuilder.ElectionContracts
             // По каждому кандидату из протокола
             for (int i = 0; i < protocol.Candidates.Count; i++)
             {
+                //
+                var c = protocol.Candidates[i];
+                //
+                string cell5Text = "";
+                if (c.Info.Явка_кандидата == "1")
+                {
+                    cell5Text = $"{c.Info.Фамилия} {c.Info.Имя[0]}. {c.Info.Отчество[0]}.";
+                }
+                else if (c.Info.Явка_представителя == "1")
+                {
+                    cell5Text = $"{c.Info.Фамилия_представителя} {c.Info.Имя_представителя[0]}. {c.Info.Отчество_представителя[0]}.";
+                }
+                else
+                {
+                    cell5Text = $"{protocol.Изб_ком_Фамилия_ИО}";
+                }
                 // Делаем строку кандидата
-                tr = CreateRowProtocolCandidates(protocol.Candidates[i], mediaresource, i, protocol.Изб_ком_Фамилия_ИО);
+                tr = CreateRowProtocolCandidates(c, mediaresource, i, cell5Text);
                 //
                 if (tr == null) continue;
                 // Добавляем к таблице

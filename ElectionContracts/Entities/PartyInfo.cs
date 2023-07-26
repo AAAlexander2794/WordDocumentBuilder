@@ -75,6 +75,7 @@ namespace WordDocumentBuilder.ElectionContracts.Entities
 
         public string Место_нахождения { get; set; } = "";
 
+        // Талон Маяк
         public string Талон_Маяк { get; set; } = "";
 
         public string Талон_Радио_России { get; set; } = "";
@@ -84,5 +85,7 @@ namespace WordDocumentBuilder.ElectionContracts.Entities
         public string Талон_Россия_1 { get; set; } = "";
 
         public string Талон_Россия_24 { get; set; } = "";
+
+        public string Явка_представителя { get; set; } = "";
     }
 }
