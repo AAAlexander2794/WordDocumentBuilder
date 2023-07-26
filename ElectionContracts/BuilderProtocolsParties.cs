@@ -150,7 +150,6 @@ namespace WordDocumentBuilder.ElectionContracts
         /// <returns></returns>
         Table CreateTableParty(Talon talon, string lastRow2CellText ="", string lastRow5CellText = "")
         {
-            if (talon == null) return null;
             // 
             Table table = new Table();
             //
@@ -236,9 +235,16 @@ namespace WordDocumentBuilder.ElectionContracts
             table.Append(tr);
             // Формируем текст ячейки с талоном
             List<string> lines = new List<string>();
-            foreach (var row in talon.TalonRecords)
+            if (talon != null)
             {
-                lines.Add($"{row.Date} {row.Time} {row.Duration} {row.Description}");
+                foreach (var row in talon.TalonRecords)
+                {
+                    lines.Add($"{row.Date} {row.Time} {row.Duration} {row.Description}");
+                }
+            }
+            else
+            {
+                lines.Add("");
             }
             // Строка с данными
             tr = new TableRow();

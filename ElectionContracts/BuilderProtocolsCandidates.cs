@@ -385,12 +385,19 @@ namespace WordDocumentBuilder.ElectionContracts
                     break;
             }
             //
-            if (talon == null || candidate.Info.Фамилия == "") return null;
+            if (candidate.Info.Фамилия == "") return null;
             // Формируем текст ячейки с талоном
             List<string> lines = new List<string>();
-            foreach (var row in talon.TalonRecords)
+            if (talon != null)
             {
-                lines.Add($"{row.Date} {row.Time} {row.Duration} {row.Description}");
+                foreach (var row in talon.TalonRecords)
+                {
+                    lines.Add($"{row.Date} {row.Time} {row.Duration} {row.Description}");
+                }
+            }
+            else
+            {
+                lines.Add("");
             }
             // Строка с данными
             tr = new TableRow();
