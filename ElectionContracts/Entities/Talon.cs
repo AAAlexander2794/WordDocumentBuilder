@@ -17,12 +17,19 @@ namespace WordDocumentBuilder.ElectionContracts.Entities
 
         public List<TalonRecord> TalonRecords { get; set; } = new List<TalonRecord>();
 
+        public TimeSpan TotalDuration { get; set; } = TimeSpan.Zero;
+
         public Talon(int id, string mediaResource, List<TalonRecord> talonRecords)
         {
             Id = id;
             MediaResource = mediaResource;
             // Только записи с совпадающими Медиаресурсом и ID
             TalonRecords = talonRecords.Where(x => x.MediaResource == MediaResource && x.Id == Id).ToList();
+            //
+            foreach (TalonRecord record in TalonRecords)
+            {
+                TotalDuration += record.Duration;
+            }
         }
 
         /// <summary>

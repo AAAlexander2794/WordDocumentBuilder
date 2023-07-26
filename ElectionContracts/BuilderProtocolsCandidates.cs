@@ -24,7 +24,7 @@ namespace WordDocumentBuilder.ElectionContracts
     /// Здесь используются методы этого класса из других файлов.
     /// </remarks>
     public partial class Builder
-    {
+    {        
         /// <summary>
         /// 
         /// </summary>
@@ -319,7 +319,9 @@ namespace WordDocumentBuilder.ElectionContracts
             table.Append(tr);
             // Добавляем округ одной строкой
             tr = CreateRowMergedCells(protocol.Округ, 6);
-            table.Append(tr);            
+            table.Append(tr);
+            // Для строки Итого со всех кандидатов длительность берем
+            TimeSpan duration = TimeSpan.Zero;
             // По каждому кандидату из протокола
             for (int i = 0; i < protocol.Candidates.Count; i++)
             {
@@ -339,8 +341,31 @@ namespace WordDocumentBuilder.ElectionContracts
                 {
                     cell5Text = $"{protocol.Изб_ком_Фамилия_ИО}";
                 }
+                //
+                Talon talon = null;
+                // Определяем, какой из талонов надо использовать
+                switch (mediaresource)
+                {
+                    case "Маяк":
+                        talon = c.Талон_Маяк;
+                        break;
+                    case "Вести ФМ":
+                        talon = c.Талон_Вести_ФМ;
+                        break;
+                    case "Радио России":
+                        talon = c.Талон_Радио_России;
+                        break;
+                    case "Россия 1":
+                        talon = c.Талон_Россия_1;
+                        break;
+                    case "Россия 24":
+                        talon = c.Талон_Россия_24;
+                        break;
+                }
+                // Для общей длительности в Итого
+                if (talon != null && talon.TotalDuration != null) duration += talon.TotalDuration;
                 // Делаем строку кандидата
-                tr = CreateRowProtocolCandidates(c, mediaresource, i, cell5Text);
+                tr = CreateRowProtocolCandidates(c, talon, mediaresource, i, cell5Text);
                 //
                 if (tr == null) continue;
                 // Добавляем к таблице
@@ -351,7 +376,7 @@ namespace WordDocumentBuilder.ElectionContracts
             tc1 = new TableCell(CreateParagraph($"Итого"));
             tc2 = new TableCell(CreateParagraph($""));
             tc3 = new TableCell(CreateParagraph($""));
-            tc4 = new TableCell(CreateParagraph($""));
+            tc4 = new TableCell(CreateParagraph($"{duration}"));
             tc5 = new TableCell(CreateParagraph($""));
             tc6 = new TableCell(CreateParagraph($""));
             tr.Append(tc1, tc2, tc3, tc4, tc5, tc6);
@@ -360,30 +385,10 @@ namespace WordDocumentBuilder.ElectionContracts
             return table;
         }
 
-        private TableRow CreateRowProtocolCandidates(Candidate candidate, string mediaresource, int i, string row5Text)
+        private TableRow CreateRowProtocolCandidates(Candidate candidate, Talon talon, string mediaresource, int i, string row5Text)
         {
             var tr = new TableRow();
-            //
-            Talon talon = null;
-            // Определяем, какой из талонов надо использовать
-            switch (mediaresource)
-            {
-                case "Маяк":
-                    talon = candidate.Талон_Маяк;
-                    break;
-                case "Вести ФМ":
-                    talon = candidate.Талон_Вести_ФМ;
-                    break;
-                case "Радио России":
-                    talon = candidate.Талон_Радио_России;
-                    break;
-                case "Россия 1":
-                    talon = candidate.Талон_Россия_1;
-                    break;
-                case "Россия 24":
-                    talon = candidate.Талон_Россия_24;
-                    break;
-            }
+            
             //
             if (candidate.Info.Фамилия == "") return null;
             // Формируем текст ячейки с талоном

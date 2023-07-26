@@ -265,7 +265,14 @@ namespace WordDocumentBuilder.ElectionContracts
             tc1 = new TableCell(CreateParagraph($"Итого"));
             tc2 = new TableCell(CreateParagraph($""));
             tc3 = new TableCell(CreateParagraph($""));
-            tc4 = new TableCell(CreateParagraph($""));
+            if (talon != null && talon.TotalDuration != null)
+            {
+                tc4 = new TableCell(CreateParagraph($"{talon.TotalDuration}"));
+            }
+            else
+            {
+                tc4 = new TableCell(CreateParagraph($""));
+            }
             tc5 = new TableCell(CreateParagraph($""));
             tc6 = new TableCell(CreateParagraph($""));
             tr.Append(tc1, tc2, tc3, tc4, tc5, tc6);
