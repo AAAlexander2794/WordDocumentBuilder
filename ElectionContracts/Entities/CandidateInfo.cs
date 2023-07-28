@@ -17,6 +17,8 @@ namespace WordDocumentBuilder.ElectionContracts.Entities
         /// </summary>
         public string На_печать { get; set; } = "";
 
+        // ФИО кандидата
+
         /// <summary>
         /// Фамилия
         /// </summary>
@@ -32,11 +34,35 @@ namespace WordDocumentBuilder.ElectionContracts.Entities
         /// </summary>
         public string Отчество { get; set; } = "";
 
-        public string Округ_дат_падеж { get; set; } = "";
+        // Округ
 
-        public string Округ_им_падеж { get; set; } = "";
+        public string Округ_Номер { get; set; } = "";
 
-        // Талон Маяк
+        public string Округ_Название_падеж_дат { get; set; } = "";
+
+        public string Округ_Название_падеж_им { get; set; } = "";
+
+        // Для договора
+
+        /// <summary>
+        /// Постановление ТИК. В формате "[дата] [номер]"
+        /// </summary>
+        public string Постановление { get; set; } = "";
+
+        /// <summary>
+        /// Номер договора
+        /// </summary>
+        public string Номер_договора { get; set; } = "";
+
+        private string _contractDate = "\"__\" __________ 20__ ";
+        public string Дата_договора
+        {
+            get { return _contractDate; }
+            set { if (value != "") _contractDate = value; }
+        }
+
+        // Талоны
+
         public string Талон_Маяк { get; set; } = "";
 
         public string Талон_Радио_России { get; set; } = "";
@@ -47,41 +73,30 @@ namespace WordDocumentBuilder.ElectionContracts.Entities
 
         public string Талон_Россия_24 { get; set; } = "";
 
+        // Явка
+
         public string Явка_кандидата { get; set; } = "";
 
-        public string Явка_представителя { get; set; } = "";
-
-        /// <summary>
-        /// Номер договора
-        /// </summary>
-        public string Номер_договора { get; set; } = "";
-
-        private string _contractDate = "\"__\" __________ 20__ ";
-        public string Дата_договора 
-        { 
-            get { return _contractDate; }
-            set { if (value != "") _contractDate = value; }
-        }
-
-        /// <summary>
-        /// Постановление ТИК. В формате "[дата] [номер]"
-        /// </summary>
-        public string Постановление_ТИК { get; set; } = "";
+        public string Явка_представителя { get; set; } = "";  
+        
+        //
 
         public string ИНН { get; set; } = "";
 
         public string Спец_изб_счет_номер { get; set; } = "";
 
-        public string Фамилия_представителя { get; set; } = "";
+        // Представитель
 
-        public string Имя_представителя { get; set; } = "";
+        public string Представитель_Фамилия { get; set; } = "";
 
-        public string Отчество_представителя { get; set; } = "";
+        public string Представитель_Имя { get; set; } = "";
+
+        public string Представитель_Отчество { get; set; } = "";
 
         /// <summary>
         /// В формате "[номер] от [дата]"
         /// </summary>
-        public string Доверенность_на_представителя { get; set; } = "";
+        public string Представитель_Доверенность { get; set; } = "";
 
     }
 }

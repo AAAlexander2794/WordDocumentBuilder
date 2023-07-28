@@ -116,7 +116,7 @@ namespace WordDocumentBuilder.ElectionContracts
                 foreach (var protocol in protocols)
                 {
                     // Если в протоколах уже есть округ этого кандидата
-                    if (protocol.Округ == candidate.Info.Округ_им_падеж)
+                    if (protocol.Округ == $"{candidate.Info.Округ_Номер} {candidate.Info.Округ_Название_падеж_им}")
                     {
                         // Добавляем к протоколу кандидата
                         protocol.Candidates.Add(candidate);
@@ -133,7 +133,7 @@ namespace WordDocumentBuilder.ElectionContracts
                     var newProtocol = new ProtocolCandidates()
                     {
                         // Округ текущего кандидата
-                        Округ = candidate.Info.Округ_им_падеж,
+                        Округ = $"{candidate.Info.Округ_Номер} {candidate.Info.Округ_Название_падеж_им}",
                         // Из настроек
                         Изб_ком_Фамилия_ИО = settings.Фамилия_ИО_члена_изб_ком,
                         СМИ_ИО_Фамилия = settings.ИО_Фамилия_предст_СМИ
@@ -335,7 +335,7 @@ namespace WordDocumentBuilder.ElectionContracts
                 }
                 else if (c.Info.Явка_представителя == "1")
                 {
-                    cell5Text = $"{c.Info.Фамилия_представителя} {c.Info.Имя_представителя[0]}. {c.Info.Отчество_представителя[0]}.";
+                    cell5Text = $"{c.Info.Представитель_Фамилия} {c.Info.Представитель_Имя[0]}. {c.Info.Представитель_Отчество[0]}.";
                 }
                 else
                 {

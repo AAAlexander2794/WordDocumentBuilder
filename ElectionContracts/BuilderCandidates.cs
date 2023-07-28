@@ -102,28 +102,29 @@ namespace WordDocumentBuilder.ElectionContracts
             {
                 candidates.Add(new CandidateInfo()
                 {
-                    Фамилия = dt.Rows[i].Field<string>(0),
-                    Имя = dt.Rows[i].Field<string>(1),
-                    Отчество = dt.Rows[i].Field<string>(2),
-                    Талон_Маяк = dt.Rows[i].Field<string>(3),
-                    Талон_Вести_ФМ = dt.Rows[i].Field<string>(4),
-                    Талон_Радио_России = dt.Rows[i].Field<string>(5),
-                    Талон_Россия_1 = dt.Rows[i].Field<string>(6),
-                    Талон_Россия_24 = dt.Rows[i].Field<string>(7),
-                    Явка_кандидата = dt.Rows[i].Field<string>(8),
-                    Явка_представителя = dt.Rows[i].Field<string>(9),
-                    Номер_договора = dt.Rows[i].Field<string>(10),
-                    Постановление_ТИК = dt.Rows[i].Field<string>(11),
-                    Фамилия_представителя = dt.Rows[i].Field<string>(12),
-                    Имя_представителя = dt.Rows[i].Field<string>(13),
-                    Отчество_представителя = dt.Rows[i].Field<string>(14),
-                    Дата_договора = dt.Rows[i].Field<string>(15),
-                    Доверенность_на_представителя = dt.Rows[i].Field<string>(16),
-                    ИНН = dt.Rows[i].Field<string>(17),
-                    Спец_изб_счет_номер = dt.Rows[i].Field<string>(18),
-                    Округ_дат_падеж = dt.Rows[i].Field<string>(19),
-                    На_печать = dt.Rows[i].Field<string>(20),
-                    Округ_им_падеж = dt.Rows[i].Field<string>(21)
+                    На_печать = dt.Rows[i].Field<string>(0),
+                    Округ_Номер = dt.Rows[i].Field<string>(1),
+                    Округ_Название_падеж_им = dt.Rows[i].Field<string>(2),
+                    Фамилия = dt.Rows[i].Field<string>(3),
+                    Имя = dt.Rows[i].Field<string>(4),
+                    Отчество = dt.Rows[i].Field<string>(5),
+                    Постановление = dt.Rows[i].Field<string>(6),
+                    Талон_Маяк = dt.Rows[i].Field<string>(7),
+                    Талон_Вести_ФМ = dt.Rows[i].Field<string>(8),
+                    Талон_Радио_России = dt.Rows[i].Field<string>(9),
+                    Талон_Россия_1 = dt.Rows[i].Field<string>(10),
+                    Талон_Россия_24 = dt.Rows[i].Field<string>(11),
+                    Явка_кандидата = dt.Rows[i].Field<string>(12),
+                    Явка_представителя = dt.Rows[i].Field<string>(13),
+                    Представитель_Фамилия = dt.Rows[i].Field<string>(14),
+                    Представитель_Имя = dt.Rows[i].Field<string>(15),
+                    Представитель_Отчество = dt.Rows[i].Field<string>(16),
+                    Номер_договора = dt.Rows[i].Field<string>(17),
+                    Дата_договора = dt.Rows[i].Field<string>(18),
+                    Округ_Название_падеж_дат = dt.Rows[i].Field<string>(19),
+                    Представитель_Доверенность = dt.Rows[i].Field<string>(20),
+                    ИНН = dt.Rows[i].Field<string>(21),
+                    Спец_изб_счет_номер = dt.Rows[i].Field<string>(22),
                 }) ;
             }
             return candidates;
@@ -164,16 +165,18 @@ namespace WordDocumentBuilder.ElectionContracts
             doc.SetMergeFieldText("Отчество", $"{c.Info.Отчество}");
             doc.SetMergeFieldText("Номер_договора", $"{c.Info.Номер_договора}");
             doc.SetMergeFieldText("Дата_договора", $"{c.Info.Дата_договора}");
-            doc.SetMergeFieldText("Постановление_ТИК", $"{c.Info.Постановление_ТИК}");
-            doc.SetMergeFieldText("Фамилия_представителя_род_падеж", $"{c.Info.Фамилия_представителя}");
-            doc.SetMergeFieldText("Имя_представителя_род_падеж", $"{c.Info.Имя_представителя}");
-            doc.SetMergeFieldText("Отчество_представителя_род_падеж", $"{c.Info.Отчество_представителя}");
+            doc.SetMergeFieldText("Округ_Название", $"{c.Info.Округ_Название_падеж_дат}");
+            doc.SetMergeFieldText("Округ_Номер", $"{c.Info.Округ_Номер}");
+            doc.SetMergeFieldText("Постановление", $"{c.Info.Постановление}");
+            doc.SetMergeFieldText("Фамилия_представителя_род_падеж", $"{c.Info.Представитель_Фамилия}");
+            doc.SetMergeFieldText("Имя_представителя_род_падеж", $"{c.Info.Представитель_Имя}");
+            doc.SetMergeFieldText("Отчество_представителя_род_падеж", $"{c.Info.Представитель_Отчество}");
             doc.SetMergeFieldText("ИО_Фамилия", $"{c.ИО_Фамилия}");
             doc.SetMergeFieldText("ИО_Фамилия_предст", $"{c.ИО_Фамилия_представителя}");
-            doc.SetMergeFieldText("Доверенность_на_представителя", $"{c.Info.Доверенность_на_представителя}");
+            doc.SetMergeFieldText("Доверенность_на_представителя", $"{c.Info.Представитель_Доверенность}");
             doc.SetMergeFieldText("ИНН", $"{c.Info.ИНН}");
             doc.SetMergeFieldText("Спец_изб_счет", $"{c.Info.Спец_изб_счет_номер}");
-            doc.SetMergeFieldText("Округ_дат_падеж", $"{c.Info.Округ_дат_падеж}");
+            
         }
 
         /// <summary>
