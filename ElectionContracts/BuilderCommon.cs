@@ -1,5 +1,6 @@
 ﻿using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Vml;
 using DocumentFormat.OpenXml.Wordprocessing;
 using System;
 using System.Collections.Generic;
@@ -143,11 +144,13 @@ namespace WordDocumentBuilder.ElectionContracts
         {
             var paragraph = new Paragraph();
             var run = new Run();
-            foreach (var line in lines)
+            // Добавляем без лишнего переноса на новую строку в конце
+            for (int i = 0; i < lines.Count - 1; i++)
             {
-                run.AppendChild(new Text(line));
+                run.AppendChild(new Text(lines[i]));
                 run.AppendChild(new Break());
             }
+            run.AppendChild(new Text(lines[lines.Count - 1]));
             //
             RunProperties runProperties = new RunProperties();
             FontSize size = new FontSize();

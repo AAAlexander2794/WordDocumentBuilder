@@ -116,7 +116,7 @@ namespace WordDocumentBuilder.ElectionContracts
                 foreach (var protocol in protocols)
                 {
                     // Если в протоколах уже есть округ этого кандидата
-                    if (protocol.Округ == $"{candidate.Info.Округ_Номер} {candidate.Info.Округ_Название_падеж_им}")
+                    if (protocol.Округ == $"№ {candidate.Info.Округ_Номер} {candidate.Info.Округ_Название_падеж_им} избирательный округ")
                     {
                         // Добавляем к протоколу кандидата
                         protocol.Candidates.Add(candidate);
@@ -133,7 +133,7 @@ namespace WordDocumentBuilder.ElectionContracts
                     var newProtocol = new ProtocolCandidates()
                     {
                         // Округ текущего кандидата
-                        Округ = $"{candidate.Info.Округ_Номер} {candidate.Info.Округ_Название_падеж_им}",
+                        Округ = $"№ {candidate.Info.Округ_Номер} {candidate.Info.Округ_Название_падеж_им} избирательный округ",
                         // Из настроек
                         Изб_ком_Фамилия_ИО = settings.Фамилия_ИО_члена_изб_ком,
                         СМИ_ИО_Фамилия = settings.ИО_Фамилия_предст_СМИ
@@ -290,15 +290,14 @@ namespace WordDocumentBuilder.ElectionContracts
                 $"(число, месяц, год; время;\r\n" +
                 $"количество\r\n" +
                 $"минут/секунд")),
-                new TableCell(CreateParagraph($"Фамилия, инициалы\r\n" +
-                $"представителя избирательного\r\n" +
-                $"объединения, участвовавшего\r\n" +
+                new TableCell(CreateParagraph($"Фамилия, инициалы представителя\r\n" +
+                $"зарегистрированного кандидата,\r\n" +
+                $"участвовавшего\r\n" +
                 $"в жеребьевке (члена\r\n" +
                 $"соответствующей\r\n" +
                 $"избирательной комиссии с\r\n" +
                 $"правом решающего голоса)")),
-                new TableCell(CreateParagraph($"Подпись представителя\r\n" +
-                $"избирательного объединения,\r\n" +
+                new TableCell(CreateParagraph($"Подпись зарегистрированного кандидата,\r\n" +
                 $"участвовавшего в жеребьевке\r\n" +
                 $"(члена соответствующей\r\n" +
                 $"избирательной комиссии с\r\n" +
@@ -411,7 +410,7 @@ namespace WordDocumentBuilder.ElectionContracts
             tr.Append(rowProp);
             // 
             var tc1 = new TableCell(CreateParagraph($"{i + 1}"));
-            var tc2 = new TableCell(CreateParagraph($"{candidate.Info.Фамилия} {candidate.Info.Имя} {candidate.Info.Отчество}"));
+            var tc2 = new TableCell(CreateParagraph($"{candidate.Info.Фамилия} {candidate.Info.Имя} {candidate.Info.Отчество}, {candidate.Info.Округ_Номер}"));
             var tc3 = new TableCell(CreateParagraph($""));
             var tc4 = new TableCell(CreateParagraph(lines));
             var tc5 = new TableCell(CreateParagraph($"{row5Text}"));

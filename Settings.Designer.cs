@@ -265,7 +265,7 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Настройки\\Кандидаты\\2018 Приложение 2 к 43-31.dotx")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Настройки\\Протоколы\\Приложение 2.dotx")]
         public string Protocols_TemplateFilePath_Candidates {
             get {
                 return ((string)(this["Protocols_TemplateFilePath_Candidates"]));
@@ -277,7 +277,7 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Настройки\\Партии\\2018 Приложение 1 к 43-31.dotx")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Настройки\\Протоколы\\Приложение 1.dotx")]
         public string Protocols_TemplateFilePath_Parties {
             get {
                 return ((string)(this["Protocols_TemplateFilePath_Parties"]));
@@ -289,7 +289,7 @@ namespace WordDocumentBuilder {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Настройки\\Протоколы.xlsx")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Настройки\\Протоколы\\Протоколы.xlsx")]
         public string Protocols_FilePath {
             get {
                 return ((string)(this["Protocols_FilePath"]));

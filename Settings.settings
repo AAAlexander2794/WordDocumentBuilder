@@ -63,13 +63,13 @@
       <Value Profile="(Default)">.\Документы\Протоколы\</Value>
     </Setting>
     <Setting Name="Protocols_TemplateFilePath_Candidates" Type="System.String" Scope="User">
-      <Value Profile="(Default)">.\Настройки\Кандидаты\2018 Приложение 2 к 43-31.dotx</Value>
+      <Value Profile="(Default)">.\Настройки\Протоколы\Приложение 2.dotx</Value>
     </Setting>
     <Setting Name="Protocols_TemplateFilePath_Parties" Type="System.String" Scope="User">
-      <Value Profile="(Default)">.\Настройки\Партии\2018 Приложение 1 к 43-31.dotx</Value>
+      <Value Profile="(Default)">.\Настройки\Протоколы\Приложение 1.dotx</Value>
     </Setting>
     <Setting Name="Protocols_FilePath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">.\Настройки\Протоколы.xlsx</Value>
+      <Value Profile="(Default)">.\Настройки\Протоколы\Протоколы.xlsx</Value>
     </Setting>
   </Settings>
 </SettingsFile>
