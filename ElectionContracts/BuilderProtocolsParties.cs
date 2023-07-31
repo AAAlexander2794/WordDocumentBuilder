@@ -81,7 +81,10 @@ namespace WordDocumentBuilder.ElectionContracts
             var partyName = $"{party.Info.Партия_Название_Полное}";
             // Фамилия И.О. человека, который подписывает талон в протоколе
             string personName = "";
-            if (party.Info.Явка_представителя == "1")
+            if (party.Info.Явка_представителя == "1" && 
+                party.Info.Представитель_Фамилия.Length > 0 &&
+                party.Info.Представитель_Имя.Length > 0 &&
+                party.Info.Представитель_Отчество.Length > 0)
             {
                 personName = $"{party.Info.Представитель_Фамилия} {party.Info.Представитель_Имя[0]}. {party.Info.Представитель_Отчество[0]}.";
             }

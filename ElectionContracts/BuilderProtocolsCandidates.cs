@@ -334,11 +334,17 @@ namespace WordDocumentBuilder.ElectionContracts
                 var c = protocol.Candidates[i];
                 //
                 string cell5Text = "";
-                if (c.Info.Явка_кандидата == "1")
+                if (c.Info.Явка_кандидата == "1" && 
+                    c.Info.Фамилия.Length > 0 && 
+                    c.Info.Имя.Length > 0 &&
+                    c.Info.Отчество.Length > 0)
                 {
                     cell5Text = $"{c.Info.Фамилия} {c.Info.Имя[0]}. {c.Info.Отчество[0]}.";
                 }
-                else if (c.Info.Явка_представителя == "1")
+                else if (c.Info.Явка_представителя == "1" &&
+                    c.Info.Представитель_Фамилия.Length > 0 &&
+                    c.Info.Представитель_Имя.Length > 0 &&
+                    c.Info.Представитель_Отчество.Length > 0)
                 {
                     cell5Text = $"{c.Info.Представитель_Фамилия} {c.Info.Представитель_Имя[0]}. {c.Info.Представитель_Отчество[0]}.";
                 }
