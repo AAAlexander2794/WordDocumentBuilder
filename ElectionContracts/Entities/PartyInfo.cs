@@ -32,9 +32,9 @@ namespace WordDocumentBuilder.ElectionContracts.Entities
         /// <summary>
         /// Указание, отделение региональное или федеральное, которое идет перед текстом "Политическая(ой) партия(и)"
         /// </summary>
-        public string Партия_Отделение { get; set; } = "";
+        public string Партия_Название_Полное { get; set; } = "";
 
-        public string Партия_Название { get; set; } = "";     
+        public string Партия_Название_Краткое { get; set; } = "";     
 
         /// <summary>
         /// Постановление избирательной комиссии. В формате "[дата] [номер]"

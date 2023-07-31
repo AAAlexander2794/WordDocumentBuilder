@@ -77,9 +77,11 @@ namespace WordDocumentBuilder.ElectionContracts.Entities
 
         public string Явка_кандидата { get; set; } = "";
 
-        public string Явка_представителя { get; set; } = "";  
-        
+        public string Явка_представителя { get; set; } = "";
+
         //
+
+        public string Партия { get; set; } = "";
 
         public string ИНН { get; set; } = "";
 

@@ -135,8 +135,8 @@ namespace WordDocumentBuilder.ElectionContracts
                         // Округ текущего кандидата
                         Округ = $"№ {candidate.Info.Округ_Номер} {candidate.Info.Округ_Название_падеж_им} избирательный округ",
                         // Из настроек
-                        Изб_ком_Фамилия_ИО = settings.Фамилия_ИО_члена_изб_ком,
-                        СМИ_ИО_Фамилия = settings.ИО_Фамилия_предст_СМИ
+                        Изб_ком_Фамилия_ИО = settings.Кандидаты_Фамилия_ИО_члена_изб_ком,
+                        СМИ_ИО_Фамилия = settings.Кандидаты_ИО_Фамилия_предст_СМИ
                     };
                     // Добавляем к новому протоколу текущего кандидата
                     newProtocol.Candidates.Add(candidate);
@@ -158,16 +158,22 @@ namespace WordDocumentBuilder.ElectionContracts
             var dt = ExcelProcessor.ReadExcelSheet(dataFilePath, sheetNumber: 0);
             var info = new ProtocolsInfo()
             {
-                Префикс_партии = dt.Rows[0].Field<string>(0),
-                Фамилия_ИО_члена_изб_ком = dt.Rows[0].Field<string>(1),
-                ИО_Фамилия_члена_изб_ком = dt.Rows[0].Field<string>(2),
-                ИО_Фамилия_предст_СМИ = dt.Rows[0].Field<string>(3),
-                Наименование_СМИ_Маяк = dt.Rows[0].Field<string>(4),
-                Наименование_СМИ_Вести_ФМ = dt.Rows[0].Field<string>(5),
-                Наименование_СМИ_Радио_России = dt.Rows[0].Field<string>(6),
-                Наименование_СМИ_Россия_1 = dt.Rows[0].Field<string>(7),
-                Наименование_СМИ_Россия_24 = dt.Rows[0].Field<string>(8),
-                Дата = dt.Rows[0].Field<string>(9)
+                // Партии
+                Партии_Фамилия_ИО_члена_изб_ком = dt.Rows[0].Field<string>(0),
+                Партии_ИО_Фамилия_члена_изб_ком = dt.Rows[0].Field<string>(1),
+                Партии_ИО_Фамилия_предст_СМИ = dt.Rows[0].Field<string>(2),
+                Партии_Дата = dt.Rows[0].Field<string>(3),
+                // Кандидаты
+                Кандидаты_Фамилия_ИО_члена_изб_ком = dt.Rows[0].Field<string>(4),
+                Кандидаты_ИО_Фамилия_члена_изб_ком = dt.Rows[0].Field<string>(5),
+                Кандидаты_ИО_Фамилия_предст_СМИ = dt.Rows[0].Field<string>(6),
+                Кандидаты_Дата = dt.Rows[0].Field<string>(7),
+                // Общее
+                Наименование_СМИ_Маяк = dt.Rows[0].Field<string>(8),
+                Наименование_СМИ_Вести_ФМ = dt.Rows[0].Field<string>(9),
+                Наименование_СМИ_Радио_России = dt.Rows[0].Field<string>(10),
+                Наименование_СМИ_Россия_1 = dt.Rows[0].Field<string>(11),
+                Наименование_СМИ_Россия_24 = dt.Rows[0].Field<string>(12)                
             };
             return info;
         }
@@ -207,9 +213,9 @@ namespace WordDocumentBuilder.ElectionContracts
             var document = new WordDocument(templatePath);
             // Заполняем поля слияния
             document.SetMergeFieldText("Наименование_СМИ", $"{fieldMedia}");
-            document.SetMergeFieldText("ИО_Фамилия_предст_СМИ", $"{settings.ИО_Фамилия_предст_СМИ}");
-            document.SetMergeFieldText("Дата", $"{settings.Дата}");
-            document.SetMergeFieldText("ИО_Фамилия_члена_изб_ком", $"{settings.ИО_Фамилия_члена_изб_ком}");
+            document.SetMergeFieldText("ИО_Фамилия_предст_СМИ", $"{settings.Кандидаты_ИО_Фамилия_предст_СМИ}");
+            document.SetMergeFieldText("Дата", $"{settings.Кандидаты_Дата}");
+            document.SetMergeFieldText("ИО_Фамилия_члена_изб_ком", $"{settings.Кандидаты_ИО_Фамилия_члена_изб_ком}");
             //
             try
             {

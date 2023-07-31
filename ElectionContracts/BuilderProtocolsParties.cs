@@ -54,7 +54,7 @@ namespace WordDocumentBuilder.ElectionContracts
                 // Если не отмечено на печать, пропускаем
                 if (party.Info.На_печать == "") continue;                
                 // Формируем путь к документу
-                var resultPath = $"{_folderPath}" + $"{party.Info.Партия_Название}\\";
+                var resultPath = $"{_folderPath}" + $"{party.Info.Партия_Название_Краткое}\\";
                 // Создает путь для документов, если вдруг каких-то папок нет
                 Directory.CreateDirectory(resultPath);
                 // По каждому СМИ
@@ -78,7 +78,7 @@ namespace WordDocumentBuilder.ElectionContracts
         private void CreateProtocol(Party party, ProtocolsInfo settings, string templatePath, string resultPath, string mediaresource)
         {
             //
-            var partyName = $"{party.Info.Партия_Отделение} {party.Info.Партия_Название}";
+            var partyName = $"{party.Info.Партия_Название_Полное}";
             // Фамилия И.О. человека, который подписывает талон в протоколе
             string personName = "";
             if (party.Info.Явка_представителя == "1")
@@ -87,7 +87,7 @@ namespace WordDocumentBuilder.ElectionContracts
             }
             else
             {
-                personName = $"{settings.Фамилия_ИО_члена_изб_ком}";
+                personName = $"{settings.Партии_Фамилия_ИО_члена_изб_ком}";
             }
             //
             string fieldMedia = "";
@@ -128,9 +128,9 @@ namespace WordDocumentBuilder.ElectionContracts
             var document = new WordDocument(templatePath);
             // Заполняем поля слияния
             document.SetMergeFieldText("Наименование_СМИ", $"{fieldMedia}");
-            document.SetMergeFieldText("ИО_Фамилия_предст_СМИ", $"{settings.ИО_Фамилия_предст_СМИ}");
-            document.SetMergeFieldText("Дата", $"{settings.Дата}");
-            document.SetMergeFieldText("ИО_Фамилия_члена_изб_ком", $"{settings.ИО_Фамилия_члена_изб_ком}");
+            document.SetMergeFieldText("ИО_Фамилия_предст_СМИ", $"{settings.Партии_ИО_Фамилия_предст_СМИ}");
+            document.SetMergeFieldText("Дата", $"{settings.Партии_Дата}");
+            document.SetMergeFieldText("ИО_Фамилия_члена_изб_ком", $"{settings.Партии_ИО_Фамилия_члена_изб_ком}");
             //
             try
             {

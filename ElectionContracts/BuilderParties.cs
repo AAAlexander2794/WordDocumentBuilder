@@ -37,7 +37,7 @@ namespace WordDocumentBuilder.ElectionContracts
                 // Создаем договор РВ
                 var document = new WordDocument(Settings.Default.Parties_TemplateFilePath_РВ);
                 // Формируем има файла договора
-                var resultPath = $"{_folderPath}" + $"{party.Info.Партия_Название}";
+                var resultPath = $"{_folderPath}" + $"{party.Info.Партия_Название_Краткое}";
                 // Устанавливаем значения текста для полей документа, кроме закладок (талонов)
                 SetMergeFields(document, party);
                 try
@@ -76,24 +76,25 @@ namespace WordDocumentBuilder.ElectionContracts
             {
                 parties.Add(new PartyInfo()
                 {
-                    Партия_Отделение = dt.Rows[i].Field<string>(0),
-                    Партия_Название = dt.Rows[i].Field<string>(1),
+                    Партия_Название_Полное = dt.Rows[i].Field<string>(0),
+                    Партия_Название_Краткое = dt.Rows[i].Field<string>(1),
                     //
-                    Талон_Маяк = dt.Rows[i].Field<string>(2),
-                    Талон_Вести_ФМ = dt.Rows[i].Field<string>(3),
-                    Талон_Радио_России = dt.Rows[i].Field<string>(4),
-                    Талон_Россия_1 = dt.Rows[i].Field<string>(5),
-                    Талон_Россия_24 = dt.Rows[i].Field<string>(6),
-                    Явка_представителя = dt.Rows[i].Field<string>(7),
+                    Представитель_Фамилия = dt.Rows[i].Field<string>(2),
+                    Представитель_Имя = dt.Rows[i].Field<string>(3),
+                    Представитель_Отчество = dt.Rows[i].Field<string>(4),
                     //
-                    Номер_договора = dt.Rows[i].Field<string>(8),
-                    Дата_договора = dt.Rows[i].Field<string>(9),
+                    Талон_Маяк = dt.Rows[i].Field<string>(5),
+                    Талон_Вести_ФМ = dt.Rows[i].Field<string>(6),
+                    Талон_Радио_России = dt.Rows[i].Field<string>(7),
+                    Талон_Россия_1 = dt.Rows[i].Field<string>(8),
+                    Талон_Россия_24 = dt.Rows[i].Field<string>(9),
+                    Явка_представителя = dt.Rows[i].Field<string>(10),
                     //
-                    Постановление = dt.Rows[i].Field<string>(10),
+                    Постановление = dt.Rows[i].Field<string>(11),
                     //
-                    Представитель_Фамилия = dt.Rows[i].Field<string>(11),
-                    Представитель_Имя = dt.Rows[i].Field<string>(12),
-                    Представитель_Отчество = dt.Rows[i].Field<string>(13),
+                    Номер_договора = dt.Rows[i].Field<string>(12),
+                    Дата_договора = dt.Rows[i].Field<string>(13),
+                    //
                     Представитель_Доверенность = dt.Rows[i].Field<string>(14),
                     //
                     Нотариус_Город = dt.Rows[i].Field<string>(15),
@@ -148,8 +149,8 @@ namespace WordDocumentBuilder.ElectionContracts
             doc.SetMergeFieldText("Номер_договора", $"{p.Info.Номер_договора}");
             doc.SetMergeFieldText("Дата_договора", $"{p.Info.Дата_договора}");
             //
-            doc.SetMergeFieldText("Название", $"{p.Info.Партия_Название}");
-            doc.SetMergeFieldText("Отделение", $"{p.Info.Партия_Отделение}");
+            doc.SetMergeFieldText("Название", $"{p.Info.Партия_Название_Краткое}");
+            doc.SetMergeFieldText("Отделение", $"{p.Info.Партия_Название_Полное}");
             doc.SetMergeFieldText("Постановление", $"{p.Info.Постановление}");
             //
             doc.SetMergeFieldText("Представитель_Фамилия", $"{p.Info.Представитель_Фамилия}");
