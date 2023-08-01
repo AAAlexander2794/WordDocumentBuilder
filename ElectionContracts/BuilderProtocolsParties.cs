@@ -101,27 +101,27 @@ namespace WordDocumentBuilder.ElectionContracts
             switch (mediaresource)
             {
                 case "Маяк":
-                    fieldMedia = "Радиостанция \"Маяк\"";
+                    fieldMedia = settings.Наименование_СМИ_Маяк;
                     fileName = "Маяк.docx";
                     table = CreateTableParty(party.Талон_Маяк, partyName, personName);
                     break;
                 case "Вести ФМ":
-                    fieldMedia = "Радиостанция \"Вести ФМ\"";
+                    fieldMedia = settings.Наименование_СМИ_Вести_ФМ;
                     fileName = "Вести ФМ.docx";
                     table = CreateTableParty(party.Талон_Вести_ФМ, partyName, personName);
                     break;
                 case "Радио России":
-                    fieldMedia = "Радиостанция \"Радио России\"";
+                    fieldMedia = settings.Наименование_СМИ_Радио_России;
                     fileName = "Радио России.docx";
                     table = CreateTableParty(party.Талон_Радио_России, partyName, personName);
                     break;
                 case "Россия 1":
-                    fieldMedia = "Телеканал \"Россия\" (\"Россия-1\")";
+                    fieldMedia = settings.Наименование_СМИ_Россия_1;
                     fileName = "Россия 1.docx";
                     table = CreateTableParty(party.Талон_Россия_1, partyName, personName);
                     break;
                 case "Россия 24":
-                    fieldMedia = "Телеканал \"Россия\" (\"Россия-24\")";
+                    fieldMedia = settings.Наименование_СМИ_Россия_24;
                     fileName = "Россия 24.docx";
                     table = CreateTableParty(party.Талон_Россия_24, partyName, personName);
                     break;
@@ -204,7 +204,7 @@ namespace WordDocumentBuilder.ElectionContracts
                 $"количество\r\n" +
                 $"минут/секунд")),
                 new TableCell(CreateParagraph($"Даты и время\r\n" +
-                $"выхода в эфир предвыборных" +
+                $"выхода в эфир предвыборных\r\n" +
                 $"агитационных материалов\r\n" +
                 $"(число, месяц, год; время;\r\n" +
                 $"количество\r\n" +
@@ -238,6 +238,9 @@ namespace WordDocumentBuilder.ElectionContracts
             table.Append(tr);
             // Формируем текст ячейки с талоном
             List<string> lines = new List<string>();
+            // Добавляем номер талона
+            lines.Add($"Талон № {talon.Id}");
+            //
             if (talon != null)
             {
                 foreach (var row in talon.TalonRecords)
@@ -251,9 +254,6 @@ namespace WordDocumentBuilder.ElectionContracts
             }
             // Строка с данными
             tr = new TableRow();
-            // Чтобы не разделялась при переходе на другую страницу
-            var rowProp = new TableRowProperties(new CantSplit());
-            tr.Append(rowProp);
             //
             tc1 = new TableCell(CreateParagraph($""));
             tc2 = new TableCell(CreateParagraph($"{lastRow2CellText}"));

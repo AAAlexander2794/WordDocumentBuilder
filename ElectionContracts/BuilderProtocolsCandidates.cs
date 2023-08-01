@@ -116,7 +116,7 @@ namespace WordDocumentBuilder.ElectionContracts
                 foreach (var protocol in protocols)
                 {
                     // Если в протоколах уже есть округ этого кандидата
-                    if (protocol.Округ == $"№ {candidate.Info.Округ_Номер} {candidate.Info.Округ_Название_падеж_им} избирательный округ")
+                    if (protocol.Округ == candidate.Округ_полное_название)
                     {
                         // Добавляем к протоколу кандидата
                         protocol.Candidates.Add(candidate);
@@ -133,7 +133,7 @@ namespace WordDocumentBuilder.ElectionContracts
                     var newProtocol = new ProtocolCandidates()
                     {
                         // Округ текущего кандидата
-                        Округ = $"№ {candidate.Info.Округ_Номер} {candidate.Info.Округ_Название_падеж_им} избирательный округ",
+                        Округ = candidate.Округ_полное_название,
                         // Из настроек
                         Изб_ком_Фамилия_ИО = settings.Кандидаты_Фамилия_ИО_члена_изб_ком,
                         СМИ_ИО_Фамилия = settings.Кандидаты_ИО_Фамилия_предст_СМИ
@@ -291,7 +291,7 @@ namespace WordDocumentBuilder.ElectionContracts
                 $"количество\r\n" +
                 $"минут/секунд")),
                 new TableCell(CreateParagraph($"Даты и время\r\n" +
-                $"выхода в эфир предвыборных" +
+                $"выхода в эфир предвыборных\r\n" +
                 $"агитационных материалов\r\n" +
                 $"(число, месяц, год; время;\r\n" +
                 $"количество\r\n" +
@@ -404,6 +404,9 @@ namespace WordDocumentBuilder.ElectionContracts
             if (candidate.Info.Фамилия == "") return null;
             // Формируем текст ячейки с талоном
             List<string> lines = new List<string>();
+            // Добавляем номер талона
+            lines.Add($"Талон № {talon.Id}");
+            //
             if (talon != null)
             {
                 foreach (var row in talon.TalonRecords)
@@ -417,9 +420,9 @@ namespace WordDocumentBuilder.ElectionContracts
             }
             // Строка с данными
             tr = new TableRow();
-            // Чтобы не разделялась при переходе на другую страницу
-            var rowProp = new TableRowProperties(new CantSplit());
-            tr.Append(rowProp);
+            //// Чтобы не разделялась при переходе на другую страницу
+            //var rowProp = new TableRowProperties(new CantSplit());
+            //tr.Append(rowProp);
             // 
             var tc1 = new TableCell(CreateParagraph($"{i + 1}"));
             var tc2 = new TableCell(CreateParagraph($"{candidate.Info.Фамилия} {candidate.Info.Имя} {candidate.Info.Отчество}, {candidate.Info.Округ_Номер}"));

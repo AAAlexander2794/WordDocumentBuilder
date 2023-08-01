@@ -149,8 +149,7 @@ namespace WordDocumentBuilder.ElectionContracts
             doc.SetMergeFieldText("Номер_договора", $"{p.Info.Номер_договора}");
             doc.SetMergeFieldText("Дата_договора", $"{p.Info.Дата_договора}");
             //
-            doc.SetMergeFieldText("Название", $"{p.Info.Партия_Название_Краткое}");
-            doc.SetMergeFieldText("Отделение", $"{p.Info.Партия_Название_Полное}");
+            doc.SetMergeFieldText("Название", $"{p.Info.Партия_Название_Полное}");
             doc.SetMergeFieldText("Постановление", $"{p.Info.Постановление}");
             //
             doc.SetMergeFieldText("Представитель_Фамилия", $"{p.Info.Представитель_Фамилия}");

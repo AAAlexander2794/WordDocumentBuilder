@@ -36,6 +36,8 @@ namespace WordDocumentBuilder.ElectionContracts.Entities
 
         public string Округ_для_создания_каталога { get; }
 
+        public string Округ_полное_название { get; }
+
         public Candidate(CandidateInfo info, List<Talon> talons)
         {
             Info = info;
@@ -50,6 +52,8 @@ namespace WordDocumentBuilder.ElectionContracts.Entities
             {
                 ИО_Фамилия_представителя = "";
             }
+            //
+            Округ_полное_название = $"№ {Info.Округ_Номер} {Info.Округ_Название_падеж_им} одномандатный избирательный округ";
             //
             Талон_Маяк = talons.FirstOrDefault(x => x.Id.ToString() == Info.Талон_Маяк && x.MediaResource == "Маяк");
             Талон_Радио_России = talons.FirstOrDefault(x => x.Id.ToString() == Info.Талон_Радио_России && x.MediaResource == "Радио России");
