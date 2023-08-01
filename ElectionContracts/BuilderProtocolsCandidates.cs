@@ -274,9 +274,20 @@ namespace WordDocumentBuilder.ElectionContracts
                 }
             };
             tblProp.Append(tblBorders);
+            //// Now we create a new layout and make it "fixed".
+            //TableLayout tl = new TableLayout() { Type = TableLayoutValues.Fixed };
+            //tblProp.TableLayout = tl;
+            //
             table.Append(tblProp);
             // Заголовки таблицы
             TableRow trHead = new TableRow();
+            var tcH4 = new TableCell(CreateParagraph($"Даты и время\r\n" +
+                $"выхода в эфир предвыборных\r\n" +
+                $"агитационных материалов\r\n" +
+                $"(число, месяц, год; время;\r\n" +
+                $"количество\r\n" +
+                $"минут/секунд"));
+            tcH4.Append(new TableCellProperties(new TableCellWidth() { Type = TableWidthUnitValues.Auto }));
             trHead.Append(
                 new TableCell(CreateParagraph($"№ п/п")),
                 new TableCell(CreateParagraph($"Фамилия, инициалы\r\n" +
@@ -290,12 +301,7 @@ namespace WordDocumentBuilder.ElectionContracts
                 $"(число, месяц, год; время;\r\n" +
                 $"количество\r\n" +
                 $"минут/секунд")),
-                new TableCell(CreateParagraph($"Даты и время\r\n" +
-                $"выхода в эфир предвыборных\r\n" +
-                $"агитационных материалов\r\n" +
-                $"(число, месяц, год; время;\r\n" +
-                $"количество\r\n" +
-                $"минут/секунд")),
+                tcH4,
                 new TableCell(CreateParagraph($"Фамилия, инициалы представителя\r\n" +
                 $"зарегистрированного кандидата,\r\n" +
                 $"участвовавшего\r\n" +
@@ -334,19 +340,25 @@ namespace WordDocumentBuilder.ElectionContracts
                 var c = protocol.Candidates[i];
                 //
                 string cell5Text = "";
-                if (c.Info.Явка_кандидата == "1" && 
-                    c.Info.Фамилия.Length > 0 && 
+                if (c.Info.Явка_кандидата == "1")
+                {
+                    // Если кандидат внесен (вообще и так должен быть внесен)
+                    if (c.Info.Фамилия.Length > 0 &&
                     c.Info.Имя.Length > 0 &&
                     c.Info.Отчество.Length > 0)
-                {
-                    cell5Text = $"{c.Info.Фамилия} {c.Info.Имя[0]}. {c.Info.Отчество[0]}.";
+                    {
+                        cell5Text = $"{c.Info.Фамилия} {c.Info.Имя[0]}. {c.Info.Отчество[0]}.";
+                    }
                 }
-                else if (c.Info.Явка_представителя == "1" &&
-                    c.Info.Представитель_Фамилия.Length > 0 &&
+                else if (c.Info.Явка_представителя == "1")
+                {
+                    // Если Представитель внесен
+                    if (c.Info.Представитель_Фамилия.Length > 0 &&
                     c.Info.Представитель_Имя.Length > 0 &&
                     c.Info.Представитель_Отчество.Length > 0)
-                {
-                    cell5Text = $"{c.Info.Представитель_Фамилия} {c.Info.Представитель_Имя[0]}. {c.Info.Представитель_Отчество[0]}.";
+                    {
+                        cell5Text = $"{c.Info.Представитель_Фамилия} {c.Info.Представитель_Имя[0]}. {c.Info.Представитель_Отчество[0]}.";
+                    }
                 }
                 else
                 {
@@ -428,6 +440,7 @@ namespace WordDocumentBuilder.ElectionContracts
             var tc2 = new TableCell(CreateParagraph($"{candidate.Info.Фамилия} {candidate.Info.Имя} {candidate.Info.Отчество}, {candidate.Info.Округ_Номер}"));
             var tc3 = new TableCell(CreateParagraph($""));
             var tc4 = new TableCell(CreateParagraph(lines));
+            //tc4.Append(new TableCellProperties(new TableCellWidth() { Type = TableWidthUnitValues.Pct, Width = "60" }));
             var tc5 = new TableCell(CreateParagraph($"{row5Text}"));
             var tc6 = new TableCell(CreateParagraph($""));
             tr.Append(tc1, tc2, tc3, tc4, tc5, tc6);

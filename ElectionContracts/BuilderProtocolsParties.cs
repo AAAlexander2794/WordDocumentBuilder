@@ -81,12 +81,14 @@ namespace WordDocumentBuilder.ElectionContracts
             var partyName = $"{party.Info.Партия_Название_Полное}";
             // Фамилия И.О. человека, который подписывает талон в протоколе
             string personName = "";
-            if (party.Info.Явка_представителя == "1" && 
-                party.Info.Представитель_Фамилия.Length > 0 &&
+            if (party.Info.Явка_представителя == "1")
+            {
+                if (party.Info.Представитель_Фамилия.Length > 0 &&
                 party.Info.Представитель_Имя.Length > 0 &&
                 party.Info.Представитель_Отчество.Length > 0)
-            {
-                personName = $"{party.Info.Представитель_Фамилия} {party.Info.Представитель_Имя[0]}. {party.Info.Представитель_Отчество[0]}.";
+                {
+                    personName = $"{party.Info.Представитель_Фамилия} {party.Info.Представитель_Имя[0]}. {party.Info.Представитель_Отчество[0]}.";
+                }
             }
             else
             {
@@ -194,6 +196,13 @@ namespace WordDocumentBuilder.ElectionContracts
             table.Append(tblProp);
             // Заголовки таблицы
             TableRow trHead = new TableRow();
+            var tcH4 = new TableCell(CreateParagraph($"Даты и время\r\n" +
+                $"выхода в эфир предвыборных\r\n" +
+                $"агитационных материалов\r\n" +
+                $"(число, месяц, год; время;\r\n" +
+                $"количество\r\n" +
+                $"минут/секунд"));
+            tcH4.Append(new TableCellProperties(new TableCellWidth() { Type = TableWidthUnitValues.Auto }));
             trHead.Append(
                 new TableCell(CreateParagraph($"№ п/п")),
                 new TableCell(CreateParagraph($"Наименование избирательного объединения")),
@@ -203,12 +212,7 @@ namespace WordDocumentBuilder.ElectionContracts
                 $"(число, месяц, год; время;\r\n" +
                 $"количество\r\n" +
                 $"минут/секунд")),
-                new TableCell(CreateParagraph($"Даты и время\r\n" +
-                $"выхода в эфир предвыборных\r\n" +
-                $"агитационных материалов\r\n" +
-                $"(число, месяц, год; время;\r\n" +
-                $"количество\r\n" +
-                $"минут/секунд")),
+                tcH4,
                 new TableCell(CreateParagraph($"Фамилия, инициалы\r\n" +
                 $"представителя избирательного\r\n" +
                 $"объединения, участвовавшего\r\n" +
