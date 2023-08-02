@@ -109,7 +109,7 @@ namespace WordDocumentBuilder.ElectionContracts
             foreach(var candidate in candidates)
             {
                 //
-                if (candidate.Info.Фамилия.Trim() == "") continue;
+                if (candidate.Info.Фамилия.Trim() == "" || candidate.Info.На_печать != "1") continue;
                 //
                 bool exist = false;
                 // Проход по уже существующим протоколам
