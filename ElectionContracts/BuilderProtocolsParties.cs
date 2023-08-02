@@ -128,27 +128,27 @@ namespace WordDocumentBuilder.ElectionContracts
                 case "Маяк":
                     fieldMedia = settings.Наименование_СМИ_Маяк;
                     fileName = "Маяк.docx";
-                    table = CreateTableParty(party.Талон_Маяк, partyName, personName);
+                    table = CreateTableParty(party.Талон_Маяк, partyName, personName, GetCustomCommonLines_Маяк());
                     break;
                 case "Вести ФМ":
                     fieldMedia = settings.Наименование_СМИ_Вести_ФМ;
                     fileName = "Вести ФМ.docx";
-                    table = CreateTableParty(party.Талон_Вести_ФМ, partyName, personName);
+                    table = CreateTableParty(party.Талон_Вести_ФМ, partyName, personName, GetCustomCommonLines_Вести_ФМ());
                     break;
                 case "Радио России":
                     fieldMedia = settings.Наименование_СМИ_Радио_России;
                     fileName = "Радио России.docx";
-                    table = CreateTableParty(party.Талон_Радио_России, partyName, personName);
+                    table = CreateTableParty(party.Талон_Радио_России, partyName, personName, GetCustomCommonLines_Радио_России());
                     break;
                 case "Россия 1":
                     fieldMedia = settings.Наименование_СМИ_Россия_1;
                     fileName = "Россия 1.docx";
-                    table = CreateTableParty(party.Талон_Россия_1, partyName, personName);
+                    table = CreateTableParty(party.Талон_Россия_1, partyName, personName, GetCustomCommonLines_Россия_1());
                     break;
                 case "Россия 24":
                     fieldMedia = settings.Наименование_СМИ_Россия_24;
                     fileName = "Россия 24.docx";
-                    table = CreateTableParty(party.Талон_Россия_24, partyName, personName);
+                    table = CreateTableParty(party.Талон_Россия_24, partyName, personName, GetCustomCommonLines_Россия_24());
                     break;
 
             }
@@ -176,7 +176,7 @@ namespace WordDocumentBuilder.ElectionContracts
         /// </summary>
         /// <param name="talon"></param>
         /// <returns></returns>
-        Table CreateTableParty(Talon talon, string lastRow2CellText ="", string lastRow5CellText = "")
+        Table CreateTableParty(Talon talon, string lastRow2CellText = "", string lastRow5CellText = "", List<string> linesCustom = null)
         {
             // 
             Table table = new Table();
@@ -285,7 +285,10 @@ namespace WordDocumentBuilder.ElectionContracts
             //
             tc1 = new TableCell(CreateParagraph($""));
             tc2 = new TableCell(CreateParagraph($"{lastRow2CellText}"));
-            tc3 = new TableCell(CreateParagraph($""));
+            if (linesCustom != null)
+            {
+                tc3 = new TableCell(CreateParagraph(linesCustom));
+            }
             tc4 = new TableCell(CreateParagraph(lines));
             tc5 = new TableCell(CreateParagraph($"{lastRow5CellText}"));
             tc6 = new TableCell(CreateParagraph($""));
@@ -310,6 +313,78 @@ namespace WordDocumentBuilder.ElectionContracts
             table.Append(tr);
             // Возвращаем
             return table;
+        }
+
+        List<string> GetCustomCommonLines_Россия_1()
+        {
+            List<string> lines = new List<string>();
+            //
+            lines.Add("17.08.2023 09:34 00:20:00");
+            lines.Add("22.08.2023 09:34 00:20:00");
+            lines.Add("23.08.2023 09:34 00:15:00");
+            lines.Add("24.08.2023 09:34 00:20:00");
+            lines.Add("29.08.2023 09:34 00:20:00");
+            lines.Add("30.08.2023 09:34 00:15:00");
+            lines.Add("31.08.2023 09:34 00:20:00");
+            lines.Add("05.09.2023 09:34 00:20:00");
+            //
+            return lines;
+        }
+
+        List<string> GetCustomCommonLines_Маяк()
+        {
+            List<string> lines = new List<string>();
+            //
+            lines.Add("17.08.2023 11:00 00:25:00");
+            lines.Add("22.08.2023 11:00 00:25:00");
+            lines.Add("24.08.2023 11:00 00:25:00");
+            lines.Add("29.08.2023 11:00 00:25:00");
+            lines.Add("31.08.2023 11:00 00:25:00");
+            lines.Add("05.09.2023 11:00 00:25:00");
+            //
+            return lines;
+        }
+
+        List<string> GetCustomCommonLines_Радио_России()
+        {
+            List<string> lines = new List<string>();
+            //
+            lines.Add("17.08.2023 20:10 00:25:00");
+            lines.Add("22.08.2023 20:10 00:25:00");
+            lines.Add("24.08.2023 20:10 00:25:00");
+            lines.Add("29.08.2023 20:10 00:25:00");
+            lines.Add("31.08.2023 20:10 00:25:00");
+            lines.Add("05.09.2023 20:10 00:25:00");
+            //
+            return lines;
+        }
+
+        List<string> GetCustomCommonLines_Россия_24()
+        {
+            List<string> lines = new List<string>();
+            //
+            lines.Add("17.08.2023 10:00 00:25:00");
+            lines.Add("22.08.2023 10:00 00:25:00");
+            lines.Add("24.08.2023 10:00 00:25:00");
+            lines.Add("29.08.2023 10:00 00:25:00");
+            lines.Add("31.08.2023 10:00 00:25:00");
+            lines.Add("05.09.2023 10:00 00:25:00");
+            //
+            return lines;
+        }
+
+        List<string> GetCustomCommonLines_Вести_ФМ()
+        {
+            List<string> lines = new List<string>();
+            //
+            lines.Add("17.08.2023 11:30 00:10:00");
+            lines.Add("22.08.2023 11:30 00:10:00");
+            lines.Add("24.08.2023 11:30 00:10:00");
+            lines.Add("29.08.2023 11:30 00:10:00");
+            lines.Add("31.08.2023 11:30 00:10:00");
+            lines.Add("05.09.2023 11:30 00:10:00");
+            //
+            return lines;
         }
     }
 }
