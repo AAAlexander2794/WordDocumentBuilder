@@ -416,11 +416,12 @@ namespace WordDocumentBuilder.ElectionContracts
             if (candidate.Info.Фамилия == "") return null;
             // Формируем текст ячейки с талоном
             List<string> lines = new List<string>();
-            // Добавляем номер талона
-            lines.Add($"Талон № {talon.Id}");
             //
             if (talon != null)
             {
+                // Добавляем номер талона
+                lines.Add($"Талон № {talon.Id}");
+                //
                 foreach (var row in talon.TalonRecords)
                 {
                     lines.Add($"{row.Date} {row.Time} {row.Duration} {row.Description}");

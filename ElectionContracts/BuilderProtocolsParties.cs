@@ -38,7 +38,15 @@ namespace WordDocumentBuilder.ElectionContracts
             var _templatePath = Settings.Default.Protocols_TemplateFilePath_Parties;
             var _protocolsFilePath = Settings.Default.Protocols_FilePath;
             // test
-            DataTable dt = ExcelProcessor.ReadExcelSheet(Settings.Default.Parties_FilePath, sheetNumber: 0);
+            DataTable dt;
+            try
+            {
+                dt = ExcelProcessor.ReadExcelSheet(Settings.Default.Parties_FilePath, sheetNumber: 0);
+            }
+            catch
+            {
+                throw new Exception("ошибка с чтением таблицы");
+            }
             // Настройки текущей жеребьевки
             ProtocolsInfo settings;
             try
@@ -47,22 +55,37 @@ namespace WordDocumentBuilder.ElectionContracts
             }
             catch { throw new Exception("Не читает настройки протоколов."); }
             // Получаем список партий
-            var parties = BuildParties(talonVariant);
+            List<Party> parties;
+            try
+            {
+                parties = BuildParties(talonVariant);
+            }
+            catch
+            {
+                throw new Exception("Ошбика с формированием списка партий");
+            }
             // По каждой партии
             foreach (var party in parties)
             {
-                // Если не отмечено на печать, пропускаем
-                if (party.Info.На_печать == "") continue;                
-                // Формируем путь к документу
-                var resultPath = $"{_folderPath}" + $"{party.Info.Партия_Название_Краткое}\\";
-                // Создает путь для документов, если вдруг каких-то папок нет
-                Directory.CreateDirectory(resultPath);
-                // По каждому СМИ
-                CreateProtocol(party, settings, _templatePath, resultPath, "Маяк");
-                CreateProtocol(party, settings, _templatePath, resultPath, "Вести ФМ");
-                CreateProtocol(party, settings, _templatePath, resultPath, "Радио России");
-                CreateProtocol(party, settings, _templatePath, resultPath, "Россия 1");
-                CreateProtocol(party, settings, _templatePath, resultPath, "Россия 24");
+                try
+                {
+                    // Если не отмечено на печать, пропускаем
+                    if (party.Info.На_печать == "") continue;
+                    // Формируем путь к документу
+                    var resultPath = $"{_folderPath}" + $"{party.Info.Партия_Название_Краткое}\\";
+                    // Создает путь для документов, если вдруг каких-то папок нет
+                    Directory.CreateDirectory(resultPath);
+                    // По каждому СМИ
+                    CreateProtocol(party, settings, _templatePath, resultPath, "Маяк");
+                    CreateProtocol(party, settings, _templatePath, resultPath, "Вести ФМ");
+                    CreateProtocol(party, settings, _templatePath, resultPath, "Радио России");
+                    CreateProtocol(party, settings, _templatePath, resultPath, "Россия 1");
+                    CreateProtocol(party, settings, _templatePath, resultPath, "Россия 24");
+                }
+                catch
+                {
+                    throw new Exception($"Ошибка с {party.Info.Партия_Название_Полное}");
+                }
             }
             //
             return dt;
@@ -242,11 +265,12 @@ namespace WordDocumentBuilder.ElectionContracts
             table.Append(tr);
             // Формируем текст ячейки с талоном
             List<string> lines = new List<string>();
-            // Добавляем номер талона
-            lines.Add($"Талон № {talon.Id}");
             //
             if (talon != null)
             {
+                // Добавляем номер талона
+                lines.Add($"Талон № {talon.Id}");
+                //
                 foreach (var row in talon.TalonRecords)
                 {
                     lines.Add($"{row.Date} {row.Time} {row.Duration} {row.Description}");

@@ -72,10 +72,18 @@ namespace WDB_GUI_NET_4_8
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             WordDocumentBuilder.ElectionContracts.Builder builder = new WordDocumentBuilder.ElectionContracts.Builder();
-            var dt = builder.BuildProtocolsParties("1");
-            // Тестово посмотреть
-            DataGrid.ItemsSource = dt.DefaultView;
-            MessageBox.Show("Готово.");
+            DataTable dt = new DataTable();
+            try
+            {
+                dt = builder.BuildProtocolsParties("1");
+                // Тестово посмотреть
+                DataGrid.ItemsSource = dt.DefaultView;
+                MessageBox.Show("Готово.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
