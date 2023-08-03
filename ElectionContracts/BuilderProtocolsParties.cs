@@ -128,27 +128,27 @@ namespace WordDocumentBuilder.ElectionContracts
                 case "Маяк":
                     fieldMedia = settings.Наименование_СМИ_Маяк;
                     fileName = "Маяк.docx";
-                    table = CreateTableParty(party.Талон_Маяк, partyName, personName, GetCustomCommonLines_Маяк());
+                    table = CreateTableParty(party.Талон_Маяк, partyName, personName, GetCustomCommonLines_Маяк(), "02:30:00");
                     break;
                 case "Вести ФМ":
                     fieldMedia = settings.Наименование_СМИ_Вести_ФМ;
                     fileName = "Вести ФМ.docx";
-                    table = CreateTableParty(party.Талон_Вести_ФМ, partyName, personName, GetCustomCommonLines_Вести_ФМ());
+                    table = CreateTableParty(party.Талон_Вести_ФМ, partyName, personName, GetCustomCommonLines_Вести_ФМ(), "01:00:00");
                     break;
                 case "Радио России":
                     fieldMedia = settings.Наименование_СМИ_Радио_России;
                     fileName = "Радио России.docx";
-                    table = CreateTableParty(party.Талон_Радио_России, partyName, personName, GetCustomCommonLines_Радио_России());
+                    table = CreateTableParty(party.Талон_Радио_России, partyName, personName, GetCustomCommonLines_Радио_России(), "02:30:00");
                     break;
                 case "Россия 1":
                     fieldMedia = settings.Наименование_СМИ_Россия_1;
                     fileName = "Россия 1.docx";
-                    table = CreateTableParty(party.Талон_Россия_1, partyName, personName, GetCustomCommonLines_Россия_1());
+                    table = CreateTableParty(party.Талон_Россия_1, partyName, personName, GetCustomCommonLines_Россия_1(), "02:30:00");
                     break;
                 case "Россия 24":
                     fieldMedia = settings.Наименование_СМИ_Россия_24;
                     fileName = "Россия 24.docx";
-                    table = CreateTableParty(party.Талон_Россия_24, partyName, personName, GetCustomCommonLines_Россия_24());
+                    table = CreateTableParty(party.Талон_Россия_24, partyName, personName, GetCustomCommonLines_Россия_24(), "02:30:00");
                     break;
 
             }
@@ -176,7 +176,7 @@ namespace WordDocumentBuilder.ElectionContracts
         /// </summary>
         /// <param name="talon"></param>
         /// <returns></returns>
-        Table CreateTableParty(Talon talon, string lastRow2CellText = "", string lastRow5CellText = "", List<string> linesCustom = null)
+        Table CreateTableParty(Talon talon, string lastRow2CellText = "", string lastRow5CellText = "", List<string> linesCustom = null, string durationCustom = "")
         {
             // 
             Table table = new Table();
@@ -298,8 +298,8 @@ namespace WordDocumentBuilder.ElectionContracts
             tr = new TableRow();
             tc1 = new TableCell(CreateParagraph($"Итого"));
             tc2 = new TableCell(CreateParagraph($""));
-            tc3 = new TableCell(CreateParagraph($""));
-            if (talon != null && talon.TotalDuration != null)
+            tc3 = new TableCell(CreateParagraph($"{durationCustom}"));
+            if (talon != null && talon.TotalDuration != null && talon.TotalDuration != TimeSpan.Zero)
             {
                 tc4 = new TableCell(CreateParagraph($"{talon.TotalDuration}"));
             }
