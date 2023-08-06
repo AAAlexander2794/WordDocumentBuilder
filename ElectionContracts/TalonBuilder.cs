@@ -58,21 +58,28 @@ namespace WordDocumentBuilder.ElectionContracts
             switch (variant)
             {
                 case "1":
-                    dt = ExcelProcessor.ReadExcelSheet(Settings.Default.Parties_TalonsFilePath_Маяк, sheetNumber: 1);
-                    talonRecords = Variant1.BuildTalonRecords(dt, "Маяк");
-                    talons = BuildTalons(talonRecords, talons);
-                    dt = ExcelProcessor.ReadExcelSheet(Settings.Default.Parties_TalonsFilePath_Вести_ФМ, sheetNumber: 1);
-                    talonRecords = Variant1.BuildTalonRecords(dt, "Вести ФМ");
-                    talons = BuildTalons(talonRecords, talons);
-                    dt = ExcelProcessor.ReadExcelSheet(Settings.Default.Parties_TalonsFilePath_Радио_России, sheetNumber: 1);
-                    talonRecords = Variant1.BuildTalonRecords(dt, "Радио России");
-                    talons = BuildTalons(talonRecords, talons);
-                    dt = ExcelProcessor.ReadExcelSheet(Settings.Default.Parties_TalonsFilePath_Россия_1, sheetNumber: 1);
-                    talonRecords = Variant1.BuildTalonRecords(dt, "Россия 1");
-                    talons = BuildTalons(talonRecords, talons);
-                    dt = ExcelProcessor.ReadExcelSheet(Settings.Default.Parties_TalonsFilePath_Россия_24, sheetNumber: 1);
-                    talonRecords = Variant1.BuildTalonRecords(dt, "Россия 24");
-                    talons = BuildTalons(talonRecords, talons);
+                    try
+                    {
+                        dt = ExcelProcessor.ReadExcelSheet(Settings.Default.Parties_TalonsFilePath_Маяк, sheetNumber: 1);
+                        talonRecords = Variant1.BuildTalonRecords(dt, "Маяк");
+                        talons = BuildTalons(talonRecords, talons);
+                        dt = ExcelProcessor.ReadExcelSheet(Settings.Default.Parties_TalonsFilePath_Вести_ФМ, sheetNumber: 1);
+                        talonRecords = Variant1.BuildTalonRecords(dt, "Вести ФМ");
+                        talons = BuildTalons(talonRecords, talons);
+                        dt = ExcelProcessor.ReadExcelSheet(Settings.Default.Parties_TalonsFilePath_Радио_России, sheetNumber: 1);
+                        talonRecords = Variant1.BuildTalonRecords(dt, "Радио России");
+                        talons = BuildTalons(talonRecords, talons);
+                        dt = ExcelProcessor.ReadExcelSheet(Settings.Default.Parties_TalonsFilePath_Россия_1, sheetNumber: 1);
+                        talonRecords = Variant1.BuildTalonRecords(dt, "Россия 1");
+                        talons = BuildTalons(talonRecords, talons);
+                        dt = ExcelProcessor.ReadExcelSheet(Settings.Default.Parties_TalonsFilePath_Россия_24, sheetNumber: 1);
+                        talonRecords = Variant1.BuildTalonRecords(dt, "Россия 24");
+                        talons = BuildTalons(talonRecords, talons);
+                    }
+                    catch(Exception ex)
+                    {
+                        throw ex;
+                    }
                     break;
                 case "test":
                     dt = ExcelProcessor.ReadExcelSheet(Settings.Default.Parties_TalonsFilePath, sheetNumber: 2);

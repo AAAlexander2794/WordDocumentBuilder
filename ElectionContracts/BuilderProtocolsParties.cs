@@ -60,9 +60,9 @@ namespace WordDocumentBuilder.ElectionContracts
             {
                 parties = BuildParties(talonVariant);
             }
-            catch
+            catch(Exception ex)
             {
-                throw new Exception("Ошбика с формированием списка партий");
+                throw ex;
             }
             // По каждой партии
             foreach (var party in parties)

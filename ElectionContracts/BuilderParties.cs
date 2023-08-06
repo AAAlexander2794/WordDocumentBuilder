@@ -122,20 +122,48 @@ namespace WordDocumentBuilder.ElectionContracts
             var parties = new List<Party>();
             foreach (var info in infos)
             {
-                var party = new Party(info, talons);
-                parties.Add(party);
+                try
+                {
+                    var party = new Party(info, talons);
+                    parties.Add(party);
+                }
+                catch
+                {
+                    var text = "";
+                    foreach (var t in talons)
+                    {
+                        text += t.GetTalonText() + "\r\n";
+                    }
+                    throw new Exception($"Ошибка с {info.Партия_Название_Краткое}\r\n{text}");
+                }
             }
             return parties;
         }
 
         List<Party> BuildParties(string talonVariant = "default")
         {
-            // Формируем талоны
-            var talons = TalonBuilder.BuildTalonsParties(talonVariant);
+            List<Talon> talons;
+            try
+            {
+                // Формируем талоны
+                talons = TalonBuilder.BuildTalonsParties(talonVariant);
+            }
+            catch
+            {
+                throw new Exception("Ошибка с талонами партий.");
+            }
             // Читаем партии
             var partiesInfos = ReadParties(Settings.Default.Parties_FilePath);
-            // Создаем сущности партий
-            var parties = BuildParties(partiesInfos, talons);
+            List<Party> parties;
+            try
+            {
+                // Создаем сущности партий
+                parties = BuildParties(partiesInfos, talons);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
             //
             return parties;
         }
