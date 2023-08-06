@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using WordDocumentBuilder.ElectionContracts.Entities;
 
@@ -76,6 +77,7 @@ namespace WordDocumentBuilder.ElectionContracts
                 //    durationTime = TimeOnly.FromDateTime(DateTime.Parse("00:" + info.Duration.Replace('.', ','))).ToTimeSpan();
                 //}
                 ///
+                // Если длительность считана в формате "00:00", то считать как "мм:сс"
                 if (info.Duration.Length < 8)
                 {
                     durationTime = TimeOnly.FromDateTime(DateTime.Parse("00:" + info.Duration.Replace('.', ','))).ToTimeSpan();
@@ -154,8 +156,11 @@ namespace WordDocumentBuilder.ElectionContracts
                 {
                     //
                     if (row.Length == 0) continue;
+                    var text = row;
+                    // Чистим от нескольких пробелов
+                    text = Regex.Replace(text, @"\s+", " ");
                     //
-                    string[] columns = row.Split(delimeterColumn);
+                    string[] columns = text.Split(delimeterColumn);
                     //
                     try
                     {
