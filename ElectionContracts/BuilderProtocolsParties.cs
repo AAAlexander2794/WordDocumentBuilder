@@ -128,17 +128,17 @@ namespace WordDocumentBuilder.ElectionContracts
                 case "Маяк":
                     fieldMedia = settings.Наименование_СМИ_Маяк;
                     fileName = "Маяк.docx";
-                    table = CreateTableParty(party.Талон_Маяк, partyName, personName, GetCustomCommonLines_Маяк(), "00:30:00");
+                    table = CreateTableParty(party.Талон_Маяк, partyName, personName, GetCustomCommonLines_Маяк(), "00:23:45");
                     break;
                 case "Вести ФМ":
                     fieldMedia = settings.Наименование_СМИ_Вести_ФМ;
                     fileName = "Вести ФМ.docx";
-                    table = CreateTableParty(party.Талон_Вести_ФМ, partyName, personName, GetCustomCommonLines_Вести_ФМ(), "01:00:00");
+                    table = CreateTableParty(party.Талон_Вести_ФМ, partyName, personName, GetCustomCommonLines_Вести_ФМ(), "00:11:00");
                     break;
                 case "Радио России":
                     fieldMedia = settings.Наименование_СМИ_Радио_России;
                     fileName = "Радио России.docx";
-                    table = CreateTableParty(party.Талон_Радио_России, partyName, personName, GetCustomCommonLines_Радио_России(), "00:17:45");
+                    table = CreateTableParty(party.Талон_Радио_России, partyName, personName, GetCustomCommonLines_Радио_России(), "00:23:45");
                     break;
                 case "Россия 1":
                     fieldMedia = settings.Наименование_СМИ_Россия_1;
@@ -148,7 +148,7 @@ namespace WordDocumentBuilder.ElectionContracts
                 case "Россия 24":
                     fieldMedia = settings.Наименование_СМИ_Россия_24;
                     fileName = "Россия 24.docx";
-                    table = CreateTableParty(party.Талон_Россия_24, partyName, personName, GetCustomCommonLines_Россия_24(), "00:17:45");
+                    table = CreateTableParty(party.Талон_Россия_24, partyName, personName, GetCustomCommonLines_Россия_24(), "00:23:45");
                     break;
 
             }
@@ -335,12 +335,14 @@ namespace WordDocumentBuilder.ElectionContracts
         {
             List<string> lines = new List<string>();
             //
-            lines.Add("17.08.2023 11:00 00:25:00");
-            lines.Add("22.08.2023 11:00 00:25:00");
-            lines.Add("24.08.2023 11:00 00:25:00");
-            lines.Add("29.08.2023 11:00 00:25:00");
-            lines.Add("31.08.2023 11:00 00:25:00");
-            lines.Add("05.09.2023 11:00 00:25:00");
+            lines.Add("17.08.2023 11:00 00:03:00");
+            lines.Add("22.08.2023 11:00 00:03:00");
+            lines.Add("23.08.2023 11:00 00:03:00");
+            lines.Add("24.08.2023 11:00 00:03:00");
+            lines.Add("29.08.2023 11:00 00:03:00");
+            lines.Add("30.08.2023 11:00 00:03:00");
+            lines.Add("31.08.2023 11:00 00:03:00");
+            lines.Add("05.09.2023 11:00 00:02:45");
             //
             return lines;
         }
@@ -351,8 +353,10 @@ namespace WordDocumentBuilder.ElectionContracts
             //
             lines.Add("17.08.2023 20:10 00:03:00");
             lines.Add("22.08.2023 20:10 00:03:00");
+            lines.Add("23.08.2023 20:10 00:03:00");
             lines.Add("24.08.2023 20:10 00:03:00");
             lines.Add("29.08.2023 20:10 00:03:00");
+            lines.Add("30.08.2023 20:10 00:03:00");
             lines.Add("31.08.2023 20:10 00:03:00");
             lines.Add("05.09.2023 20:10 00:02:45");
             //
@@ -365,8 +369,10 @@ namespace WordDocumentBuilder.ElectionContracts
             //
             lines.Add("17.08.2023 10:00 00:03:00");
             lines.Add("22.08.2023 10:00 00:03:00");
+            lines.Add("23.08.2023 10:00 00:03:00");
             lines.Add("24.08.2023 10:00 00:03:00");
             lines.Add("29.08.2023 10:00 00:03:00");
+            lines.Add("30.08.2023 10:00 00:03:00");
             lines.Add("31.08.2023 10:00 00:03:00");
             lines.Add("05.09.2023 10:00 00:02:45");
             //
@@ -377,12 +383,10 @@ namespace WordDocumentBuilder.ElectionContracts
         {
             List<string> lines = new List<string>();
             //
-            lines.Add("17.08.2023 11:30 00:10:00");
-            lines.Add("22.08.2023 11:30 00:10:00");
-            lines.Add("24.08.2023 11:30 00:10:00");
-            lines.Add("29.08.2023 11:30 00:10:00");
-            lines.Add("31.08.2023 11:30 00:10:00");
-            lines.Add("05.09.2023 11:30 00:10:00");
+            lines.Add("17.08.2023 11:30 00:02:45");
+            lines.Add("22.08.2023 11:30 00:02:45");
+            lines.Add("31.08.2023 11:30 00:02:45");
+            lines.Add("05.09.2023 11:30 00:02:45");
             //
             return lines;
         }
