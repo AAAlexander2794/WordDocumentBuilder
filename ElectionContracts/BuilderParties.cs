@@ -148,9 +148,9 @@ namespace WordDocumentBuilder.ElectionContracts
                 // Формируем талоны
                 talons = TalonBuilder.BuildTalonsParties(talonVariant);
             }
-            catch
+            catch(Exception ex)
             {
-                throw new Exception("Ошибка с талонами партий.");
+                throw new Exception($"BuildTalonParties\r\n{ex.Message}");
             }
             // Читаем партии
             var partiesInfos = ReadParties(Settings.Default.Parties_FilePath);

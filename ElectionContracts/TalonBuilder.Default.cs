@@ -42,12 +42,20 @@ namespace WordDocumentBuilder.ElectionContracts
                 // По строкам
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    records.Add(new TalonRecordInfo(
-                        dt.Rows[i].Field<string>(0),
-                        dt.Rows[i].Field<string>(1),
-                        dt.Rows[i].Field<string>(2),
-                        dt.Rows[i].Field<string>(3),
-                        dt.Rows[i].Field<string>(4)));
+                    try
+                    {
+                        records.Add(new TalonRecordInfo(
+                            dt.Rows[i].Field<string>(0),
+                            dt.Rows[i].Field<string>(1),
+                            dt.Rows[i].Field<string>(2),
+                            dt.Rows[i].Field<string>(3),
+                            dt.Rows[i].Field<string>(4),
+                            dt.Rows[i].Field<string>(5)));
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception($"{ex.Message}\r\n{dt.Rows[i].Field<string>(0)}");
+                    }
                 }
                 return records;
             }

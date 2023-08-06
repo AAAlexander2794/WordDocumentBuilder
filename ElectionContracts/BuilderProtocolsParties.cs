@@ -62,7 +62,7 @@ namespace WordDocumentBuilder.ElectionContracts
             }
             catch(Exception ex)
             {
-                throw ex;
+                throw new Exception($"BuildParties\r\n{ex.Message}");
             }
             // По каждой партии
             foreach (var party in parties)

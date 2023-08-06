@@ -31,37 +31,44 @@ namespace WordDocumentBuilder
         public static DataTable ReadExcelSheet(string filename, bool firstRowIsHeader = true, int sheetNumber = 0)
         {
             DataTable dt = new DataTable();
-            using (SpreadsheetDocument doc = SpreadsheetDocument.Open(filename, false))
+            try
             {
-                //Read the first Sheets 
-                Sheet sheet = doc.WorkbookPart.Workbook.Sheets.ChildElements[sheetNumber] as Sheet;
-                Worksheet worksheet = (doc.WorkbookPart.GetPartById(sheet.Id.Value) as WorksheetPart).Worksheet;
-                IEnumerable<Row> rows = worksheet.GetFirstChild<SheetData>().Descendants<Row>();
-                int counter = 0;
-                foreach (Row row in rows)
+                using (SpreadsheetDocument doc = SpreadsheetDocument.Open(filename, false))
                 {
-                    counter = counter + 1;
-                    //Read the first row as header
-                    if (counter == 1)
+                    //Read the first Sheets 
+                    Sheet sheet = doc.WorkbookPart.Workbook.Sheets.ChildElements[sheetNumber] as Sheet;
+                    Worksheet worksheet = (doc.WorkbookPart.GetPartById(sheet.Id.Value) as WorksheetPart).Worksheet;
+                    IEnumerable<Row> rows = worksheet.GetFirstChild<SheetData>().Descendants<Row>();
+                    int counter = 0;
+                    foreach (Row row in rows)
                     {
-                        var j = 1;
-                        foreach (Cell cell in row.Descendants<Cell>())
+                        counter = counter + 1;
+                        //Read the first row as header
+                        if (counter == 1)
                         {
-                            var colunmName = firstRowIsHeader ? GetCellValue(doc, cell) : "Field" + j++;
-                            dt.Columns.Add(colunmName);
+                            var j = 1;
+                            foreach (Cell cell in row.Descendants<Cell>())
+                            {
+                                var colunmName = firstRowIsHeader ? GetCellValue(doc, cell) : "Field" + j++;
+                                dt.Columns.Add(colunmName);
+                            }
                         }
-                    }
-                    else
-                    {
-                        dt.Rows.Add();
-                        int i = 0;
-                        foreach (Cell cell in row.Descendants<Cell>())
+                        else
                         {
-                            dt.Rows[dt.Rows.Count - 1][i] = GetCellValue(doc, cell);
-                            i++;
+                            dt.Rows.Add();
+                            int i = 0;
+                            foreach (Cell cell in row.Descendants<Cell>())
+                            {
+                                dt.Rows[dt.Rows.Count - 1][i] = GetCellValue(doc, cell);
+                                i++;
+                            }
                         }
                     }
                 }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception($"ReadExcelSheet\r\n{ex.Message}");
             }
             return dt;
         }

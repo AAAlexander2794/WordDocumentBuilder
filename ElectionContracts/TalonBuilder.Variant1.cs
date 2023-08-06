@@ -15,8 +15,25 @@ namespace WordDocumentBuilder.ElectionContracts
         {
             internal static List<TalonRecord> BuildTalonRecords(DataTable dt, string mediaResource)
             {
-                var talonRecordInfos = ParseTalonRecordInfos(dt, mediaResource);
-                var talonRecords = BuildTalonRecords(talonRecordInfos);
+                List<TalonRecordInfo> talonRecordInfos;
+                List<TalonRecord> talonRecords;
+                try
+                {
+                    talonRecordInfos = ParseTalonRecordInfos(dt, mediaResource);
+                    //throw new Exception($"Проверка\r\n{talonRecordInfos[talonRecordInfos.Count - 1].GetTalonRecordString()}");
+                }
+                catch(Exception ex)
+                {
+                    throw new Exception($"ParseTalonRecordInfo\r\n{ex.Message}");
+                }
+                try
+                {
+                    talonRecords = BuildTalonRecords(talonRecordInfos);
+                }
+                catch(Exception ex)
+                {
+                    throw new Exception($"BuildTalonRecords\r\n{ex.Message}");
+                }
                 return talonRecords;
             }
 
@@ -26,22 +43,37 @@ namespace WordDocumentBuilder.ElectionContracts
                 //
                 foreach (var info in infos)
                 {
-                    talonRecords.Add(CreateTalonRecord(info));
+                    try
+                    {
+                        talonRecords.Add(CreateTalonRecord(info));
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception($"CreateTalonRecord\r\n{ex.Message}\r\n");
+                    }
                 }
                 return talonRecords;
             }
 
             static TalonRecord CreateTalonRecord(TalonRecordInfo info)
             {
-                var talonRecord = new TalonRecord(
-                    int.Parse(info.Id),
-                    info.MediaResource,
-                    DateOnly.FromDateTime(DateTime.Parse(info.Date)),
-                    // Происходит замена точки на запятую (вот такая культура)
-                    TimeOnly.FromDateTime(DateTime.Parse(info.Time.Replace('.', ','))),
-                    TimeOnly.FromDateTime(DateTime.Parse(info.Duration.Replace('.', ','))).ToTimeSpan(),
-                    info.Description
-                    );
+                TalonRecord talonRecord;
+                try
+                {
+                    talonRecord = new TalonRecord(
+                        int.Parse(info.Id),
+                        info.MediaResource,
+                        DateOnly.FromDateTime(DateTime.Parse(info.Date)),
+                        // Происходит замена точки на запятую (вот такая культура)
+                        TimeOnly.FromDateTime(DateTime.Parse(info.Time.Replace('.', ','))),
+                        TimeOnly.FromDateTime(DateTime.Parse(info.Duration.Replace('.', ','))).ToTimeSpan(),
+                        info.Description
+                        );
+                }
+                catch(Exception ex)
+                {
+                    throw new Exception($"Ошибка при создании TalonRecord\r\n{info.GetTalonRecordString()}");
+                }
                 return talonRecord;
             }
 
@@ -57,13 +89,20 @@ namespace WordDocumentBuilder.ElectionContracts
                 // В одной ячейке все строки одного талона
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    var talonId = dt.Rows[i].Field<string>(0);
-                    // Ячейка со строками одного талона парсится в список строк одного талона
-                    var talonRecords = ParseTalonString(talonId, mediaResource, dt.Rows[i].Field<string>(1));
-                    // Все записи добавляем к результату
-                    foreach (var talonRecord in talonRecords)
+                    try
                     {
-                        result.Add(talonRecord);
+                        var talonId = dt.Rows[i].Field<string>(0);
+                        // Ячейка со строками одного талона парсится в список строк одного талона
+                        var talonRecords = ParseTalonString(talonId, mediaResource, dt.Rows[i].Field<string>(1));
+                        // Все записи добавляем к результату
+                        foreach (var talonRecord in talonRecords)
+                        {
+                            result.Add(talonRecord);
+                        }
+                    }
+                    catch(Exception ex)
+                    {
+                        throw new Exception($"Ошибка\r\n{ex.Message}\r\n(ParseTalonRecordInfos)");
                     }
                 }
                 return result;

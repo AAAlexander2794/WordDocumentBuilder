@@ -47,5 +47,10 @@ namespace WordDocumentBuilder.ElectionContracts.Entities
             Duration = duration;
             Description = description;
         }
+
+        public string GetTalonRecordString()
+        {
+            return $"{Id} {MediaResource} {Date} {Time} {Duration} {Description}";
+        }
     }
 }
