@@ -35,6 +35,12 @@ namespace WordDocumentBuilder.ElectionContracts
                 {
                     throw new Exception($"BuildTalonRecords\r\n{ex.Message}");
                 }
+                // test
+                if (mediaResource == "Вести ФМ")
+                {
+                    var some = "";
+                }
+                //
                 return talonRecords;
             }
 
@@ -104,6 +110,10 @@ namespace WordDocumentBuilder.ElectionContracts
                         //TimeOnly.FromDateTime(DateTime.Parse(info.Duration.Replace('.', ','))).ToTimeSpan(),
                         info.Description
                         );
+                    //if (info.MediaResource == "Вести ФМ")
+                    //{
+                    //    var some = "";
+                    //}
                 }
                 catch(Exception ex)
                 {
@@ -134,11 +144,16 @@ namespace WordDocumentBuilder.ElectionContracts
                         {
                             result.Add(talonRecord);
                         }
+                        if (mediaResource == "Вести ФМ")
+                        {
+                            var some = $"{dt.Rows[i].Field<string>(1)}";
+                        }
                     }
                     catch(Exception ex)
                     {
                         throw new Exception($"Ошибка\r\n{ex.Message}\r\n(ParseTalonRecordInfos)");
                     }
+                    
                 }
                 return result;
             }
@@ -168,6 +183,12 @@ namespace WordDocumentBuilder.ElectionContracts
                     //
                     string[] columns = text.Split(delimeterColumn);
                     //
+                    string description = "";
+                    if (columns.Length >= 4)
+                    {
+                        description = columns[3];
+                    }
+                    //
                     try
                     {
                         result.Add(new TalonRecordInfo(
@@ -176,7 +197,8 @@ namespace WordDocumentBuilder.ElectionContracts
                         columns[0],
                         columns[1],
                         columns[2],
-                        columns[3]));
+                        description));
+                        
                     }
                     catch { continue; }
                 }

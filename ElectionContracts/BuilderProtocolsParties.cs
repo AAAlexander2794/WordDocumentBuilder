@@ -273,8 +273,19 @@ namespace WordDocumentBuilder.ElectionContracts
                 //
                 foreach (var row in talon.TalonRecords)
                 {
-                    lines.Add($"{row.Date} {row.Time} {row.Duration} {row.Description}");
+                    if (talon.MediaResource == "Вести ФМ")
+                    {
+                        lines.Add($"{row.Date} {row.Time}:{row.Time.Second} {row.Duration} {row.Description}");
+                    }
+                    else
+                    {
+                        lines.Add($"{row.Date} {row.Time} {row.Duration} {row.Description}");
+                    }
                 }
+                //if (talon.MediaResource == "Вести ФМ")
+                //{
+                //    var some = "";
+                //}
             }
             else
             {

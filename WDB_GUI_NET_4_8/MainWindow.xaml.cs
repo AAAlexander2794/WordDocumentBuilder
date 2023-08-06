@@ -73,8 +73,8 @@ namespace WDB_GUI_NET_4_8
         {
             WordDocumentBuilder.ElectionContracts.Builder builder = new WordDocumentBuilder.ElectionContracts.Builder();
             DataTable dt = new DataTable();
-            // test
-            //dt = ExcelProcessor.ReadExcelSheet(Settings.Default.Parties_TalonsFilePath_Маяк, sheetNumber: 0);
+            //// test
+            //dt = ExcelProcessor.ReadExcelSheet(Settings.Default.Parties_TalonsFilePath_Вести_ФМ, sheetNumber: 0);
             //DataGrid.ItemsSource = dt.DefaultView;
             try
             {
