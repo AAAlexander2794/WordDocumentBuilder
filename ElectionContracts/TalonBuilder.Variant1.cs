@@ -55,9 +55,35 @@ namespace WordDocumentBuilder.ElectionContracts
                 return talonRecords;
             }
 
-            static TalonRecord CreateTalonRecord(TalonRecordInfo info)
+            static TalonRecord CreateTalonRecord(TalonRecordInfo info, string durationMode = "default")
             {
                 TalonRecord talonRecord;
+                TimeSpan durationTime = TimeSpan.Zero;
+                ///// ОСТОРОЖНО! КОСТЫЛЬ!
+                //if (durationMode == "default")
+                //{
+                //    // Происходит замена точки на запятую (вот такая культура)
+                //    durationTime = TimeOnly.FromDateTime(DateTime.Parse(info.Duration.Replace('.', ','))).ToTimeSpan();
+                //}
+                //else
+                //{
+                //    durationTime = TimeOnly.FromDateTime(DateTime.Parse("00:"+info.Duration.Replace('.', ','))).ToTimeSpan();
+                //}
+                ///// ОСТОРОЖНО! КОСТЫЛЬ!
+                //TimeSpan не_превышает = TimeOnly.FromDateTime(DateTime.Parse("00:00:50")).ToTimeSpan();
+                //if (durationTime >= не_превышает)
+                //{
+                //    durationTime = TimeOnly.FromDateTime(DateTime.Parse("00:" + info.Duration.Replace('.', ','))).ToTimeSpan();
+                //}
+                ///
+                if (info.Duration.Length < 8)
+                {
+                    durationTime = TimeOnly.FromDateTime(DateTime.Parse("00:" + info.Duration.Replace('.', ','))).ToTimeSpan();
+                }
+                else
+                {
+                    durationTime = TimeOnly.FromDateTime(DateTime.Parse(info.Duration.Replace('.', ','))).ToTimeSpan();
+                }
                 try
                 {
                     talonRecord = new TalonRecord(
@@ -66,7 +92,8 @@ namespace WordDocumentBuilder.ElectionContracts
                         DateOnly.FromDateTime(DateTime.Parse(info.Date)),
                         // Происходит замена точки на запятую (вот такая культура)
                         TimeOnly.FromDateTime(DateTime.Parse(info.Time.Replace('.', ','))),
-                        TimeOnly.FromDateTime(DateTime.Parse(info.Duration.Replace('.', ','))).ToTimeSpan(),
+                        durationTime,
+                        //TimeOnly.FromDateTime(DateTime.Parse(info.Duration.Replace('.', ','))).ToTimeSpan(),
                         info.Description
                         );
                 }
