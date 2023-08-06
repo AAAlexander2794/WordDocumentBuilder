@@ -319,14 +319,14 @@ namespace WordDocumentBuilder.ElectionContracts
         {
             List<string> lines = new List<string>();
             //
-            lines.Add("17.08.2023 09:34 00:20:00");
-            lines.Add("22.08.2023 09:34 00:20:00");
-            lines.Add("23.08.2023 09:34 00:15:00");
-            lines.Add("24.08.2023 09:34 00:20:00");
-            lines.Add("29.08.2023 09:34 00:20:00");
-            lines.Add("30.08.2023 09:34 00:15:00");
-            lines.Add("31.08.2023 09:34 00:20:00");
-            lines.Add("05.09.2023 09:34 00:20:00");
+            lines.Add("17.08.2023 09:34 00:03:00");
+            lines.Add("22.08.2023 09:34 00:03:00");
+            lines.Add("23.08.2023 09:34 00:03:00");
+            lines.Add("24.08.2023 09:34 00:03:00");
+            lines.Add("29.08.2023 09:34 00:03:00");
+            lines.Add("30.08.2023 09:34 00:03:00");
+            lines.Add("31.08.2023 09:34 00:03:00");
+            lines.Add("05.09.2023 09:34 00:02:45");
             //
             return lines;
         }
@@ -349,12 +349,12 @@ namespace WordDocumentBuilder.ElectionContracts
         {
             List<string> lines = new List<string>();
             //
-            lines.Add("17.08.2023 20:10 00:25:00");
-            lines.Add("22.08.2023 20:10 00:25:00");
-            lines.Add("24.08.2023 20:10 00:25:00");
-            lines.Add("29.08.2023 20:10 00:25:00");
-            lines.Add("31.08.2023 20:10 00:25:00");
-            lines.Add("05.09.2023 20:10 00:25:00");
+            lines.Add("17.08.2023 20:10 00:03:00");
+            lines.Add("22.08.2023 20:10 00:03:00");
+            lines.Add("24.08.2023 20:10 00:03:00");
+            lines.Add("29.08.2023 20:10 00:03:00");
+            lines.Add("31.08.2023 20:10 00:03:00");
+            lines.Add("05.09.2023 20:10 00:02:45");
             //
             return lines;
         }
@@ -363,12 +363,12 @@ namespace WordDocumentBuilder.ElectionContracts
         {
             List<string> lines = new List<string>();
             //
-            lines.Add("17.08.2023 10:00 00:25:00");
-            lines.Add("22.08.2023 10:00 00:25:00");
-            lines.Add("24.08.2023 10:00 00:25:00");
-            lines.Add("29.08.2023 10:00 00:25:00");
-            lines.Add("31.08.2023 10:00 00:25:00");
-            lines.Add("05.09.2023 10:00 00:25:00");
+            lines.Add("17.08.2023 10:00 00:03:00");
+            lines.Add("22.08.2023 10:00 00:03:00");
+            lines.Add("24.08.2023 10:00 00:03:00");
+            lines.Add("29.08.2023 10:00 00:03:00");
+            lines.Add("31.08.2023 10:00 00:03:00");
+            lines.Add("05.09.2023 10:00 00:02:45");
             //
             return lines;
         }
