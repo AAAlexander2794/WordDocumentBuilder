@@ -128,7 +128,7 @@ namespace WordDocumentBuilder.ElectionContracts
                 case "Маяк":
                     fieldMedia = settings.Наименование_СМИ_Маяк;
                     fileName = "Маяк.docx";
-                    table = CreateTableParty(party.Талон_Маяк, partyName, personName, GetCustomCommonLines_Маяк(), "02:30:00");
+                    table = CreateTableParty(party.Талон_Маяк, partyName, personName, GetCustomCommonLines_Маяк(), "00:30:00");
                     break;
                 case "Вести ФМ":
                     fieldMedia = settings.Наименование_СМИ_Вести_ФМ;
@@ -138,17 +138,17 @@ namespace WordDocumentBuilder.ElectionContracts
                 case "Радио России":
                     fieldMedia = settings.Наименование_СМИ_Радио_России;
                     fileName = "Радио России.docx";
-                    table = CreateTableParty(party.Талон_Радио_России, partyName, personName, GetCustomCommonLines_Радио_России(), "02:30:00");
+                    table = CreateTableParty(party.Талон_Радио_России, partyName, personName, GetCustomCommonLines_Радио_России(), "00:17:45");
                     break;
                 case "Россия 1":
                     fieldMedia = settings.Наименование_СМИ_Россия_1;
                     fileName = "Россия 1.docx";
-                    table = CreateTableParty(party.Талон_Россия_1, partyName, personName, GetCustomCommonLines_Россия_1(), "02:30:00");
+                    table = CreateTableParty(party.Талон_Россия_1, partyName, personName, GetCustomCommonLines_Россия_1(), "00:23:45");
                     break;
                 case "Россия 24":
                     fieldMedia = settings.Наименование_СМИ_Россия_24;
                     fileName = "Россия 24.docx";
-                    table = CreateTableParty(party.Талон_Россия_24, partyName, personName, GetCustomCommonLines_Россия_24(), "02:30:00");
+                    table = CreateTableParty(party.Талон_Россия_24, partyName, personName, GetCustomCommonLines_Россия_24(), "00:17:45");
                     break;
 
             }
