@@ -78,7 +78,13 @@ namespace WordDocumentBuilder.ElectionContracts
                 //}
                 ///
                 // Если длительность считана в формате "00:00", то считать как "мм:сс"
-                if (info.Duration.Length < 8)
+                //
+                /// Разные варианты костыльности
+                if (info.Duration.Length == 7)
+                {
+                    durationTime = TimeOnly.FromDateTime(DateTime.Parse("0" + info.Duration.Replace('.', ','))).ToTimeSpan();
+                }
+                else if (info.Duration.Length == 5)
                 {
                     durationTime = TimeOnly.FromDateTime(DateTime.Parse("00:" + info.Duration.Replace('.', ','))).ToTimeSpan();
                 }
