@@ -137,6 +137,11 @@ namespace WordDocumentBuilder.ElectionContracts
                     try
                     {
                         var talonId = dt.Rows[i].Field<string>(0);
+                        // test
+                        if (mediaResource == "Вести ФМ")
+                        {
+                            var some = $"{dt.Rows[i].Field<string>(1)}";
+                        }
                         // Ячейка со строками одного талона парсится в список строк одного талона
                         var talonRecords = ParseTalonString(talonId, mediaResource, dt.Rows[i].Field<string>(1));
                         // Все записи добавляем к результату
@@ -144,10 +149,7 @@ namespace WordDocumentBuilder.ElectionContracts
                         {
                             result.Add(talonRecord);
                         }
-                        if (mediaResource == "Вести ФМ")
-                        {
-                            var some = $"{dt.Rows[i].Field<string>(1)}";
-                        }
+                        
                     }
                     catch(Exception ex)
                     {
