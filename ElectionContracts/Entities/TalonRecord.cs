@@ -10,7 +10,7 @@ namespace WordDocumentBuilder.ElectionContracts.Entities
     /// <summary>
     /// Одна строка 
     /// </summary>
-    internal class TalonRecord
+    public class TalonRecord
     {
         public int Id { get; set; }
 

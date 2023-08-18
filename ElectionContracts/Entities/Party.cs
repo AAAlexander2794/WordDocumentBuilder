@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WordDocumentBuilder.ElectionContracts.Entities
 {
-    internal class Party
+    public class Party
     {
         /// <summary>
         /// Информация о кандидате, формируется на основе записи из Экселя.

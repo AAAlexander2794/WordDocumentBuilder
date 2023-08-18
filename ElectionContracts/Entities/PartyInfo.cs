@@ -10,7 +10,7 @@ namespace WordDocumentBuilder.ElectionContracts.Entities
     /// <summary>
     /// Запись партии в текстовом виде (из Экселя)
     /// </summary>
-    internal class PartyInfo
+    public class PartyInfo
     {
         /// <summary>
         /// Поле, где отмечается, создавать договор на эту партию или нет

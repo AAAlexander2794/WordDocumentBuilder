@@ -174,6 +174,11 @@ namespace WDB_GUI_NET_4_8
             Settings.Default.Save();
         }
 
-        
+        private void DoReport(object sender, RoutedEventArgs e)
+        {
+            var builder = new WordDocumentBuilder.EconomicDepartment.Builder();
+            builder.BuildTable();
+            MessageBox.Show("Готово.");
+        }
     }
 }

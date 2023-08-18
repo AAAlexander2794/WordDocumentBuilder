@@ -10,7 +10,7 @@ namespace WordDocumentBuilder.ElectionContracts.Entities
     /// Запись кандидата в текстовом виде (из Экселя).
     /// </summary>
     /// <remarks>Да, поля названы по-русски.</remarks>
-    internal class CandidateInfo
+    public class CandidateInfo
     {
         /// <summary>
         /// Поле, где отмечается, создавать договор на этого кандидата или нет

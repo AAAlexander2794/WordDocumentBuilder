@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WordDocumentBuilder.ElectionContracts.Entities
 {
-    internal class Talon
+    public class Talon
     {
 
 

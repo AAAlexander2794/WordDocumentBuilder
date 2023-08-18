@@ -9,7 +9,7 @@ namespace WordDocumentBuilder.ElectionContracts.Entities
     /// <summary>
     /// Одна запись талона в первозданном текстовом виде (из Экселя).
     /// </summary>
-    internal class TalonRecordInfo
+    public class TalonRecordInfo
     {
         /// <summary>
         /// No Талона

@@ -134,6 +134,17 @@
                     </Grid>
                 </Grid>
             </TabItem>
+            <TabItem Header="Отчет для ИК">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50.009"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Button Content="Создать таблицу" Margin="10,10,605,10" Click="DoReport"></Button>
+                    <DataGrid Grid.Row="1" Margin="5,5,5,5" Name="dataGridReport"></DataGrid>
+
+                </Grid>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

@@ -13,7 +13,7 @@ namespace WordDocumentBuilder.ElectionContracts.Entities
     /// <remarks>
     /// У каждого кандидата по 5 талонов.
     /// </remarks>
-    internal class Candidate
+    public class Candidate
     {
         /// <summary>
         /// Информация о кандидате, формируется на основе записи из Экселя.

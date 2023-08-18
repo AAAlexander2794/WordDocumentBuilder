@@ -9,7 +9,7 @@ namespace WordDocumentBuilder.ElectionContracts.Entities
     /// <summary>
     /// Хранит всю инфу, которая должна быть записана в протокол кандидатов (по СМИ и округам).
     /// </summary>
-    internal class ProtocolCandidates
+    public class ProtocolCandidates
     {
         /// <summary>
         /// Расширенное название медиаресурса для заголовка протокола.

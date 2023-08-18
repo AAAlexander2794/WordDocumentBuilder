@@ -49,13 +49,6 @@ namespace WordDocumentBuilder.ElectionContracts
             {
                 throw new Exception("Не читает таблицу.");
             }
-            // Получаем список Кандидатов
-            List<Candidate> candidates;
-            try
-            {
-                candidates = BuildCandidates(talonVariant);
-            }
-            catch { throw new Exception("Ошибка с талонами."); }
             // Настройки текущей жеребьевки
             ProtocolsInfo settings;
             try
@@ -63,13 +56,8 @@ namespace WordDocumentBuilder.ElectionContracts
                 settings = ReadProtocols(_protocolsFilePath);
             }
             catch { throw new Exception("Не читает настройки протоколов."); }
-            // Создаем список протоколов
-            List<ProtocolCandidates> protocols;
-            try
-            {
-                protocols = CreateProtocolsCandidates(candidates, settings);
-            }
-            catch { throw new Exception("Ошибка со списком протоколов."); }
+            //
+            var protocols = BuildProtocolsCandidates(settings, talonVariant);
             // По каждому протоколу
             try
             {
@@ -90,6 +78,26 @@ namespace WordDocumentBuilder.ElectionContracts
             catch { throw new Exception("Ошибка с записью протоколов."); }
             //
             return dt;
+        }
+
+        public List<ProtocolCandidates> BuildProtocolsCandidates(ProtocolsInfo settings, string talonVariant = "default")
+        {
+            // Получаем список Кандидатов
+            List<Candidate> candidates;
+            try
+            {
+                candidates = BuildCandidates(talonVariant);
+            }
+            catch { throw new Exception("Ошибка с талонами."); }
+            // Создаем список протоколов
+            List<ProtocolCandidates> protocols;
+            try
+            {
+                protocols = CreateProtocolsCandidates(candidates, settings);
+            }
+            catch { throw new Exception("Ошибка со списком протоколов."); }
+            //
+            return protocols;
         }
 
         /// <summary>
@@ -153,7 +161,7 @@ namespace WordDocumentBuilder.ElectionContracts
         /// </summary>
         /// <param name="dataFilePath"></param>
         /// <returns></returns>
-        ProtocolsInfo ReadProtocols(string dataFilePath)
+        public ProtocolsInfo ReadProtocols(string dataFilePath)
         {
             var dt = ExcelProcessor.ReadExcelSheet(dataFilePath, sheetNumber: 0);
             var info = new ProtocolsInfo()
