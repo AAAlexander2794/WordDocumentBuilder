@@ -34,7 +34,9 @@ namespace WordDocumentBuilder.ElectionContracts.Entities
         /// </summary>
         public string Партия_Название_Полное { get; set; } = "";
 
-        public string Партия_Название_Краткое { get; set; } = "";     
+        public string Партия_Название_Краткое { get; set; } = "";
+
+        public string Партия_Название_Рабочее { get; set; } = "";
 
         /// <summary>
         /// Постановление избирательной комиссии. В формате "[дата] [номер]"

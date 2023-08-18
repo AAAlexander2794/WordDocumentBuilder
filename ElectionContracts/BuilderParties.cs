@@ -110,8 +110,8 @@ namespace WordDocumentBuilder.ElectionContracts
                     ИНН = dt.Rows[i].Field<string>(22),
                     КПП = dt.Rows[i].Field<string>(23),
                     Спец_изб_счет_номер = dt.Rows[i].Field<string>(24),
-                    Место_нахождения = dt.Rows[i].Field<string>(25)
-                    
+                    Место_нахождения = dt.Rows[i].Field<string>(25),
+                    Партия_Название_Рабочее = dt.Rows[i].Field<string>(26)
                 });
             }
             return parties;
@@ -140,7 +140,7 @@ namespace WordDocumentBuilder.ElectionContracts
             return parties;
         }
 
-        List<Party> BuildParties(string talonVariant = "default")
+        public List<Party> BuildParties(string talonVariant = "default")
         {
             List<Talon> talons;
             try

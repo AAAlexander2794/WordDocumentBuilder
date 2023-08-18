@@ -144,7 +144,7 @@ namespace WordDocumentBuilder.ElectionContracts
             return candidates;
         }
 
-        List<Candidate> BuildCandidates(string talonVariant = "default")
+        public List<Candidate> BuildCandidates(string talonVariant = "default")
         {
             //
             var talons = TalonBuilder.BuildTalonsCandidates(talonVariant);

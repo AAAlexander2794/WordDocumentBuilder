@@ -119,6 +119,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EconomicDepartment\BroadcastRecord.cs" />
     <Compile Include="ElectionContracts\BuilderCandidates.cs" />
     <Compile Include="ElectionContracts\BuilderCommon.cs" />
     <Compile Include="ElectionContracts\BuilderParties.cs" />
@@ -151,7 +152,6 @@
     </Compile>
     <Compile Include="EconomicDepartment\BroadcastingMaterial.cs" />
     <Compile Include="EconomicDepartment\Builder.cs" />
-    <Compile Include="EconomicDepartment\Candidate.cs" />
     <Compile Include="EconomicDepartment\ElectionRegion.cs" />
   </ItemGroup>
   <ItemGroup>
