@@ -180,5 +180,12 @@ namespace WDB_GUI_NET_4_8
             builder.BuildTable();
             MessageBox.Show("Готово.");
         }
+
+        private void CreateTotalReports(object sender, RoutedEventArgs e)
+        {
+            var builder = new WordDocumentBuilder.EconomicDepartment.Builder();
+            builder.BuildTotalReports();
+            MessageBox.Show("Готово.");
+        }
     }
 }

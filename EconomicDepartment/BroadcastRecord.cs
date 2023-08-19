@@ -1,7 +1,9 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.EMMA;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace WordDocumentBuilder.EconomicDepartment
@@ -57,5 +59,36 @@ namespace WordDocumentBuilder.EconomicDepartment
         /// Название ролика/тема дебатов
         /// </summary>
         public string BroadcastCaption { get; set; } = "";
+
+        public BroadcastRecord() { }
+
+        public BroadcastRecord(string mediaResource,
+                               string date,
+                               string time,
+                               string durationNominal,
+                               string regionNumber,
+                               string clientType,
+                               string clientName,
+                               string durationActual,
+                               string broadcastType,
+                               string broadcastCaption)
+        {
+            MediaResource = mediaResource;
+            Date = DateOnly.Parse(date);
+            Time = TimeOnly.Parse(time);
+            DurationNominal = TimeSpan.Parse(durationNominal);
+            RegionNumber = regionNumber;
+            ClientType = clientType;
+            // Оставляем только руссие буквы и пробелы
+            Regex rgx = new Regex("[^а-яА-Я ]");
+            ClientName = $"{rgx.Replace(clientName, "")}".Trim();
+            //
+            if (durationActual != "")
+            {
+                DurationActual = TimeSpan.Parse(durationActual);
+            }
+            BroadcastType = broadcastType;
+            BroadcastCaption = broadcastCaption;
+        }
     }
 }

@@ -150,7 +150,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="EconomicDepartment\BroadcastingMaterial.cs" />
     <Compile Include="EconomicDepartment\Builder.cs" />
     <Compile Include="EconomicDepartment\ElectionRegion.cs" />
   </ItemGroup>

@@ -141,6 +141,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Button Content="Создать таблицу" Margin="10,10,605,10" Click="DoReport"></Button>
+                    <Button Margin="194,10,428,10" Content="Создать отчеты" Click="CreateTotalReports" ></Button>
                     <DataGrid Grid.Row="1" Margin="5,5,5,5" Name="dataGridReport"></DataGrid>
 
                 </Grid>
