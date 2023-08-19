@@ -1,4 +1,5 @@
-﻿using DocumentFormat.OpenXml;
+﻿using ClosedXML.Excel;
+using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using System;
@@ -43,6 +44,8 @@ namespace WordDocumentBuilder
                     foreach (Row row in rows)
                     {
                         counter = counter + 1;
+                        // Счетчик столбцов
+                        int columnNumber = 0;
                         //Read the first row as header
                         if (counter == 1)
                         {
@@ -51,17 +54,26 @@ namespace WordDocumentBuilder
                             {
                                 var colunmName = firstRowIsHeader ? GetCellValue(doc, cell) : "Field" + j++;
                                 dt.Columns.Add(colunmName);
+                                columnNumber++;
                             }
                         }
                         else
                         {
                             dt.Rows.Add();
+                            // Почти полностью рабочий вариант (пропускает пустые ячейки)
                             int i = 0;
                             foreach (Cell cell in row.Descendants<Cell>())
                             {
                                 dt.Rows[dt.Rows.Count - 1][i] = GetCellValue(doc, cell);
                                 i++;
                             }
+
+                            //// Нерабочий вариант
+                            //var cells = row.Descendants<Cell>().ToList();
+                            //for (int j = 0; j <= columnNumber; j++)
+                            //{
+                            //    dt.Rows[dt.Rows.Count - 1][j] = GetCellValue(doc, cells[j]);
+                            //}
                         }
                     }
                 }
@@ -74,12 +86,75 @@ namespace WordDocumentBuilder
         }
 
         /// <summary>
-        /// Чтение ячейки листа, используется в <see cref="ReadExcelSheet(string, bool, int)"/>.
+        /// Из интернета, ругается, что метод не найден
         /// </summary>
-        /// <param name="doc"></param>
-        /// <param name="cell"></param>
+        /// <param name="path"></param>
+        /// <param name="worksheet"></param>
         /// <returns></returns>
-        private static string GetCellValue(SpreadsheetDocument doc, Cell cell)
+        public static DataTable GetDataFromExcel(string path, dynamic worksheet)
+        {
+            //Save the uploaded Excel file.
+
+
+            DataTable dt = new DataTable();
+            //Open the Excel file using ClosedXML.
+            using (XLWorkbook workBook = new XLWorkbook(path))
+            {
+                //Read the first Sheet from Excel file.
+                IXLWorksheet workSheet = workBook.Worksheet(worksheet);
+
+                //Create a new DataTable.
+
+                //Loop through the Worksheet rows.
+                bool firstRow = true;
+                foreach (IXLRow row in workSheet.Rows())
+                {
+                    //Use the first row to add columns to DataTable.
+                    if (firstRow)
+                    {
+                        foreach (IXLCell cell in row.Cells())
+                        {
+                            if (!string.IsNullOrEmpty(cell.Value.ToString()))
+                            {
+                                dt.Columns.Add(cell.Value.ToString());
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        firstRow = false;
+                    }
+                    else
+                    {
+                        int i = 0;
+                        DataRow toInsert = dt.NewRow();
+                        foreach (IXLCell cell in row.Cells(1, dt.Columns.Count))
+                        {
+                            try
+                            {
+                                toInsert[i] = cell.Value.ToString();
+                            }
+                            catch (Exception ex)
+                            {
+
+                            }
+                            i++;
+                        }
+                        dt.Rows.Add(toInsert);
+                    }
+                }
+                return dt;
+            }
+        }
+
+            /// <summary>
+            /// Чтение ячейки листа, используется в <see cref="ReadExcelSheet(string, bool, int)"/>.
+            /// </summary>
+            /// <param name="doc"></param>
+            /// <param name="cell"></param>
+            /// <returns></returns>
+            private static string GetCellValue(SpreadsheetDocument doc, Cell cell)
         {
             if (cell.CellValue == null) return "";
             string value = cell.CellValue.InnerText;

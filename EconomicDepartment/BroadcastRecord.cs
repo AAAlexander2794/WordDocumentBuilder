@@ -33,7 +33,7 @@ namespace WordDocumentBuilder.EconomicDepartment
         /// <summary>
         /// Номер округа
         /// </summary>
-        public string RegionNumber { get; set; } = "";
+        public string RegionNumber { get; set; } = "–";
 
         /// <summary>
         /// Партия/кандидат

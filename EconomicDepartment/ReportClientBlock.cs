@@ -10,7 +10,7 @@ namespace WordDocumentBuilder.EconomicDepartment
     /// <summary>
     /// Блок отчета, содержащий одного клиента
     /// </summary>
-    internal class ReportClientBlock
+    public class ReportClientBlock
     {
         /// <summary>
         /// Ф.И.О. клиента (или название партии)
@@ -25,7 +25,7 @@ namespace WordDocumentBuilder.EconomicDepartment
         /// <summary>
         /// Записи о вещании
         /// </summary>
-        ObservableCollection<BroadcastRecord> BroadcastRecords { get; set; } = new ObservableCollection<BroadcastRecord>();
+        public ObservableCollection<BroadcastRecord> BroadcastRecords { get; set; } = new ObservableCollection<BroadcastRecord>();
 
         /// <summary>
         /// Суммарное время, предоставленное клиенту

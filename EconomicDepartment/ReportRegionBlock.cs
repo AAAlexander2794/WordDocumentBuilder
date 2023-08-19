@@ -9,7 +9,7 @@ namespace WordDocumentBuilder.EconomicDepartment
     /// <summary>
     /// Блок отчета, содержащий один округ
     /// </summary>
-    internal class ReportRegionBlock
+    public class ReportRegionBlock
     {
         public string RegionNumber { get; set; } = "";
 

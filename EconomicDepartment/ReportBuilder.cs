@@ -15,23 +15,24 @@ namespace WordDocumentBuilder.EconomicDepartment
             //
             string subCatalog = $"{DateTime.Now.ToShortDateString()} {DateTime.Now.Hour}.{DateTime.Now.Minute}.{DateTime.Now.Second}";
             //
-            CreateTotalReport("Маяк", subCatalog);
-            CreateTotalReport("Радио России", subCatalog);
-            CreateTotalReport("Вести ФМ", subCatalog);
-            CreateTotalReport("Россия 1", subCatalog);
-            CreateTotalReport("Россия 24", subCatalog);
+            BuildTotalReport("Маяк", subCatalog);
+            BuildTotalReport("Радио России", subCatalog);
+            BuildTotalReport("Вести ФМ", subCatalog);
+            BuildTotalReport("Россия 1", subCatalog);
+            BuildTotalReport("Россия 24", subCatalog);
         }
 
-        public void CreateTotalReport(string mediaResource, string subCatalog)
+
+
+        public void BuildTotalReport(string mediaResource, string subCatalog)
         {
-
-
             string recordsFilePath = $@"./Настройки/Учет вещания/{mediaResource}.xlsx";
             // Список строк вещания одной СМИ
             var broadcastRecords = ReadBroadcastRecordsFromExcel(recordsFilePath);
-            // На основе строк одной СМИ делаем таблицу
-            DataTable dt = BuildTotalReport(broadcastRecords);
-
+            // На основе строк одной СМИ строим блоки для таблицы
+            var blocks = BuildTotalReport(broadcastRecords);
+            // Строим таблицу из блоков
+            DataTable dt = BuildTotalReport(blocks);
             // Запись в файл Excel
             XLWorkbook wb = new XLWorkbook();
             wb.Worksheets.Add(dt, "Отчет");
@@ -39,7 +40,61 @@ namespace WordDocumentBuilder.EconomicDepartment
 
         }
 
-        public DataTable BuildTotalReport(List<BroadcastRecord> records)
+        public List<ReportRegionBlock> BuildTotalReport(List<BroadcastRecord> broadcastRecords)
+        {
+            List<ReportRegionBlock> regionBlocks = new List<ReportRegionBlock>();
+            // По каждой строке вещания
+            foreach (var broadcastRecord in broadcastRecords)
+            {
+                bool regionCreated = false;
+                foreach (var region in regionBlocks)
+                {
+                    // Если такой регион уже есть
+                    if (region.RegionNumber == broadcastRecord.RegionNumber)
+                    {
+                        regionCreated = true;
+                        bool clientCreated = false;
+                        // По каждому клиенту в регионе
+                        foreach (var client in region.ClientBlocks)
+                        {
+                            // Если такой клиент уже есть
+                            if (client.ClientName == broadcastRecord.ClientName)
+                            {
+                                clientCreated = true;
+                                client.BroadcastRecords.Add(broadcastRecord);
+                            }
+                        }
+                        // Если клиента еще не создали
+                        if (!clientCreated)
+                        {
+                            var newClient = new ReportClientBlock()
+                            {
+                                ClientName = broadcastRecord.ClientName
+                            };
+                            newClient.BroadcastRecords.Add(broadcastRecord);
+                            region.ClientBlocks.Add(newClient);
+                        }
+                    }
+                }
+                // Если регион еще не создали
+                if (!regionCreated)
+                {
+                    var newRegion = new ReportRegionBlock();
+                    newRegion.RegionNumber = broadcastRecord.RegionNumber;
+                    regionBlocks.Add(newRegion);
+                    // Создаем нового клиента (регион новый, значит, клиента не было)
+                    var newClient = new ReportClientBlock()
+                    {
+                        ClientName = broadcastRecord.ClientName
+                    };
+                    newClient.BroadcastRecords.Add(broadcastRecord);
+                    newRegion.ClientBlocks.Add(newClient);
+                }
+            }
+            return regionBlocks;
+        }
+
+        public DataTable BuildTotalReport(List<ReportRegionBlock> blocks)
         {
             DataTable dt = new DataTable();
             // Создаем 7 столбцов
@@ -50,22 +105,51 @@ namespace WordDocumentBuilder.EconomicDepartment
             dt.Columns.Add("Дата и время выхода в эфир");
             dt.Columns.Add("Объем фактически использованного эфирного времени (час:мин:сек)");
             dt.Columns.Add("Основание предоставления (дата заключения и номер договора)");
-            //
+            // Счетчик п/п
             int i = 1;
-            //
-            foreach (var record in records)
+            // Суммарный объем фактически выделенного времени в СМИ
+            TimeSpan sumDuration = TimeSpan.Zero;
+            // По каждому округу
+            foreach (var block in blocks)
             {
                 dt.Rows.Add();
-                dt.Rows[dt.Rows.Count - 1][0] = i;
-                dt.Rows[dt.Rows.Count - 1][1] = record.ClientName;
-                dt.Rows[dt.Rows.Count - 1][2] = record.BroadcastType;
-                dt.Rows[dt.Rows.Count - 1][3] = record.BroadcastCaption;
-                dt.Rows[dt.Rows.Count - 1][4] = $"{record.Date} {record.Time}";
-                dt.Rows[dt.Rows.Count - 1][5] = record.DurationActual;
-                dt.Rows[dt.Rows.Count - 1][6] = "";
-                //
-                i++;
+                dt.Rows[dt.Rows.Count - 1][0] = $"Округ № {block.RegionNumber}";
+                // По каждому клиенту
+                foreach (var client in block.ClientBlocks)
+                {
+                    bool firstRow = true;
+                    // По каждой записи вещания клиента
+                    foreach (var record in client.BroadcastRecords)
+                    {
+                        dt.Rows.Add();
+                        if (firstRow)
+                        {
+                            dt.Rows[dt.Rows.Count - 1][0] = i;
+                            dt.Rows[dt.Rows.Count - 1][1] = client.ClientName;
+                            dt.Rows[dt.Rows.Count - 1][6] = client.ClientContract;
+                        }
+                        //
+                        dt.Rows[dt.Rows.Count - 1][2] = record.BroadcastType;
+                        dt.Rows[dt.Rows.Count - 1][3] = record.BroadcastCaption;
+                        dt.Rows[dt.Rows.Count - 1][4] = $"{record.Date} {record.Time}";
+                        dt.Rows[dt.Rows.Count - 1][5] = record.DurationActual;
+                        //
+                        firstRow = false;
+                    }
+                    //
+                    dt.Rows.Add();
+                    dt.Rows[dt.Rows.Count - 1][4] = $"Итого";
+                    dt.Rows[dt.Rows.Count - 1][5] = client.TotalDuration;
+                    //
+                    sumDuration += client.TotalDuration;
+                    // Увеличения счетчика п/п
+                    i++;
+                }
             }
+            //
+            dt.Rows.Add();
+            dt.Rows[dt.Rows.Count - 1][4] = $"Итого";
+            dt.Rows[dt.Rows.Count - 1][5] = sumDuration;
             //
             return dt;
         }
@@ -105,5 +189,7 @@ namespace WordDocumentBuilder.EconomicDepartment
             //
             return broadcastRecords;
         }
+
+
     }
 }
