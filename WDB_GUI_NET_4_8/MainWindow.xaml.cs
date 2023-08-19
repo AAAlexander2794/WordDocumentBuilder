@@ -183,7 +183,7 @@ namespace WDB_GUI_NET_4_8
 
         private void CreateTotalReports(object sender, RoutedEventArgs e)
         {
-            var builder = new WordDocumentBuilder.EconomicDepartment.Builder();
+            var builder = new WordDocumentBuilder.EconomicDepartment.ReportBuilder();
             builder.BuildTotalReports();
             MessageBox.Show("Готово.");
         }
