@@ -184,12 +184,11 @@ namespace WDB_GUI_NET_4_8
         private void CreateTotalReports(object sender, RoutedEventArgs e)
         {
             // test
-            var dt = ExcelProcessor.ReadExcelSheet($@"./Настройки/Учет вещания/Россия 1.xlsx");
-            dataGridReport.ItemsSource = dt.DefaultView;
+            //var dt = ExcelProcessor.ReadExcelSheet($@"./Настройки/Учет вещания/Россия 1.xlsx");
+            //dataGridReport.ItemsSource = dt.DefaultView;
             //
             var builder = new WordDocumentBuilder.EconomicDepartment.ReportBuilder();
-           
-            //builder.BuildTotalReports();
+            builder.BuildTotalReports();
             MessageBox.Show("Готово.");
         }
     }

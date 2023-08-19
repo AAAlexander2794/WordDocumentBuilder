@@ -78,10 +78,68 @@ namespace WordDocumentBuilder
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception($"ReadExcelSheet\r\n{ex.Message}");
             }
+            return dt;
+        }
+
+        public static DataTable ReadExcelSheetClosedXML(string filename, int sheetNumber = 1, bool firstRowIsHeader = true)
+        {
+            //
+            var workbook = new XLWorkbook(filename);
+            var ws = workbook.Worksheet(sheetNumber);
+            return ReadExcelSheetClosedXML(ws, firstRowIsHeader);
+        }
+
+        public static DataTable ReadExcelSheetClosedXML(string filename, string sheetName, bool firstRowIsHeader = true)
+        {
+            //
+            var workbook = new XLWorkbook(filename);
+            var ws = workbook.Worksheet(sheetName);
+            return ReadExcelSheetClosedXML(ws, firstRowIsHeader);
+        }
+
+        public static DataTable ReadExcelSheetClosedXML(IXLWorksheet ws, bool firstRowIsHeader = true)
+        {
+            DataTable dt = new DataTable();
+            // Счетчик количества столбцов
+            int count = 0;
+            //
+            if (firstRowIsHeader)
+            {
+                //
+                var rowHead = ws.Row(1);
+                var cells = rowHead.Cells();
+                foreach (var cell in cells)
+                {
+                    if (cell.IsEmpty()) break;
+                    // Создаем столбец
+                    dt.Columns.Add(cell.GetValue<string>());
+                    count++;
+                }
+            }
+            //
+            foreach (var row in ws.Rows())
+            {
+                // Первую пропускаем
+                if (row == ws.Row(1)) continue;
+                // На первой пустой строке прекращаем
+                if (row.IsEmpty()) break;
+                //
+                dt.Rows.Add();
+                int i = 0;
+                //
+                foreach (var cell in row.Cells())
+                {
+                    // Если ячеек больше, чем заголовков, прекращаем
+                    if (i >= count) break;
+                    dt.Rows[dt.Rows.Count - 1][i] = cell.Value;
+                    i++;
+                }
+            }
+            //
             return dt;
         }
 

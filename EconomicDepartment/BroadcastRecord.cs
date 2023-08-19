@@ -75,8 +75,10 @@ namespace WordDocumentBuilder.EconomicDepartment
         {
             MediaResource = mediaResource;
             Date = DateOnly.Parse(date);
-            Time = TimeOnly.Parse(time);
-            DurationNominal = TimeSpan.Parse(durationNominal);
+            var dateTime = DateTime.Parse(time);
+            Time = TimeOnly.FromDateTime(dateTime);
+            dateTime = DateTime.Parse(durationNominal);
+            DurationNominal = dateTime.TimeOfDay;
             RegionNumber = regionNumber;
             ClientType = clientType;
             // Оставляем только руссие буквы и пробелы
@@ -85,7 +87,8 @@ namespace WordDocumentBuilder.EconomicDepartment
             //
             if (durationActual != "")
             {
-                DurationActual = TimeSpan.Parse(durationActual);
+                dateTime = DateTime.Parse(durationActual);
+                DurationActual = dateTime.TimeOfDay;
             }
             BroadcastType = broadcastType;
             BroadcastCaption = broadcastCaption;

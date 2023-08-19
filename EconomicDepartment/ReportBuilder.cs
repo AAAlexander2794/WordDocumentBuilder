@@ -158,7 +158,7 @@ namespace WordDocumentBuilder.EconomicDepartment
         {
             List<BroadcastRecord> broadcastRecords;
             //
-            var dt = ExcelProcessor.ReadExcelSheet(filePath);
+            var dt = ExcelProcessor.ReadExcelSheetClosedXML(filePath, "Отчет");
             //
             broadcastRecords = BuildBroadcastRecords(dt);
             //
