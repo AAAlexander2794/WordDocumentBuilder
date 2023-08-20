@@ -82,7 +82,7 @@ namespace WordDocumentBuilder.EconomicDepartment
             RegionNumber = regionNumber;
             ClientType = clientType;
             // Оставляем только руссие буквы и пробелы
-            Regex rgx = new Regex("[^а-яА-Я ]");
+            Regex rgx = new Regex("[^а-яёА-Я ]");
             ClientName = $"{rgx.Replace(clientName, "")}".Trim();
             //
             if (durationActual != "")

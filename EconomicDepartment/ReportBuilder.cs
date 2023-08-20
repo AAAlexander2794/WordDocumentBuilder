@@ -5,6 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WordDocumentBuilder.ElectionContracts;
+using WordDocumentBuilder.ElectionContracts.Entities;
 
 namespace WordDocumentBuilder.EconomicDepartment
 {
@@ -31,6 +33,47 @@ namespace WordDocumentBuilder.EconomicDepartment
             var broadcastRecords = ReadBroadcastRecordsFromExcel(recordsFilePath);
             // На основе строк одной СМИ строим блоки для таблицы
             var blocks = BuildTotalReport(broadcastRecords);
+            // Добавляем к клиентам данные о договоре
+            var builder = new ElectionContracts.Builder();
+            var candidates = builder.BuildCandidates("1");
+            foreach (var candidate in candidates)
+            {
+                bool isFound = false;
+                // Поиск только по блокам, где указан округ, то есть только по кандидатам
+                foreach (var block in blocks.Where(b => b.RegionNumber.All(Char.IsDigit)))
+                {
+                    foreach (var client in block.ClientBlocks)
+                    {
+                        // Если нашли этого кандидата, добавляем информацию о договоре и переходим сразу к следующему
+                        if (client.ClientName == $"{candidate.Info.Фамилия} {candidate.Info.Имя} {candidate.Info.Отчество}")
+                        {
+                            isFound = true;
+                            client.ClientContract = $"Договор № {candidate.Info.Номер_договора} от {candidate.Info.Дата_договора} г.";
+                            break;
+                        }
+                    }
+                    if (isFound) break;
+                }
+            }
+            var parties = builder.BuildParties("1");
+            foreach (var party in parties)
+            {
+                bool isFound = false;
+                foreach (var block in blocks.Where(b => b.RegionNumber == "–"))
+                {
+                    foreach (var client in block.ClientBlocks)
+                    {
+                        // Если нашли партию, добавляем информацию о договоре и переходим сразу к следующему
+                        if (party.Info.Партия_Название_Рабочее.Contains(client.ClientName))
+                        {
+                            isFound = true;
+                            client.ClientContract = $"Договор № {party.Info.Номер_договора} от {party.Info.Дата_договора} г.";
+                            break;
+                        }
+                    }
+                    if (isFound) break;
+                }
+            }
             // Строим таблицу из блоков
             DataTable dt = BuildTotalReport(blocks);
             // Запись в файл Excel
