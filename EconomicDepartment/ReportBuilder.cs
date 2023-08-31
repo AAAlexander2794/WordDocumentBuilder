@@ -164,6 +164,9 @@ namespace WordDocumentBuilder.EconomicDepartment
                     // По каждой записи вещания клиента
                     foreach (var record in client.BroadcastRecords)
                     {
+                        // Если не было вещания фактического, пропускаем.
+                        if (record.DurationActual == TimeSpan.Zero) continue;
+                        //
                         dt.Rows.Add();
                         if (firstRow)
                         {
@@ -180,13 +183,17 @@ namespace WordDocumentBuilder.EconomicDepartment
                         firstRow = false;
                     }
                     //
-                    dt.Rows.Add();
-                    dt.Rows[dt.Rows.Count - 1][4] = $"Итого";
-                    dt.Rows[dt.Rows.Count - 1][5] = client.TotalDuration;
-                    //
-                    sumDuration += client.TotalDuration;
-                    // Увеличения счетчика п/п
-                    i++;
+                    if (client.TotalDuration != TimeSpan.Zero)
+                    {
+                        //
+                        dt.Rows.Add();
+                        dt.Rows[dt.Rows.Count - 1][4] = $"Итого";
+                        dt.Rows[dt.Rows.Count - 1][5] = client.TotalDuration;
+                        //
+                        sumDuration += client.TotalDuration;
+                        // Увеличения счетчика п/п
+                        i++;
+                    }
                 }
             }
             //
