@@ -105,6 +105,7 @@ namespace WordDocumentBuilder.EconomicDepartment
                             {
                                 clientCreated = true;
                                 client.BroadcastRecords.Add(broadcastRecord);
+                                region.TotalDuration += broadcastRecord.DurationActual;
                             }
                         }
                         // Если клиента еще не создали
@@ -116,6 +117,7 @@ namespace WordDocumentBuilder.EconomicDepartment
                             };
                             newClient.BroadcastRecords.Add(broadcastRecord);
                             region.ClientBlocks.Add(newClient);
+                            region.TotalDuration += broadcastRecord.DurationActual;
                         }
                     }
                 }
@@ -132,6 +134,7 @@ namespace WordDocumentBuilder.EconomicDepartment
                     };
                     newClient.BroadcastRecords.Add(broadcastRecord);
                     newRegion.ClientBlocks.Add(newClient);
+                    newRegion.TotalDuration += broadcastRecord.DurationActual;
                 }
             }
             return regionBlocks;
@@ -155,11 +158,17 @@ namespace WordDocumentBuilder.EconomicDepartment
             // По каждому округу
             foreach (var block in blocks)
             {
+                // Если не было вещания фактического, пропускаем.
+                if (block.TotalDuration == TimeSpan.Zero) continue;
+                //
                 dt.Rows.Add();
                 dt.Rows[dt.Rows.Count - 1][0] = $"Округ № {block.RegionNumber}";
                 // По каждому клиенту
                 foreach (var client in block.ClientBlocks)
                 {
+                    // Если не было вещания фактического, пропускаем.
+                    if (client.TotalDuration == TimeSpan.Zero) continue;
+                    //
                     bool firstRow = true;
                     // По каждой записи вещания клиента
                     foreach (var record in client.BroadcastRecords)
