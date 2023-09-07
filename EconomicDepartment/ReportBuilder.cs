@@ -33,11 +33,36 @@ namespace WordDocumentBuilder.EconomicDepartment
             string recordsFilePath = $@"./Настройки/Учет вещания/{mediaResource}.xlsx";
             // Список строк вещания одной СМИ
             var broadcastRecords = ReadBroadcastRecordsFromExcel(recordsFilePath);
-            // На основе строк одной СМИ строим блоки для таблицы
-            var blocks = BuildTotalReport(broadcastRecords);
+            
             // Добавляем к клиентам данные о договоре
             var builder = new ElectionContracts.Builder();
             var candidates = builder.BuildCandidates("1");
+            // Формируем список округов
+            List<Region> regions = new List<Region>();
+            foreach (var candidate in candidates)
+            {
+                bool flag = false;
+                foreach (var region in regions)
+                {
+                    if (region.Number == candidate.Info.Округ_Номер)
+                    {
+                        flag = true;
+                        break;
+                    }
+                }
+                // Если нет региона (округа) еще
+                if (!flag)
+                {
+                    regions.Add(new Region()
+                    {
+                        Number = candidate.Info.Округ_Номер,
+                        Caption = candidate.Info.Округ_Название_падеж_им
+                    });
+                }
+            }
+            // На основе строк одной СМИ строим блоки для таблицы
+            var blocks = BuildTotalReport(broadcastRecords, regions);
+            //
             foreach (var candidate in candidates)
             {
                 bool isFound = false;
@@ -379,9 +404,18 @@ namespace WordDocumentBuilder.EconomicDepartment
         //    return tr;
         //}
 
-        public List<ReportRegionBlock> BuildTotalReport(List<BroadcastRecord> broadcastRecords)
+        public List<ReportRegionBlock> BuildTotalReport(List<BroadcastRecord> broadcastRecords, List<Region> regions)
         {
             List<ReportRegionBlock> regionBlocks = new List<ReportRegionBlock>();
+            // Заполняем регионы заранее в нужном порядке 
+            foreach (var region in regions)
+            {
+                regionBlocks.Add(new ReportRegionBlock() 
+                { 
+                    RegionNumber = region.Number, 
+                    RegionCaption = region.Caption 
+                });
+            }
             // По каждой строке вещания
             foreach (var broadcastRecord in broadcastRecords)
             {
@@ -464,7 +498,15 @@ namespace WordDocumentBuilder.EconomicDepartment
                 if (block.TotalDuration == TimeSpan.Zero) continue;
                 //
                 dt.Rows.Add();
-                dt.Rows[dt.Rows.Count - 1][0] = $"Округ № {block.RegionNumber}";
+                // Если номер округа есть, то указываем номер и название
+                if (Regex.IsMatch(block.RegionNumber, @"^\d+$"))
+                {
+                    dt.Rows[dt.Rows.Count - 1][0] = $"{block.RegionCaption} округ № {block.RegionNumber}";
+                }
+                else
+                {
+                    dt.Rows[dt.Rows.Count - 1][0] = $"Партии";
+                }
                 // По каждому клиенту
                 foreach (var client in block.ClientBlocks)
                 {
