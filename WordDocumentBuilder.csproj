@@ -122,6 +122,7 @@
     <Compile Include="EconomicDepartment\BroadcastRecord.cs" />
     <Compile Include="EconomicDepartment\Region.cs" />
     <Compile Include="EconomicDepartment\ReportBuilder.cs" />
+    <Compile Include="EconomicDepartment\ReportBuilder.Word.cs" />
     <Compile Include="EconomicDepartment\ReportClientBlock.cs" />
     <Compile Include="EconomicDepartment\ReportRegionBlock.cs" />
     <Compile Include="ElectionContracts\BuilderCandidates.cs" />
