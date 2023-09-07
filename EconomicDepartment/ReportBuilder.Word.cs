@@ -1,249 +1,259 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Wordprocessing;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace WordDocumentBuilder.EconomicDepartment
 {
     public partial class ReportBuilder
     {
-        //private void CreateProtocol(List<ReportRegionBlock> blocks, string templatePath, string resultPath, string mediaresource)
-        //{
-        //    //
-        //    string fieldMedia = "";
-        //    string fileName = "_";
-        //    switch (mediaresource)
-        //    {
-        //        case "Маяк":
-        //            fieldMedia = settings.Наименование_СМИ_Маяк;
-        //            fileName = "Маяк.docx";
-        //            break;
-        //        case "Вести ФМ":
-        //            fieldMedia = settings.Наименование_СМИ_Вести_ФМ;
-        //            fileName = "Вести ФМ.docx";
-        //            break;
-        //        case "Радио России":
-        //            fieldMedia = settings.Наименование_СМИ_Радио_России;
-        //            fileName = "Радио России.docx";
-        //            break;
-        //        case "Россия 1":
-        //            fieldMedia = settings.Наименование_СМИ_Россия_1;
-        //            fileName = "Россия 1.docx";
-        //            break;
-        //        case "Россия 24":
-        //            fieldMedia = settings.Наименование_СМИ_Россия_24;
-        //            fileName = "Россия 24.docx";
-        //            break;
-        //    }
-        //    // Новый протокол
-        //    var document = new WordDocument(templatePath);
-        //    // Заполняем поля слияния
-        //    document.SetMergeFieldText("Наименование_СМИ", $"{fieldMedia}");
-        //    document.SetMergeFieldText("ИО_Фамилия_предст_СМИ", $"{settings.Кандидаты_ИО_Фамилия_предст_СМИ}");
-        //    document.SetMergeFieldText("Дата", $"{settings.Кандидаты_Дата}");
-        //    document.SetMergeFieldText("ИО_Фамилия_члена_изб_ком", $"{settings.Кандидаты_ИО_Фамилия_члена_изб_ком}");
-        //    //
-        //    try
-        //    {
-        //        document.SetBookmarkText($"Талон", "");
-        //        var table = CreateTableProtocolCandidates(protocol, mediaresource);
-        //        document.SetBookmarkTable($"Талон", table);
-        //    }
-        //    catch { }
-        //    //
-        //    document.Save(resultPath + $"{fileName}");
-        //    document.Close();
-        //}
+        private void CreateReport(List<ReportRegionBlock> blocks, string templatePath, string resultPath, string mediaresource)
+        {
+            //
+            string fieldMedia = "";
+            string fileName = "_";
+            switch (mediaresource)
+            {
+                case "Маяк":
+                    //fieldMedia = settings.Наименование_СМИ_Маяк;
+                    fileName = "Маяк.docx";
+                    break;
+                case "Вести ФМ":
+                    //fieldMedia = settings.Наименование_СМИ_Вести_ФМ;
+                    fileName = "Вести ФМ.docx";
+                    break;
+                case "Радио России":
+                    //fieldMedia = settings.Наименование_СМИ_Радио_России;
+                    fileName = "Радио России.docx";
+                    break;
+                case "Россия 1":
+                    //fieldMedia = settings.Наименование_СМИ_Россия_1;
+                    fileName = "Россия 1.docx";
+                    break;
+                case "Россия 24":
+                    //fieldMedia = settings.Наименование_СМИ_Россия_24;
+                    fileName = "Россия 24.docx";
+                    break;
+            }
+            // Новый 
+            var document = new WordDocument(templatePath);
+            //// Заполняем поля слияния
+            //document.SetMergeFieldText("Наименование_СМИ", $"{fieldMedia}");
+            //document.SetMergeFieldText("ИО_Фамилия_предст_СМИ", $"{settings.Кандидаты_ИО_Фамилия_предст_СМИ}");
+            //document.SetMergeFieldText("Дата", $"{settings.Кандидаты_Дата}");
+            //document.SetMergeFieldText("ИО_Фамилия_члена_изб_ком", $"{settings.Кандидаты_ИО_Фамилия_члена_изб_ком}");
+            //
+            document.SetBookmarkText($"Учет", "");
+            var table = CreateTableReport(blocks);
+            document.SetBookmarkTable($"Учет", table);
+            // Создает путь для документов, если вдруг каких-то папок нет
+            Directory.CreateDirectory(resultPath);
+            //
+            document.Save(resultPath + $"{fileName}");
+            document.Close();
+        }
 
 
-        ///// <summary>
-        ///// Создает таблицу для отчета в ворде
-        ///// </summary>
-        ///// <param name="candidates"></param>
-        ///// <param name="parties"></param>
-        ///// <param name="mediaresource"></param>
-        ///// <returns></returns>
-        //Table CreateTableReport(List<Candidate> candidates, List<Party> parties, string mediaresource)
-        //{
-        //    // 
-        //    Table table = new Table();
-        //    //
-        //    TableProperties tblProp = new TableProperties();
-        //    TableBorders tblBorders = new TableBorders()
-        //    {
-        //        BottomBorder = new BottomBorder()
-        //        {
-        //            Size = 4,
-        //            Val = BorderValues.Single
-        //        },
-        //        TopBorder = new TopBorder()
-        //        {
-        //            Size = 4,
-        //            Val = BorderValues.Single
-        //        },
-        //        LeftBorder = new LeftBorder()
-        //        {
-        //            Size = 4,
-        //            Val = BorderValues.Single
-        //        },
-        //        RightBorder = new RightBorder()
-        //        {
-        //            Size = 4,
-        //            Val = BorderValues.Single
-        //        },
-        //        InsideHorizontalBorder = new InsideHorizontalBorder()
-        //        {
-        //            Size = 4,
-        //            Val = BorderValues.Single
-        //        },
-        //        InsideVerticalBorder = new InsideVerticalBorder()
-        //        {
-        //            Size = 4,
-        //            Val = BorderValues.Single
-        //        }
-        //    };
-        //    tblProp.Append(tblBorders);
-        //    //// Now we create a new layout and make it "fixed".
-        //    //TableLayout tl = new TableLayout() { Type = TableLayoutValues.Fixed };
-        //    //tblProp.TableLayout = tl;
-        //    //
-        //    table.Append(tblProp);
-        //    // Заголовки таблицы
-        //    TableRow trHead = new TableRow();
-        //    var tcH4 = new TableCell(CreateParagraph($"Даты и время\r\n" +
-        //        $"выхода в эфир предвыборных\r\n" +
-        //        $"агитационных материалов\r\n" +
-        //        $"(число, месяц, год; время;\r\n" +
-        //        $"количество\r\n" +
-        //        $"минут/секунд"));
-        //    tcH4.Append(new TableCellProperties(new TableCellWidth() { Type = TableWidthUnitValues.Auto }));
-        //    trHead.Append(
-        //        new TableCell(CreateParagraph($"№ п/п")),
-        //        new TableCell(CreateParagraph($"Фамилия, инициалы\r\n" +
-        //        $"зарегистрированного кандидата,\r\n" +
-        //        $"№ одномандатного\r\n" +
-        //        $"избирательного округа, по\r\n" +
-        //        $"которому он зарегистрирован")),
-        //        new TableCell(CreateParagraph($"Даты и время выхода в эфир\r\n" +
-        //        $"совместных агитационных\r\n" +
-        //        $"мероприятий\r\n" +
-        //        $"(число, месяц, год; время;\r\n" +
-        //        $"количество\r\n" +
-        //        $"минут/секунд")),
-        //        tcH4,
-        //        new TableCell(CreateParagraph($"Фамилия, инициалы представителя\r\n" +
-        //        $"зарегистрированного кандидата,\r\n" +
-        //        $"участвовавшего\r\n" +
-        //        $"в жеребьевке (члена\r\n" +
-        //        $"соответствующей\r\n" +
-        //        $"избирательной комиссии с\r\n" +
-        //        $"правом решающего голоса)")),
-        //        new TableCell(CreateParagraph($"Подпись зарегистрированного кандидата,\r\n" +
-        //        $"участвовавшего в жеребьевке\r\n" +
-        //        $"(члена соответствующей\r\n" +
-        //        $"избирательной комиссии с\r\n" +
-        //        $"правом решающего голоса)\r\n" +
-        //        $"и дата подписания"))
-        //        );
-        //    // Добавляем заголовок к таблице
-        //    table.Append(trHead);
-        //    // Добавляем строчку с нумерованием столбцов
-        //    TableRow tr = new TableRow();
-        //    TableCell tc1 = new TableCell(CreateParagraph($"1"));
-        //    TableCell tc2 = new TableCell(CreateParagraph($"2"));
-        //    TableCell tc3 = new TableCell(CreateParagraph($"3"));
-        //    TableCell tc4 = new TableCell(CreateParagraph($"4"));
-        //    TableCell tc5 = new TableCell(CreateParagraph($"5"));
-        //    TableCell tc6 = new TableCell(CreateParagraph($"6"));
-        //    tr.Append(tc1, tc2, tc3, tc4, tc5, tc6);
-        //    table.Append(tr);
-        //    // Добавляем округ одной строкой
-        //    tr = CreateRowMergedCells(protocol.Округ, 6);
-        //    table.Append(tr);
-        //    // Для строки Итого со всех кандидатов длительность берем
-        //    TimeSpan duration = TimeSpan.Zero;
-        //    // По каждому кандидату из протокола
-        //    for (int i = 0; i < protocol.Candidates.Count; i++)
-        //    {
-        //        //
-        //        var c = protocol.Candidates[i];
-        //        //
-        //        string cell5Text = "";
-        //        if (c.Info.Явка_кандидата == "1")
-        //        {
-        //            // Если кандидат внесен (вообще и так должен быть внесен)
-        //            if (c.Info.Фамилия.Length > 0 &&
-        //            c.Info.Имя.Length > 0 &&
-        //            c.Info.Отчество.Length > 0)
-        //            {
-        //                cell5Text = $"{c.Info.Фамилия} {c.Info.Имя[0]}. {c.Info.Отчество[0]}.";
-        //            }
-        //        }
-        //        else if (c.Info.Явка_представителя == "1")
-        //        {
-        //            // Если Представитель внесен
-        //            if (c.Info.Представитель_Фамилия.Length > 0 &&
-        //            c.Info.Представитель_Имя.Length > 0 &&
-        //            c.Info.Представитель_Отчество.Length > 0)
-        //            {
-        //                cell5Text = $"{c.Info.Представитель_Фамилия} {c.Info.Представитель_Имя[0]}. {c.Info.Представитель_Отчество[0]}.";
-        //            }
-        //        }
-        //        else
-        //        {
-        //            cell5Text = $"{protocol.Изб_ком_Фамилия_ИО}";
-        //        }
-        //        //
-        //        Talon talon = null;
-        //        // Определяем, какой из талонов надо использовать
-        //        switch (mediaresource)
-        //        {
-        //            case "Маяк":
-        //                talon = c.Талон_Маяк;
-        //                break;
-        //            case "Вести ФМ":
-        //                talon = c.Талон_Вести_ФМ;
-        //                break;
-        //            case "Радио России":
-        //                talon = c.Талон_Радио_России;
-        //                break;
-        //            case "Россия 1":
-        //                talon = c.Талон_Россия_1;
-        //                break;
-        //            case "Россия 24":
-        //                talon = c.Талон_Россия_24;
-        //                break;
-        //        }
-        //        // Для общей длительности в Итого
-        //        if (talon != null && talon.TotalDuration != null) duration += talon.TotalDuration;
-        //        // Делаем строку кандидата
-        //        tr = CreateRowProtocolCandidates(c, talon, mediaresource, i, cell5Text);
-        //        //
-        //        if (tr == null) continue;
-        //        // Добавляем к таблице
-        //        table.Append(tr);
-        //    }
-        //    // Строка "Итого"
-        //    tr = new TableRow();
-        //    tc1 = new TableCell(CreateParagraph($"Итого"));
-        //    tc2 = new TableCell(CreateParagraph($""));
-        //    tc3 = new TableCell(CreateParagraph($""));
-        //    if (duration != TimeSpan.Zero)
-        //    {
-        //        tc4 = new TableCell(CreateParagraph($"{duration}"));
-        //    }
-        //    else
-        //    {
-        //        tc4 = new TableCell(CreateParagraph($""));
-        //    }
-        //    tc5 = new TableCell(CreateParagraph($""));
-        //    tc6 = new TableCell(CreateParagraph($""));
-        //    tr.Append(tc1, tc2, tc3, tc4, tc5, tc6);
-        //    table.Append(tr);
-        //    // Возвращаем
-        //    return table;
-        //}
+        /// <summary>
+        /// Создает таблицу для отчета в ворде
+        /// </summary>
+        /// <param name="candidates"></param>
+        /// <param name="parties"></param>
+        /// <param name="mediaresource"></param>
+        /// <returns></returns>
+        Table CreateTableReport(List<ReportRegionBlock> blocks)
+        {
+            // 
+            Table table = new Table();
+            //
+            TableProperties tblProp = new TableProperties();
+            TableBorders tblBorders = new TableBorders()
+            {
+                BottomBorder = new BottomBorder()
+                {
+                    Size = 4,
+                    Val = BorderValues.Single
+                },
+                TopBorder = new TopBorder()
+                {
+                    Size = 4,
+                    Val = BorderValues.Single
+                },
+                LeftBorder = new LeftBorder()
+                {
+                    Size = 4,
+                    Val = BorderValues.Single
+                },
+                RightBorder = new RightBorder()
+                {
+                    Size = 4,
+                    Val = BorderValues.Single
+                },
+                InsideHorizontalBorder = new InsideHorizontalBorder()
+                {
+                    Size = 4,
+                    Val = BorderValues.Single
+                },
+                InsideVerticalBorder = new InsideVerticalBorder()
+                {
+                    Size = 4,
+                    Val = BorderValues.Single
+                }
+            };
+            tblProp.Append(tblBorders);
+            //// Now we create a new layout and make it "fixed".
+            //TableLayout tl = new TableLayout() { Type = TableLayoutValues.Fixed };
+            //tblProp.TableLayout = tl;
+            //
+            table.Append(tblProp);
+            // Заголовки таблицы
+            TableRow trHead = new TableRow();
+            var tcH4 = new TableCell(CreateParagraph($"Наименование теле -, радиоматериала"));
+            tcH4.Append(new TableCellProperties(new TableCellWidth() { Type = TableWidthUnitValues.Auto }));
+            trHead.Append(
+                new TableCell(CreateParagraph($"№ п/п")),
+                new TableCell(CreateParagraph($"Ф.И.О.\r\n" +
+                $"зарегистрированного кандидата,\r\n" +
+                $"наименование избирательного объединения, зарегистрировавшего областной список кандидатов")),
+                new TableCell(CreateParagraph($"Форма предвыборной агитации ")),
+                tcH4,
+                new TableCell(CreateParagraph($"Дата и время выхода в эфир")),
+                new TableCell(CreateParagraph($"Объем фактически предоставленного эфирного времени (час: мин:сек)")),
+                new TableCell(CreateParagraph($"Основание предоставления\r\n(дата заключения\r\nи номер договора)\r\n"))
+                );
+            // Добавляем заголовок к таблице
+            table.Append(trHead);
+            // Добавляем строчку с нумерованием столбцов
+            TableRow tr = new TableRow();
+            TableCell tc1 = new TableCell(CreateParagraph($"1"));
+            TableCell tc2 = new TableCell(CreateParagraph($"2"));
+            TableCell tc3 = new TableCell(CreateParagraph($"3"));
+            TableCell tc4 = new TableCell(CreateParagraph($"4"));
+            TableCell tc5 = new TableCell(CreateParagraph($"5"));
+            TableCell tc6 = new TableCell(CreateParagraph($"6"));
+            TableCell tc7 = new TableCell(CreateParagraph($"7"));
+            tr.Append(tc1, tc2, tc3, tc4, tc5, tc6, tc7);
+            table.Append(tr);
+            // Счетчик п/п
+            int i = 1;
+            // Суммарный объем фактически выделенного времени в СМИ
+            TimeSpan sumDuration = TimeSpan.Zero;
+            // По региону
+            foreach (var region in blocks)
+            {
+                // Если не было вещания фактического, пропускаем.
+                if (region.TotalDuration == TimeSpan.Zero) continue;
+                //
+                string regionCaption = "";
+                // Если номер округа есть, то указываем номер и название
+                if (Regex.IsMatch(region.RegionNumber, @"^\d+$"))
+                {
+                    regionCaption = $"{region.RegionCaption} округ № {region.RegionNumber}";
+                }
+                else
+                {
+                    regionCaption = $"Партии";
+                }
+                // Добавляем округ одной строкой
+                tr = CreateRowMergedCells(regionCaption, 7);
+                table.Append((TableRow)tr.CloneNode(true));
+                // По клиенту
+                foreach (var client in region.ClientBlocks)
+                {
+                    // Если не было вещания фактического, пропускаем.
+                    if (client.TotalDuration == TimeSpan.Zero) continue;
+                    //
+                    bool firstRow = true;
+                    //
+                    // По каждой записи вещания клиента
+                    foreach (var record in client.BroadcastRecords)
+                    {
+                        // Если не было вещания фактического, пропускаем.
+                        if (record.DurationActual == TimeSpan.Zero) continue;
+                        //
+                        if (firstRow)
+                        {
+                            tc1 = new TableCell(CreateParagraph($"{i}"));
+                            tc2 = new TableCell(CreateParagraph($"{client.ClientName}"));
+                            tc7 = new TableCell(CreateParagraph($"{client.ClientContract}"));
+                        }
+                        else
+                        {
+                            tc1 = new TableCell(CreateParagraph($""));
+                            tc2 = new TableCell(CreateParagraph($""));
+                            tc7 = new TableCell(CreateParagraph($""));
+                        }
+                        //
+                        tc3 = new TableCell(CreateParagraph($"{record.BroadcastType}"));
+                        tc4 = new TableCell(CreateParagraph($"{record.BroadcastCaption}"));
+                        tc5 = new TableCell(CreateParagraph($"{record.Date} {record.Time}"));
+                        tc6 = new TableCell(CreateParagraph($"{record.DurationActual}"));
+                        //
+                        firstRow = false;
+                        //
+                        tr = new TableRow();
+                        tr.Append((TableCell)tc1.CloneNode(true), 
+                            (TableCell)tc2.CloneNode(true),
+                            (TableCell)tc3.CloneNode(true),
+                            (TableCell)tc4.CloneNode(true),
+                            (TableCell)tc5.CloneNode(true),
+                            (TableCell)tc6.CloneNode(true), 
+                            (TableCell)tc7.CloneNode(true));
+                        table.Append((TableRow)tr.CloneNode(true));
+                    }
+                    //
+                    if (client.TotalDuration != TimeSpan.Zero)
+                    {
+                        tc1 = new TableCell(CreateParagraph($""));
+                        tc2 = new TableCell(CreateParagraph($""));
+                        tc3 = new TableCell(CreateParagraph($""));
+                        tc4 = new TableCell(CreateParagraph($""));
+                        tc5 = new TableCell(CreateParagraph($"Итого"));
+                        tc6 = new TableCell(CreateParagraph($"{client.TotalDuration}"));
+                        tc7 = new TableCell(CreateParagraph($""));
+                        //
+                        tr = new TableRow();
+                        tr.Append((TableCell)tc1.CloneNode(true),
+                            (TableCell)tc2.CloneNode(true),
+                            (TableCell)tc3.CloneNode(true),
+                            (TableCell)tc4.CloneNode(true),
+                            (TableCell)tc5.CloneNode(true),
+                            (TableCell)tc6.CloneNode(true),
+                            (TableCell)tc7.CloneNode(true));
+                        table.Append((TableRow)tr.CloneNode(true));
+                        //
+                        sumDuration += client.TotalDuration;
+                        // Увеличения счетчика п/п
+                        i++;
+                    }
+                }
+            }
+            //
+            tc1 = new TableCell(CreateParagraph($""));
+            tc2 = new TableCell(CreateParagraph($""));
+            tc3 = new TableCell(CreateParagraph($""));
+            tc4 = new TableCell(CreateParagraph($""));
+            tc5 = new TableCell(CreateParagraph($"Итого"));
+            tc6 = new TableCell(CreateParagraph($"{sumDuration}"));
+            tc7 = new TableCell(CreateParagraph($""));
+            //
+            tr = new TableRow();
+            tr.Append((TableCell)tc1.CloneNode(true),
+                            (TableCell)tc2.CloneNode(true),
+                            (TableCell)tc3.CloneNode(true),
+                            (TableCell)tc4.CloneNode(true),
+                            (TableCell)tc5.CloneNode(true),
+                            (TableCell)tc6.CloneNode(true),
+                            (TableCell)tc7.CloneNode(true));
+            table.Append((TableRow)tr.CloneNode(true));
+            // Возвращаем
+            return table;
+        }
 
         ///// <summary>
         ///// Создает строку таблицы в ворде
@@ -301,5 +311,80 @@ namespace WordDocumentBuilder.EconomicDepartment
         //    //
         //    return tr;
         //}
+
+        /// <summary>
+        /// Объединяет указанное количество ячеек в строке вместе, также вставляет туда текст. (в теории, пока нет)
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="cellsNumber"></param>
+        /// <returns></returns>
+        private TableRow CreateRowMergedCells(string text, int cellsNumber)
+        {
+            var tr = new TableRow();
+            // Создаем свойства ячейки для начала объединения
+            TableCellProperties propStart = new TableCellProperties();
+            propStart.Append(new HorizontalMerge()
+            {
+                Val = MergedCellValues.Restart,
+            });
+            // Делаем ячейку с текстом и добавляем ей свойство начала объединения
+            var tc = new TableCell(CreateParagraph($"{text}", "alignmentCenter"));
+            tc.Append(propStart);
+            tr.Append(tc);
+            // Цикл по количеству ячеек, которые надо объединить
+            for (int i = 1; i < cellsNumber; i++)
+            {
+                // Создаем свойства ячейки для продолжения объединения
+                var prop = new TableCellProperties();
+                prop.Append(new HorizontalMerge()
+                {
+                    Val = MergedCellValues.Continue
+                });
+                // Создаем новую ячейку
+                var tcNext = new TableCell(CreateParagraph($""));
+                // Прикрепляем к новой ячейке свойства продолжения объединения
+                tcNext.Append(prop);
+                // Добавляем ячейку к строке
+                tr.Append(tcNext);
+            };
+            //
+            return tr;
+        }
+
+        /// <summary>
+        /// Создает новый абзац текста
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="style">Для выбора различных дополнений текста типа выравнивания по центру</param>
+        /// <returns></returns>
+        Paragraph CreateParagraph(string text, string style = "default")
+        {
+            var paragraph = new Paragraph();
+            var run = new Run();
+            var runText = new Text($"{text}");
+            //
+            RunProperties runProperties = new RunProperties();
+            FontSize size = new FontSize();
+            size.Val = StringValue.FromString("18");
+            runProperties.Append(size);
+            //
+            run.Append(runProperties);
+            run.Append(runText);
+            //
+            if (style == "alignmentCenter")
+            {
+                Justification justification = new Justification()
+                {
+                    Val = JustificationValues.Center
+                };
+                var prProp = new ParagraphProperties();
+                prProp.Append(justification);
+                paragraph.Append(prProp);
+            }
+            //
+            paragraph.Append(run);
+            //
+            return paragraph;
+        }
     }
 }

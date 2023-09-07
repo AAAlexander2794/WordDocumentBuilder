@@ -101,12 +101,19 @@ namespace WordDocumentBuilder.EconomicDepartment
                     if (isFound) break;
                 }
             }
-            // Строим таблицу из блоков
-            DataTable dt = BuildTotalReport(blocks);
-            // Запись в файл Excel
-            XLWorkbook wb = new XLWorkbook();
-            wb.Worksheets.Add(dt, "Отчет");
-            wb.SaveAs($@"./Документы/Отчеты/{subCatalog}/{mediaResource}.xlsx");
+            //
+            var templatePath = $@"./Настройки/Учет вещания/Форма учета.dotx";
+            var resultPath = $@"./Документы/Отчеты/{subCatalog}/";
+            // Сохраняем отчет в ворд
+            CreateReport(blocks, templatePath, resultPath, mediaResource);
+
+
+            //// Строим таблицу из блоков
+            //DataTable dt = BuildTotalReport(blocks);
+            //// Запись в файл Excel
+            //XLWorkbook wb = new XLWorkbook();
+            //wb.Worksheets.Add(dt, "Отчет");
+            //wb.SaveAs($@"./Документы/Отчеты/{subCatalog}/{mediaResource}.xlsx");
 
         }
 
