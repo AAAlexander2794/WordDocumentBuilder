@@ -77,8 +77,24 @@ namespace WordDocumentBuilder.EconomicDepartment
             Date = DateOnly.Parse(date);
             var dateTime = DateTime.Parse(time);
             Time = TimeOnly.FromDateTime(dateTime);
-            dateTime = DateTime.Parse(durationNominal);
-            DurationNominal = dateTime.TimeOfDay;
+            if (durationNominal != "")
+            {
+                try
+                {
+                    dateTime = DateTime.Parse(durationNominal);
+                    DurationNominal = dateTime.TimeOfDay;
+                }
+                catch
+                {
+                    double d = double.Parse(durationNominal);
+                    dateTime = DateTime.FromOADate(d);
+                    DurationNominal = dateTime.TimeOfDay;
+                }
+            }
+            else
+            {
+                DurationNominal = TimeSpan.Zero;
+            }
             RegionNumber = regionNumber;
             ClientType = clientType;
             // Оставляем только руссие буквы и пробелы
@@ -87,8 +103,17 @@ namespace WordDocumentBuilder.EconomicDepartment
             //
             if (durationActual != "")
             {
-                dateTime = DateTime.Parse(durationActual);
-                DurationActual = dateTime.TimeOfDay;
+                try
+                {
+                    dateTime = DateTime.Parse(durationActual);
+                    DurationActual = dateTime.TimeOfDay;
+                }
+                catch
+                {
+                    double d = double.Parse(durationActual);
+                    dateTime = DateTime.FromOADate(d);
+                    DurationActual = dateTime.TimeOfDay;
+                }
             }
             BroadcastType = broadcastType;
             BroadcastCaption = broadcastCaption;
